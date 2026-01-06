@@ -2,7 +2,6 @@ import os
 os.system('clear')
 
 mainMenuTitleArt = r"""
-
  ________  ___  ___  _____ ______   ________  _________  ___  ___      ___ _______      
 |\   ____\|\  \|\  \|\   _ \  _   \|\   __  \|\___   ___\\  \|\  \    /  /|\  ___ \     
 \ \  \___|\ \  \\\  \ \  \\\__\ \  \ \  \|\  \|___ \  \_\ \  \ \  \  /  / | \   __/|    
@@ -27,13 +26,6 @@ mainMenuPlayArt = r"""
                                   /  \ / )( \(  )(_  _)
                                  (  O )) \/ ( )(   )(  
                                   \__\)\____/(__) (__)
-
-==========================================================================================
-
-[Space] to select
-[W] up
-[S] down
-
 """
 
 mainMenuHtpArt = r"""
@@ -49,13 +41,6 @@ mainMenuHtpArt = r"""
                                   /  \ / )( \(  )(_  _)
                                  (  O )) \/ ( )(   )(  
                                   \__\)\____/(__) (__)
-
-==========================================================================================
-
-[Space] to select
-[W] up
-[S] down
-
 """
 
 mainMenuQuitArt = r"""
@@ -71,17 +56,16 @@ mainMenuQuitArt = r"""
                              \ \  /  \ / )( \(  )(_  _)
                               ) )(  O )) \/ ( )(   )(  
                              /_/  \__\)\____/(__) (__)
-
-==========================================================================================
-
-[Space] to select
-[W] up
-[S] down
-
 """
 
+mainMenuControlsArt = r"""
+==========================================================================================
+[W] up    [S] down    [Space] to select
+"""
+
+
 def getMainMenuArt():
-  return (str(mainMenuTitleArt) + str(mainMenuQuitArt), 
-          str(mainMenuTitleArt) + str(mainMenuHtpArt),
-          str(mainMenuTitleArt) + str(mainMenuPlayArt)
+  return (str(mainMenuTitleArt) + str(mainMenuQuitArt) + str(mainMenuControlsArt), 
+          str(mainMenuTitleArt) + str(mainMenuHtpArt) + str(mainMenuControlsArt),
+          str(mainMenuTitleArt) + str(mainMenuPlayArt + str(mainMenuControlsArt))
 )

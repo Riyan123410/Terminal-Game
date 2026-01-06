@@ -24,28 +24,34 @@ def selectMode():
     validInput = False
     # loop until a valid launch mode is selected
     while not validInput:
+        # try to set mode as if input is not a number there will be an error
         try:
-            # try to set mode
-            mode = int(input())
+            # input is true until it is proven false
             validInput = True
-
-            if not mode in range(0, 2):
-                validInput = False
-                print("Not in range")
+            currentInput = int(input())
+            # based on input check if its the regular mode
+            match currentInput:
+                case 0: 
+                    isRegularMode = True
+                case 1: 
+                    isRegularMode = False
+                case _:
+                    validInput = False
+                    print("Not in range")
         except:
+            validInput = False
             print("Invalid input")
-    return mode
+    return isRegularMode
 
-def afterLaunchSelected(mode):
+def afterLaunchSelected(isRegularMode):
     # clear screen and print selected mode
     os.system('clear')
-    modeList = ["Regular", "Compatibility"]
-    print(f"{modeList[mode]} selected...")
+    print(f"Compatibility Mode: {not isRegularMode}")
 
-    # wait 1 second and reset
+    # wait and reset
     clearInTime(TEXT_DELAY)
 
-# call launch
+# main call all funcitons
 def main():
     printLaunch()
     mode = selectMode()
