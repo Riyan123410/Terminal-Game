@@ -1,7 +1,7 @@
 import launchMode
 import Input
-import regularMainMenu
 import os
+from regularMode.menus import regularMainMenu
 
 def main():
     gameState = ""
@@ -15,6 +15,12 @@ def main():
     # if regular mode
     if isRegularMode:
         gameState = regularMainMenu.main()
+    
+    # check each game state
+    match gameState:
+        case "htp":
+            pass
+
 
     print(gameState)
 

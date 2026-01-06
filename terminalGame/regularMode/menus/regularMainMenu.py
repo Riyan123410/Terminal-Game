@@ -6,7 +6,7 @@ import os
 currentSelected = 2
 MENU_MAX = currentSelected
 MENU_MIN = 0
-gameState = ("quit","HTP", "play")
+gameState = ("quit","htp", "play")
 
 def main():
     # print when first entered
