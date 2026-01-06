@@ -3,14 +3,14 @@ import Input
 import helperFuncs
 import os
 
-currentSelected = 1
-MENU_MAX = 1
+currentSelected = 2
+MENU_MAX = currentSelected
 MENU_MIN = 0
-gameState = ("how to play", "play")
+gameState = ("quit","HTP", "play")
 
 def main():
     # print when first entered
-    print(Menus.getMainMenuArt()[0])
+    print(Menus.getMainMenuArt()[MENU_MAX])
     while True:
         # input
         key = Input.getInputList()
