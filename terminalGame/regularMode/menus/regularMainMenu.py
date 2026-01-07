@@ -1,4 +1,4 @@
-from asciiArt import Menus
+from asciiArt import asciiMenus
 import Input
 import helperFuncs
 
@@ -10,7 +10,7 @@ gameState = ("quit","htp", "play")
 
 def main():
     # print when first entered
-    print(Menus.getMainMenuArt()[MENU_MAX])
+    print(asciiMenus.getMainMenuArt()[MENU_MAX])
     while True:
         # input
         key = Input.getInputList()
@@ -29,4 +29,4 @@ def changeSelectedBy(change):
 
     # update menu
     helperFuncs.clearTerminal()
-    print(Menus.getMainMenuArt()[currentSelected])
+    print(asciiMenus.getMainMenuArt()[currentSelected])
