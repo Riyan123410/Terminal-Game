@@ -58,19 +58,18 @@ def determineIntentions():
             visibleIntentions.append(enemies[enemyList[i]][e]["description"])
 def discardGain(number):
     global hand
-    for i in range(number):
+    global cost
+    i = 0
+    while i < number:
         print(hand)
         discarding = input("Card to discard: ")
-        global cost
-        try:
+        if discarding in hand:
             discardCard(discarding)
-        except:
-            print("Invalid Card")
-            print(i)
-            i -= 1
-            time.sleep(1)
-        else:
             cost += 1
+            i += 1
+        else:
+            print("Invalid Card")
+            time.sleep(1)
         helperFuncs.clearTerminal()
 def defineCard():
     cardInput = input("Which Card: ")
@@ -144,7 +143,7 @@ def playerTurn():
         while cost > costMax:
             cost -= 1
         print(f"hand: {hand}")
-        print(enemyHealth)
+        print(f"enemy health: {enemyHealth}")
         print(f"discard: {discard}")
         print(f"deck: {deck}")
         print(f"cost: {cost}")
