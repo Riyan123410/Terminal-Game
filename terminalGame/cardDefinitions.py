@@ -9,7 +9,3 @@ cardDef = {
            
            
            }
-def testing(number):
-    global test
-    test -= number
-test = 50

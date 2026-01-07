@@ -6,8 +6,6 @@ from cardDefinitions import cardDef
 import cardDefinitions
 import enemyHelpers
 
-
-
 playerHealth = 50
 costMax = 4
 cost = 0
@@ -206,8 +204,6 @@ def playerTurn():
         print(f"block: {playerBlock}")
         print(visibleIntentions)
         print(enemies)
-        print(cardDefinitions.test)
-        cardDefinitions.testing(2)
 
         playCard = input().lower()
         try:
