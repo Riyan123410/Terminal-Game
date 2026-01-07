@@ -21,3 +21,6 @@ def combineStrings(string1, len1, string2, len2, height):
        combinedString += addRowChars(string2, len2, i)
        combinedString += "\n"
    return combinedString
+
+def combineCardStrings(stringDict1, stringDict2, height):
+    return combineStrings(stringDict1["art"], stringDict1["len"], stringDict2["art"], stringDict2["len"], height)

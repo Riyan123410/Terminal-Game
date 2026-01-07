@@ -5,6 +5,7 @@ def getInput():
     char = msvcrt.getch()
     try:
         # try to convert char from a byte to a string
+        # TODO: change to ASCII
         char = char.decode('latin1')
     except:
         # if failed to convert just pass and return the byte directly 
