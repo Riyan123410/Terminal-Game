@@ -24,7 +24,7 @@ hand = []
 deck = ["strike", "clean sweep", "strike", "strike", "strike", "strike", "strike", "strike", "strike", "block", "block", "block", "crossbow", "well prepared"]
 enemies = dict({})
 
-# resolveIntentions([str]) -> null
+# resolveIntentions([str]) -> None
 # purpose: takes in a list called list, then executes all strings within the list as functions associated with it's name.
 # examples:
 #           resolveIntentions("damagePlayer(1,2)")                        -> playerHealth - 2
@@ -93,6 +93,12 @@ def defineCard():
     time.sleep(2)
 
 
+# damagePlayer(int,int) -> None
+# purpose: Takes in two integers called times and number, and decreases the player health by number * times - block.
+# examples:
+#           damagePlayer(1,2) -> playerHealth - 2
+#           damagePlayer(4,1) -> playerHealth - 4
+#           damagePlayer(2,2) -> playerHealth - 4
 def damagePlayer(times,number):
     global playerHealth
     global playerBlock
