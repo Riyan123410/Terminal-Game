@@ -1,6 +1,7 @@
 import helperFuncs
 import time
 import Input
+from asciiArt import asciiMenus
 
 # constants
 TEXT_DELAY = 1
@@ -14,9 +15,7 @@ def clearInTime(seconds):
 # text for select launch mode
 def printLaunch():
     helperFuncs.clearTerminal()
-    print("Please full screen your terminal in order for ascii art to display properly, \nif art is not displayed correctly compatibilty mode can be used")
-    print("Choose by enterying the corresponding number in the terminal: ")
-    print("\n> Continue[0] - ASCII art, input uses WASD and SPACE\n> Compatibility Mode[1] - No ASCII art, input uses characters entered in terminal(for non windows users)")
+    print(str(asciiMenus.launchMode))
 
 # select launch mode
 def selectMode():

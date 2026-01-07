@@ -1,27 +1,37 @@
 import launchMode
 import Input
 import os
-from regularMode.menus import regularMainMenu
 import helperFuncs
+from regularMode.menus import regularMainMenu
+from regularMode.menus import regularHtpMenu
+
+# set each game state
+def setGameStateCompatibility(gameState):
+    return "quit"
+
+# set game state
+def setGameStateRegular(gameState):
+    match gameState:
+        case "mainMenu":
+            return regularMainMenu.main()
+        case "htp":
+            return regularHtpMenu.main()
+    return "quit"
 
 def main():
-    gameState = ""
+    gameState = "mainMenu"
 
     # clear before starting
     helperFuncs.clearTerminal()
 
-    # get launch mode
+    # get launch mode and start game after
     isRegularMode = launchMode.main()
 
-    # if regular mode
-    if isRegularMode:
-        gameState = regularMainMenu.main()
-    
-    # check each game state
-    match gameState:
-        case "htp":
-            pass
-
+    while gameState != "quit":
+        if isRegularMode:
+            gameState = setGameStateRegular(gameState)
+        else:
+            gameState = setGameStateCompatibility(gameState)
 
     print(gameState)
 

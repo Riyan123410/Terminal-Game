@@ -1,7 +1,16 @@
-import helperFuncs
-helperFuncs.clearTerminal()
+launchMode = r"""
+Please full screen your terminal in order for ascii art to display properly,                                                   ‾‾‾‾‾‾|
+make sure you can see the frame properly on the top left, this paragraph should only be 3 lines                                ‾‾‾‾| |
+If art is not displayed correctly compatibilty mode can be used.                                                                   | |
 
-mainMenuTitleArt = r"""
+> Continue[0] - ASCII art, input uses WASD and SPACE
+> Compatibility Mode[1] - No ASCII art, input uses characters entered in terminal(for non windows users)
+
+========================================================================================================
+[0] Continue    [1] Compatibility Mode
+"""
+
+mainMenuTitle = r"""
  ________  ___  ___  _____ ______   ________  _________  ___  ___      ___ _______      
 |\   ____\|\  \|\  \|\   _ \  _   \|\   __  \|\___   ___\\  \|\  \    /  /|\  ___ \     
 \ \  \___|\ \  \\\  \ \  \\\__\ \  \ \  \|\  \|___ \  \_\ \  \ \  \  /  / | \   __/|    
@@ -13,7 +22,7 @@ mainMenuTitleArt = r"""
 """
 
 
-mainMenuPlayArt = r"""
+mainMenuPlay = r"""
                             __  ____  __     __   _  _ 
                             \ \(  _ \(  )   / _\ ( \/ )
                              ) )) __// (_/\/    \ )  / 
@@ -28,7 +37,7 @@ mainMenuPlayArt = r"""
                                   \__\)\____/(__) (__)
 """
 
-mainMenuHtpArt = r"""
+mainMenuHtp = r"""
                                 ____  __     __   _  _ 
                                (  _ \(  )   / _\ ( \/ )
                                 ) __// (_/\/    \ )  / 
@@ -43,7 +52,7 @@ mainMenuHtpArt = r"""
                                   \__\)\____/(__) (__)
 """
 
-mainMenuQuitArt = r"""
+mainMenuQuit = r"""
                                 ____  __     __   _  _ 
                                (  _ \(  )   / _\ ( \/ )
                                 ) __// (_/\/    \ )  / 
@@ -58,14 +67,55 @@ mainMenuQuitArt = r"""
                              /_/  \__\)\____/(__) (__)
 """
 
-mainMenuControlsArt = r"""
+mainMenuControls = r"""
 ==========================================================================================
-[W] up    [S] down    [Space] to select
+[W] up    [S] down    [Space] select
 """
 
-
 def getMainMenuArt():
-  return (str(mainMenuTitleArt) + str(mainMenuQuitArt) + str(mainMenuControlsArt), 
-          str(mainMenuTitleArt) + str(mainMenuHtpArt) + str(mainMenuControlsArt),
-          str(mainMenuTitleArt) + str(mainMenuPlayArt + str(mainMenuControlsArt))
-)
+  return (str(mainMenuTitle) + str(mainMenuQuit) + str(mainMenuControls), 
+          str(mainMenuTitle) + str(mainMenuHtp) + str(mainMenuControls),
+          str(mainMenuTitle) + str(mainMenuPlay + str(mainMenuControls))
+  )
+
+htpBasics = r"""
+ _____                    _____ 
+( ___ )------------------( ___ )
+ |   |                    |   | 
+ |   |  _                 |   | 
+ |   | | |_  _____ __ __  |   | 
+ |   | | ' \/ _ \ V  V /  |   | 
+ |   | |_||_\___/\_/\_/   |   | 
+ |   |     | |_ ___       |   | 
+ |   |     |  _/ _ \      |   | 
+ |   |      \__\___/      |   | 
+ |   |  _ __| |__ _ _  _  |   | 
+ |   | | '_ \ / _` | || | |   | 
+ |   | | .__/_\__,_|\_, | |   | 
+ |   | |_|          |__/  |   | 
+ |___|                    |___| 
+(_____)------------------(_____)
+"""
+htpDeck = r"""
+ _____                   _____ 
+( ___ )-----------------( ___ )
+ |   |                   |   | 
+ |   |                   |   | 
+ |   |                   |   | 
+ |   |                   |   | 
+ |   |     _        _    |   | 
+ |   |  __| |___ __| |__ |   | 
+ |   | / _` / -_) _| / / |   | 
+ |   | \__,_\___\__|_\_\ |   | 
+ |   |                   |   | 
+ |   |                   |   | 
+ |   |                   |   | 
+ |   |                   |   | 
+ |___|                   |___| 
+(_____)-----------------(_____)
+"""
+
+def getHtpArt():
+  return (str(htpBasics), 
+          str(htpDeck)
+  )
