@@ -1,6 +1,7 @@
 import helperFuncs
 import random
 import time
+from enemyIntentions import intentionsList
 
 
 
@@ -20,8 +21,6 @@ hand = []
 cardDef = {"end" : ["passes turn", "endTurn()", 0], "define" : ["defines",  "defineCard()", 0], "strike" : ["deals 4 damage, 1 target", "damageEnemy(1,4)", 1], "block" : ["gain 3 block", "gainBlock(1,3)", 1], "clean sweep" : ["discard 2 cards, then gain 2 cost", "discardGain(2)", 0]}
 deck = ["strike", "clean sweep", "strike", "strike", "strike", "strike", "strike", "strike", "strike", "block", "block", "block"]
 enemies = {"goose" : []}
-intentionsList = {"goose" : {"turn1" : {"attackTimes" : 2, 1 : {"description" : "deal 2d4 damage", "effect" : "damagePlayer(1,diceRoll(2,4))"}, 2 : {"description" : "Discard 1 card from your hand", "effect" : "discardCardRand(1)"}}, "turn2" : {"attackTimes" : 2, 1 : {"description" : "deal 2d4 damage", "effect" : "damagePlayer(1,diceRoll(2,4))"}, 2 : {"description" : "Discard 1 card from your hand", "effect" : "discardCardRand(1)"}}}}
-
 
 def resolveIntentions(list):
     global intentionsList
@@ -37,17 +36,17 @@ def determinePly():
     else:
         ply = 0
         return "turn2"
-def diceRoll(times,size):
-    roll = 0
-    for i in range(times):
-        roll += random.randint(1,size)
-    return roll
 def enemyIntentions(enemyName):
     global intentionsList
     attackIntentions = []
     for i in range(intentionsList[enemyName][determinePly()]["attackTimes"]):
         attackIntentions.append(intentionsList[enemyName][determinePly()][i+1])
     return attackIntentions
+
+def checkDeck():
+    global deck
+    print(deck)
+    time.sleep(2)
 
 def determineIntentions():
     global enemies
