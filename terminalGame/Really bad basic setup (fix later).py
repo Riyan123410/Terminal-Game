@@ -72,9 +72,13 @@ def discardGain(number):
             time.sleep(1)
         helperFuncs.clearTerminal()
 def defineCard():
-    cardInput = input("Which Card: ")
     global cardDef
-    print(cardDef[cardInput][0])
+    print(hand)
+    cardInput = input("Which Card: ")
+    try:
+        print(cardDef[cardInput][0])
+    except:
+        print("Invalid Card")
     time.sleep(2)
 def damagePlayer(times,number):
     global playerHealth
