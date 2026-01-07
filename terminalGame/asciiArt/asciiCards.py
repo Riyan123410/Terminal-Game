@@ -1,5 +1,3 @@
-import asciiHelpers
-
 CARD_HEIGHT = 15
 CARD_DOWN_HEIGHT = 2
 
@@ -45,4 +43,3 @@ asciiCards = {
 (                      )
 """
 }
-# print(asciiHelpers.combineCardStrings([asciiCards["strike"]["selected"], asciiCards["strike"]["normal"]], CARD_HEIGHT))
