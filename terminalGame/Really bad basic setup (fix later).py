@@ -13,7 +13,6 @@ costGain = 3
 enemyHealth = 40
 startingDraw = 4
 turnNumber = 0
-ply = 0
 visibleIntentions = []
 handMax = 15
 discard = []
@@ -24,17 +23,13 @@ enemies = {"goose" : []}
 
 def resolveIntentions(list):
     global intentionsList
-    global ply
     for i in list:
         exec(i["effect"])
 def determinePly():
-    global ply
     global turnNumber
     if turnNumber % 2 == 0:
-        ply = 1
         return "turn1"
     else:
-        ply = 0
         return "turn2"
 def enemyIntentions(enemyName):
     global intentionsList
@@ -114,9 +109,12 @@ def discardCardRand(number):
     global hand
     cardToDiscard = ""
     for i in range(number):
-        cardToDiscard = (hand[random.randint(0,len(hand) - 1)])
-        discard.append(cardToDiscard)
-        hand.remove(cardToDiscard) 
+        try:
+            cardToDiscard = (hand[random.randint(0,len(hand) - 1)])
+            discard.append(cardToDiscard)
+            hand.remove(cardToDiscard)
+        except:
+            pass
 def discardCard(name):
     global discard
     global hand
@@ -184,7 +182,6 @@ def enemyTurn():
     global playerHealth
     global enemies
     global turnNumber
-    global ply
     global visibleIntentions
     enemyList = list(enemies.keys())
     determinePly()
