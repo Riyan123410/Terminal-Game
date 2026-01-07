@@ -1,5 +1,4 @@
 import launchMode
-import Input
 import os
 import helperFuncs
 from regularMode.menus import regularMainMenu

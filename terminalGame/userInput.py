@@ -41,20 +41,24 @@ def getInput():
 
 def getInputList():
     # set input to 0 and get the key presses
-    inputList = [0,0,0]
+    inputList = {
+        "xDir" : 0,
+        "yDir" : 0,
+        "space" : False
+    }
     key = getInput()
-    # horizontal
+    # match inputs
     match key:
         case "d": 
-            inputList[0] = 1
+            inputList["xDir"] = 1
         case "a":
-            inputList[0] = -1
+            inputList["xDir"] = -1
         case "w":
-            inputList[1] = 1
+            inputList["yDir"] = 1
         case "s":  
-            inputList[1] = -1
+            inputList["yDir"] = -1
         case " ": 
-            inputList[2] = 1
+            inputList["space"] = True
 
     return inputList
 
