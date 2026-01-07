@@ -3,6 +3,7 @@ import random
 import time
 from enemyIntentions import intentionsList
 from cardDefinitions import cardDef
+import enemyHelpers
 
 
 
@@ -10,52 +11,30 @@ playerHealth = 50
 costMax = 4
 cost = 0
 playerBlock = 0
+difficulty = 2
+combatDifficulty = 0
 costGain = 3
 enemyHealth = 40
 startingDraw = 4
 turnNumber = 0
-visibleIntentions = []
+visibleIntentions = {}
 handMax = 15
 discard = []
 hand = []
 deck = ["strike", "clean sweep", "strike", "strike", "strike", "strike", "strike", "strike", "strike", "block", "block", "block"]
-enemies = {"goose" : []}
+enemies = dict({})
 
 def resolveIntentions(list):
     global intentionsList
     for i in list:
         exec(i["effect"])
-def determinePly():
-    global turnNumber
-    if turnNumber % 2 == 0:
-        return "turn1"
-    else:
-        return "turn2"
-def enemyIntentions(enemyName):
-    global intentionsList
-    attackIntentions = []
-    for i in range(intentionsList[enemyName][determinePly()]["attackTimes"]):
-        attackIntentions.append(intentionsList[enemyName][determinePly()][i+1])
-    return attackIntentions
 
 def checkDeck():
     global deck
     print(deck)
     time.sleep(2)
 
-def determineIntentions():
-    global enemies
-    global visibleIntentions
-    global intentionsList
-    visibleIntentions = []
-    enemyList = list(enemies.keys())
-    print(enemyList)
-    for i in range(len(enemyList)):
-        enemies[enemyList[i]] = enemyIntentions(enemyList[i])
-        print(enemies[enemyList[i]])
-        for e in range(intentionsList[enemyList[i]][determinePly()]["attackTimes"]):
 
-            visibleIntentions.append(enemies[enemyList[i]][e]["description"])
 def discardGain(number):
     global hand
     global cost
@@ -87,8 +66,12 @@ def damagePlayer(times,number):
         playerHealth -= number
 def damageEnemy(times,number):
     global enemyHealth
+    global enemies
+    helperFuncs.clearTerminal()
+    print(list(enemies.keys()))
+    target = input("Which enemy: ")
     for i in range(times):
-        enemyHealth -= number
+        enemies[target]["health"] -= number
 def gainBlock(times,number):
     global playerBlock
     for i in range(times):
@@ -124,7 +107,16 @@ def discardCard(name):
     global hand
     discard.append(name)
     hand.remove(name)
-determineIntentions()
+
+
+def startCombat():
+    global enemies
+    global turnNumber
+    global visibleIntentions
+    setup = enemyHelpers.determineIntentions(enemyHelpers.determineEnemies(enemies,difficulty), turnNumber)
+    enemies = setup[0]
+    visibleIntentions = setup[1]
+
 def playerTurn():
     global cost
     global hand
@@ -154,6 +146,7 @@ def playerTurn():
         print(f"cost: {cost}")
         print(f"player health: {playerHealth}")
         print(visibleIntentions)
+        print(enemies)
         playCard = input().lower()
         try:
             effect = cardDef[playCard][1]
@@ -188,12 +181,15 @@ def enemyTurn():
     global turnNumber
     global visibleIntentions
     enemyList = list(enemies.keys())
-    determinePly()
     for i in range(len(enemies)):
         print(enemies[enemyList[i]])
-        resolveIntentions(enemies[enemyList[i]])
+        resolveIntentions(enemies[enemyList[i]]["attacks"])
     # Determine next enemies attack
-    determineIntentions()
-while True:
-    playerTurn()
-    enemyTurn()
+    enemyHelpers.determineIntentions(enemies, turnNumber)
+
+def gameLoop():
+    startCombat()
+    while True:
+        playerTurn()
+        enemyTurn()
+gameLoop()
