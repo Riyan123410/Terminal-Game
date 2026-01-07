@@ -1,4 +1,4 @@
-import os
+import helperFuncs
 import time
 import Input
 
@@ -9,11 +9,11 @@ TEXT_DELAY = 1
 # clear after
 def clearInTime(seconds):
     time.sleep(seconds)
-    os.system('clear')
+    helperFuncs.clearTerminal()
 
 # text for select launch mode
 def printLaunch():
-    os.system('clear')
+    helperFuncs.clearTerminal()
     print("Please full screen your terminal in order for ascii art to display properly, \nif art is not displayed correctly compatibilty mode can be used")
     print("Choose by enterying the corresponding number in the terminal: ")
     print("\n> Continue[0] - ASCII art, input uses WASD and SPACE\n> Compatibility Mode[1] - No ASCII art, input uses characters entered in terminal(for non windows users)")
@@ -45,7 +45,7 @@ def selectMode():
 
 def afterLaunchSelected(isRegularMode):
     # clear screen and print selected mode
-    os.system('clear')
+    helperFuncs.clearTerminal()
     print(f"Compatibility Mode: {not isRegularMode}")
 
     # wait and reset

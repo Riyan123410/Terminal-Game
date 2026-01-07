@@ -1,7 +1,7 @@
 from asciiArt import Menus
 import Input
 import helperFuncs
-import os
+
 
 currentSelected = 2
 MENU_MAX = currentSelected
@@ -17,7 +17,7 @@ def main():
         changeSelectedBy(key[1])
         # if selected return
         if key[2] == 1:
-            os.system('clear')
+            helperFuncs.clearTerminal()
             return gameState[currentSelected]
 
 # change selected
@@ -28,5 +28,5 @@ def changeSelectedBy(change):
     currentSelected = helperFuncs.changeWithClamp(currentSelected, change, MENU_MIN, MENU_MAX)
 
     # update menu
-    os.system('clear')
+    helperFuncs.clearTerminal()
     print(Menus.getMainMenuArt()[currentSelected])

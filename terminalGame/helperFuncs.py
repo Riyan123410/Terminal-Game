@@ -1,4 +1,5 @@
 import os
+import random
 
 def clamp(num, minNum, maxNum):
     if num < minNum:
@@ -20,3 +21,10 @@ def clearTerminal():
     else:
         # Command for Linux and macOS
         os.system('clear')
+
+# roll dice
+def diceRoll(times,size):
+    roll = 0
+    for i in range(times):
+        roll += random.randint(1,size)
+    return roll

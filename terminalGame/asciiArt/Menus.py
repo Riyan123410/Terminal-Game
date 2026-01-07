@@ -1,5 +1,5 @@
-import os
-os.system('clear')
+import helperFuncs
+helperFuncs.clearTerminal()
 
 mainMenuTitleArt = r"""
  ________  ___  ___  _____ ______   ________  _________  ___  ___      ___ _______      

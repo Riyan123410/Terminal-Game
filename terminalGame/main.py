@@ -2,12 +2,13 @@ import launchMode
 import Input
 import os
 from regularMode.menus import regularMainMenu
+import helperFuncs
 
 def main():
     gameState = ""
 
     # clear before starting
-    os.system('clear')
+    helperFuncs.clearTerminal()
 
     # get launch mode
     isRegularMode = launchMode.main()
