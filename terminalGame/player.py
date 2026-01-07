@@ -12,7 +12,7 @@ playerHealth = 50
 costMax = 4
 cost = 0
 playerBlock = 0
-difficulty = 2
+difficulty = 0.5
 combatDifficulty = 0
 costGain = 3
 startingDraw = 5
@@ -52,35 +52,40 @@ def resolveIntentions(resolveList):
     print(playerHealth)
 
 
-
-def checkDeck():
-    global deck
-    print(deck)
-    time.sleep(2)
-
-
+# discardGain(int) -> None
+# purpose: takes in an integer called number, then discards as many entrys from number from the hand, and increases cost by number discarded.
+# examples:
+#           discardGain(1) -> len(hand) - 1, len(discard) + 1, cost + 1
+#           discardGain()  -> nothing
+#           discardGain(4) -> len(hand) - 4, len(discard) + 4, cost + 4
 def discardGain(number):
     global hand
     global cost
     i = 0
-    while (i < number):
-        print(hand)
-        discarding = input("Card to discard: ")
-        if discarding in hand:
-            discardCard(discarding)
-            cost += 1
-            i += 1
-        else:
-            print("Invalid Card")
-            i += 1
-            time.sleep(1)
-        helperFuncs.clearTerminal()
+    try:
+        while (i < number):
+            print(hand)
+            discarding = input("Card to discard: ")
+            if discarding in hand:
+                discardCard(discarding)
+                cost += 1
+                i += 1
+            else:
+                print("Invalid Card")
+                i += 1
+                time.sleep(1)
+            helperFuncs.clearTerminal()
+    except:
+        pass
 
 def enemyDamageSelf(times,number):
     global enemies
     for i in range(times):
         addEnemy = random.choice(list(enemies.keys()))
         enemies[addEnemy]["health"] -= number
+        if enemies[addEnemy]["health"] <= 0:
+                enemies.pop(addEnemy)
+                visibleIntentions.pop(addEnemy)
 
 def defineCard():
     global cardDef
@@ -247,7 +252,7 @@ def enemyTurn():
 
 def gameLoop():
     startCombat()
-    while True:
+    while enemies != {}:
         playerTurn()
         enemyTurn()
 gameLoop()
