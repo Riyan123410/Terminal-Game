@@ -1,4 +1,5 @@
-intentionsList = {"goose" : 
+intentionsList = {
+    "goose" : 
     {"turn1" : 
         {
             1 : {"description" : "deal 2d4 damage", "effect" : "damagePlayer(1,helperFuncs.diceRoll(2,4))"}, 
