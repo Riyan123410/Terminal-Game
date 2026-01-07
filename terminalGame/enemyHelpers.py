@@ -16,6 +16,7 @@ def determinePly(turnNumber):
         return "turn2"
     
 def determineIntentions(enemies,turnNumber):
+    visibleIntentions = 0
     visibleIntentions = {}
     global intentionsList
     enemyList = list(enemies.keys())
@@ -31,12 +32,19 @@ def determineIntentions(enemies,turnNumber):
 
 def determineEnemies(enemies,difficulty):
     combatDifficulty = 0
+    attempts = 0
     global intentionsList
-    while combatDifficulty < difficulty:
+    while (combatDifficulty < difficulty) and (attempts <= 5):
         addEnemy = random.choice(list(intentionsList.keys()))
         if intentionsList[addEnemy]["diff"] + combatDifficulty <= difficulty:
             if addEnemy not in enemies:
                 enemies[addEnemy] = {}
                 enemies[addEnemy]["health"] = (intentionsList[addEnemy]["health"])
                 combatDifficulty += intentionsList[addEnemy]["diff"]
+                attempts = 0
+            else:
+                attempts += 1
+        else:
+            attempts += 1
+
     return enemies

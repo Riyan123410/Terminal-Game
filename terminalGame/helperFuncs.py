@@ -25,6 +25,10 @@ def clearTerminal():
 # roll dice
 def diceRoll(times,size):
     roll = 0
-    for i in range(times):
-        roll += random.randint(1,size)
+    if size > 0:
+        for i in range(times):
+            roll += random.randint(1,size)
+    else:
+        for i in range(times):
+            roll += random.randint(size,-1)
     return roll
