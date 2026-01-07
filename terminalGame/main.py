@@ -33,6 +33,4 @@ def main():
         else:
             gameState = setGameStateCompatibility(gameState)
 
-    print(gameState)
-
 main()

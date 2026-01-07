@@ -17,11 +17,8 @@ def combineStrings(string1, string2, width1, height):
     # loop through the height of the strings
     for i in range(height):
        # loop through the legnth of each adding to the new string
-        try:
-            combinedString += string1[i * width1 : i * width1 + width1]
-            combinedString += string2[i * width2 : i * width2 + width2]
-        except IndexError:
-            return "OUT OF RANGE"
+        combinedString += string1[i * width1 : i * width1 + width1]
+        combinedString += string2[i * width2 : i * width2 + width2]
         combinedString += "\n"
     return combinedString
 

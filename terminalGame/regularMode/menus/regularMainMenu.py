@@ -4,27 +4,24 @@ import helperFuncs
 
 MENU_MAX = 2
 MENU_MIN = 0
-gameState = ("quit","htp", "play")
+MENU_DIR = "vertical"
+nextGameState = ("quit","htp", "play")
 
 def main():
     # reset current selected
     currentSelected = MENU_MAX
     # print when first entered
+    helperFuncs.clearTerminal()
     print(asciiMenus.getMainMenuArt()[MENU_MAX])
     while True:
-        # input
-        inputLists = Input.getInputList()
-        changeSelectedBy(currentSelected, inputLists[1])
-        # if selected return
-        if inputLists[2] == 1:
-            helperFuncs.clearTerminal()
-            return gameState[currentSelected]
+        # get input and use it to change selected
+        inputList = Input.getInputList()
+        currentSelected = helperFuncs.changeWithInput(currentSelected, inputList, MENU_DIR, MENU_MIN, MENU_MAX)
 
-# change selected
-def changeSelectedBy(currentSelected, change):
-    # increase, clamp
-    currentSelected = helperFuncs.changeWithClamp(currentSelected, change, MENU_MIN, MENU_MAX)
+        # if space pressed return selected
+        if inputList[2] == 1:
+            return nextGameState[currentSelected]
 
-    # update menu
-    helperFuncs.clearTerminal()
-    print(asciiMenus.getMainMenuArt()[currentSelected])
+        # clear and update
+        helperFuncs.clearTerminal()
+        print(asciiMenus.getMainMenuArt()[currentSelected])

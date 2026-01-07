@@ -1,10 +1,11 @@
 import asciiHelpers
 
 CARD_HEIGHT = 15
+CARD_DOWN_HEIGHT = 2
 
 asciiCards = {
     "strike" : {
-        False : r"""
+        "normal" : r"""
                    
                    
  _.-._.-._.-._.-._ 
@@ -21,7 +22,7 @@ asciiCards = {
 (        8        )
  `-._.-._.-._.-.-' 
 """,
-        True : r"""
+        "selected" : r"""
  _.-._.-._.-._.-._.-._. 
 (                      )
  )          .         ( 
@@ -38,5 +39,10 @@ asciiCards = {
 (        1 target      )
  `-._.-._.--._.-._.-.-' 
 """
-    }
+    },
+    "cardDown" : r"""
+ _.-._.-._.-._.-._.-._. 
+(                      )
+"""
 }
+print(asciiHelpers.combineCardStrings([asciiCards["strike"]["selected"], asciiCards["strike"]["normal"]], CARD_HEIGHT))
