@@ -31,5 +31,8 @@ def main():
             gameState = setGameStateRegular(gameState)
         else:
             gameState = setGameStateCompatibility(gameState)
+    
+    helperFuncs.clearTerminal()
+    print("quit")
 
 main()

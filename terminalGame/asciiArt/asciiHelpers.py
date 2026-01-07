@@ -22,12 +22,12 @@ def combineStrings(string1, string2, width1, height):
         combinedString += "\n"
     return combinedString
 
-def combineCardStrings(stringDicts, height):
+def combineCardStrings(cards, height):
     # set string and len
     combinedString = ""
     width = 0
     # loop through each card and add them
-    for card in stringDicts:
+    for card in cards:
         combinedString = combineStrings(combinedString, card, width, height)
         width += findWidth(card)
 
