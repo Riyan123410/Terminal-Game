@@ -1,5 +1,4 @@
 import launchMode
-import Input
 import os
 import helperFuncs
 from regularMode.menus import regularMainMenu
@@ -32,5 +31,8 @@ def main():
             gameState = setGameStateRegular(gameState)
         else:
             gameState = setGameStateCompatibility(gameState)
+    
+    helperFuncs.clearTerminal()
+    print("quit")
 
 main()

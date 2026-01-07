@@ -1,10 +1,10 @@
 from asciiArt import asciiMenus
-import Input
+import userInput
 import helperFuncs
 
 MENU_MAX = 2
 MENU_MIN = 0
-MENU_DIR = "vertical"
+MENU_DIR = "yDir"
 nextGameState = ("quit","htp", "play")
 
 def main():
@@ -15,11 +15,11 @@ def main():
     print(asciiMenus.getMainMenuArt()[MENU_MAX])
     while True:
         # get input and use it to change selected
-        inputList = Input.getInputList()
+        inputList = userInput.getInputList()
         currentSelected = helperFuncs.changeWithInput(currentSelected, inputList, MENU_DIR, MENU_MIN, MENU_MAX)
 
         # if space pressed return selected
-        if inputList[2] == 1:
+        if inputList["space"]:
             return nextGameState[currentSelected]
 
         # clear and update

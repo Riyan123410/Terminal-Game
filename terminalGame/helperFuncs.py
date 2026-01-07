@@ -34,9 +34,5 @@ def diceRoll(times,size):
     return roll
 
 def changeWithInput(currentSelected, userInput, menuDir, menuMin, menuMax):
-    menuDirToInt = {
-        "horizontal" : 0,
-        "vertical" : 1
-    }
     # with input add selected with clamp
-    return changeWithClamp(currentSelected, userInput[menuDirToInt[menuDir]], menuMin, menuMax)
+    return changeWithClamp(currentSelected, userInput[menuDir], menuMin, menuMax)

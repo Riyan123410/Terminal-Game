@@ -45,4 +45,4 @@ asciiCards = {
 (                      )
 """
 }
-print(asciiHelpers.combineCardStrings([asciiCards["strike"]["selected"], asciiCards["strike"]["normal"]], CARD_HEIGHT))
+# print(asciiHelpers.combineCardStrings([asciiCards["strike"]["selected"], asciiCards["strike"]["normal"]], CARD_HEIGHT))

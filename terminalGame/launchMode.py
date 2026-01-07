@@ -1,6 +1,6 @@
 import helperFuncs
 import time
-import Input
+import userInput
 from asciiArt import asciiMenus
 
 # constants

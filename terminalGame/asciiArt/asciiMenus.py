@@ -10,7 +10,8 @@ If art is not displayed correctly compatibilty mode can be used.                
 [0] Continue    [1] Compatibility Mode
 """
 
-mainMenuTitle = r"""
+mainMenu = {
+  "title" : r"""
  ________  ___  ___  _____ ______   ________  _________  ___  ___      ___ _______      
 |\   ____\|\  \|\  \|\   _ \  _   \|\   __  \|\___   ___\\  \|\  \    /  /|\  ___ \     
 \ \  \___|\ \  \\\  \ \  \\\__\ \  \ \  \|\  \|___ \  \_\ \  \ \  \  /  / | \   __/|    
@@ -19,10 +20,8 @@ mainMenuTitle = r"""
     ____\_\  \ \_______\ \__\    \ \__\ \__\ \__\   \ \__\ \ \__\ \__/ /     \ \_______\
    |\_________\|_______|\|__|     \|__|\|__|\|__|    \|__|  \|__|\|__|/       \|_______|
    \|_________|                                                                         
-"""
-
-
-mainMenuPlay = r"""
+""",
+  "play" : r"""
                             __  ____  __     __   _  _ 
                             \ \(  _ \(  )   / _\ ( \/ )
                              ) )) __// (_/\/    \ )  / 
@@ -35,9 +34,8 @@ mainMenuPlay = r"""
                                   /  \ / )( \(  )(_  _)
                                  (  O )) \/ ( )(   )(  
                                   \__\)\____/(__) (__)
-"""
-
-mainMenuHtp = r"""
+""",
+  "htp" : r"""
                                 ____  __     __   _  _ 
                                (  _ \(  )   / _\ ( \/ )
                                 ) __// (_/\/    \ )  / 
@@ -50,9 +48,8 @@ mainMenuHtp = r"""
                                   /  \ / )( \(  )(_  _)
                                  (  O )) \/ ( )(   )(  
                                   \__\)\____/(__) (__)
-"""
-
-mainMenuQuit = r"""
+""",
+  "quit" : r"""
                                 ____  __     __   _  _ 
                                (  _ \(  )   / _\ ( \/ )
                                 ) __// (_/\/    \ )  / 
@@ -65,57 +62,15 @@ mainMenuQuit = r"""
                              \ \  /  \ / )( \(  )(_  _)
                               ) )(  O )) \/ ( )(   )(  
                              /_/  \__\)\____/(__) (__)
-"""
-
-mainMenuControls = r"""
+""",
+  "controls" : r"""
 ==========================================================================================
 [W] up    [S] down    [Space] select
 """
+}
 
 def getMainMenuArt():
-  return (str(mainMenuTitle) + str(mainMenuQuit) + str(mainMenuControls), 
-          str(mainMenuTitle) + str(mainMenuHtp) + str(mainMenuControls),
-          str(mainMenuTitle) + str(mainMenuPlay + str(mainMenuControls))
-  )
-
-htpBasics = r"""
- _____                    _____ 
-( ___ )------------------( ___ )
- |   |                    |   | 
- |   |  _                 |   | 
- |   | | |_  _____ __ __  |   | 
- |   | | ' \/ _ \ V  V /  |   | 
- |   | |_||_\___/\_/\_/   |   | 
- |   |     | |_ ___       |   | 
- |   |     |  _/ _ \      |   | 
- |   |      \__\___/      |   | 
- |   |  _ __| |__ _ _  _  |   | 
- |   | | '_ \ / _` | || | |   | 
- |   | | .__/_\__,_|\_, | |   | 
- |   | |_|          |__/  |   | 
- |___|                    |___| 
-(_____)------------------(_____)
-"""
-htpDeck = r"""
- _____                   _____ 
-( ___ )-----------------( ___ )
- |   |                   |   | 
- |   |                   |   | 
- |   |                   |   | 
- |   |                   |   | 
- |   |     _        _    |   | 
- |   |  __| |___ __| |__ |   | 
- |   | / _` / -_) _| / / |   | 
- |   | \__,_\___\__|_\_\ |   | 
- |   |                   |   | 
- |   |                   |   | 
- |   |                   |   | 
- |   |                   |   | 
- |___|                   |___| 
-(_____)-----------------(_____)
-"""
-
-def getHtpArt():
-  return (str(htpBasics), 
-          str(htpDeck)
-  )
+  return (str(mainMenu["title"]) + str(mainMenu["quit"]) + str(mainMenu["controls"]), 
+          str(mainMenu["title"]) + str(mainMenu["htp"]) + str(mainMenu["controls"]),
+          str(mainMenu["title"]) + str(mainMenu["play"]) + str(mainMenu["controls"])
+        )
