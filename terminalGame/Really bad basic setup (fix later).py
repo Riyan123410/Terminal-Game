@@ -1,4 +1,4 @@
-import os
+import helperFuncs
 import random
 import time
 
@@ -49,15 +49,6 @@ def enemyIntentions(enemyName):
         attackIntentions.append(intentionsList[enemyName][determinePly()][i+1])
     return attackIntentions
 
-def clearTerminal():
-    """Clears the terminal screen for Windows, Linux, and macOS."""
-    # Check the operating system name
-    if os.name == 'nt':
-        # Command for Windows
-        os.system('cls')
-    else:
-        # Command for Linux and macOS
-        os.system('clear')
 def determineIntentions():
     global enemies
     global visibleIntentions
@@ -86,7 +77,7 @@ def discardGain(number):
             time.sleep(1)
         else:
             cost += 1
-        clearTerminal()
+        helperFuncs.clearTerminal()
 def defineCard():
     cardInput = input("Which Card: ")
     global cardDef
@@ -145,11 +136,11 @@ def playerTurn():
     drawCards(startingDraw)
     cost += costGain
     block = 0
-    clearTerminal()
+    helperFuncs.clearTerminal()
     print("your turn")
     time.sleep(1)
     while True:
-        clearTerminal()
+        helperFuncs.clearTerminal()
         turnNumber += 1
         while len(hand) > handMax:
             hand.pop()
@@ -172,7 +163,7 @@ def playerTurn():
             currentCardCost = cardDef[playCard][2]
             if (playCard in hand):
                 if cost - currentCardCost > -1:
-                    clearTerminal()
+                    helperFuncs.clearTerminal()
                     discardCard(playCard)
                     cost -= currentCardCost
                     exec(effect)
@@ -181,11 +172,11 @@ def playerTurn():
                     print("Not enough cost")
                     time.sleep(1)
             elif playCard == "define":
-                clearTerminal()
+                helperFuncs.clearTerminal()
                 exec(effect)
             elif playCard == "end":
                 time.sleep(1)
-                clearTerminal()
+                helperFuncs.clearTerminal()
                 return
             else:
                 print("Card not in hand")
