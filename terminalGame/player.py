@@ -49,6 +49,7 @@ def resolveIntentions(resolveList):
     print(playerHealth)
 
 
+
 # discardGain(int) -> None
 # purpose: takes in an integer called number, then discards as many entrys from number from the hand, and increases cost by number discarded.
 # examples:
@@ -77,9 +78,11 @@ def discardGain(number):
 
 def enemyDamageSelf(times,number):
     global enemies
+    global visibleIntentions
     for i in range(times):
         addEnemy = random.choice(list(enemies.keys()))
         enemies[addEnemy]["health"] -= number
+        enemyHelpers.updateEnemyHealth(visibleIntentions,enemies)
         if enemies[addEnemy]["health"] <= 0:
                 enemies.pop(addEnemy)
                 visibleIntentions.pop(addEnemy)
@@ -116,12 +119,14 @@ def damagePlayer(times,number):
 def damageEnemy(times,number):
     i = 0
     global enemies
+    global visibleIntentions
     while i < times:
         helperFuncs.clearTerminal()
         print(list(enemies.keys()))
         target = input("Which enemy: ")
         try:
             enemies[target]["health"] -= number
+            enemyHelpers.updateEnemyHealth(visibleIntentions,enemies)
             i += 1
             if enemies[target]["health"] <= 0:
                 enemies.pop(target)
@@ -202,7 +207,6 @@ def playerTurn():
         print(f"health: {playerHealth}")
         print(f"block: {playerBlock}")
         print(visibleIntentions)
-        print(enemies)
         if enemies == {}:
             return
         playCard = input().lower()
@@ -251,4 +255,3 @@ def gameLoop():
     while enemies != {}:
         playerTurn()
         enemyTurn()
-gameLoop()
