@@ -122,28 +122,43 @@ def ammoCard(card,times,damage,effect):
         case "single":
             damageEnemy(times,damage)
     discard.remove(card)
-    match card:
-        case "crossbow":
-            deck.append("crossbow-reload")
+    deck.append(card+"-reload")
 
 def reloadCard(card):
+    global deck
+    global discard
     match card:
-        case "crossbow":
-            deck.append("crossbow")
-            discard.remove("crossbow-reload")
+        case "blunderbuss":
+            damageEnemyAll(1,16)
 
+    deck.append(card)
+    discard.remove(card+"-reload")
+        
+
+def damageEnemyAll(times,number):
+    global enemies
+    global visibleIntentions
+    helperFuncs.clearTerminal()
+    enemyList = list(enemies.keys())
+    for i in range(len(enemyList)):
+        for e in range(times):
+            enemies[enemyList[i]]["health"] -= number
+            visibleIntentions = enemyHelpers.updateEnemyHealth(visibleIntentions,enemies)
+            if enemies[enemyList[i]]["health"] <= 0:
+                enemies.pop(enemyList[i])
+                visibleIntentions.pop(enemyList[i])
 
 def damageEnemy(times,number):
     i = 0
     global enemies
     global visibleIntentions
+    helperFuncs.clearTerminal()
+    print(list(enemies.keys()))
+    target = input("Which enemy: ")
     while i < times:
-        helperFuncs.clearTerminal()
-        print(list(enemies.keys()))
-        target = input("Which enemy: ")
         try:
             enemies[target]["health"] -= number
-            enemyHelpers.updateEnemyHealth(visibleIntentions,enemies)
+            visibleIntentions = enemyHelpers.updateEnemyHealth(visibleIntentions,enemies)
             i += 1
             if enemies[target]["health"] <= 0:
                 enemies.pop(target)

@@ -67,6 +67,37 @@ def discardGain(number):
             helperFuncs.clearTerminal()
     except:
         pass
+    
+def ammoCard(card,times,damage,effect):
+    match effect:
+        case "single":
+            damageEnemy(times,damage)
+    discard.remove(card)
+    deck.append(card+"-reload")
+
+def reloadCard(card):
+    global deck
+    global discard
+    match card:
+        case "blunderbuss":
+            damageEnemyAll(1,16)
+
+    deck.append(card)
+    discard.remove(card+"-reload")
+        
+
+def damageEnemyAll(times,number):
+    global enemies
+    global visibleIntentions
+    helperFuncs.clearTerminal()
+    enemyList = list(enemies.keys())
+    for i in range(len(enemyList)):
+        for e in range(times):
+            enemies[enemyList[i]]["health"] -= number
+            visibleIntentions = enemyHelpers.updateEnemyHealth(visibleIntentions,enemies)
+            if enemies[enemyList[i]]["health"] <= 0:
+                enemies.pop(enemyList[i])
+                visibleIntentions.pop(enemyList[i])
 
 def enemyDamageSelf(times,number):
     global enemies
