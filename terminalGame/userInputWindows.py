@@ -1,12 +1,14 @@
-import msvcrt
+try:
+    import msvcrt
+except:
+    print("not compatable")
 
 def getInput():
     # get character without pressing enter
     char = msvcrt.getch()
     try:
         # try to convert char from a byte to a string
-        # TODO: change to ASCII
-        char = char.decode('ASCII')
+        char     = char.decode('ASCII')
     except:
         # if failed to convert just pass and return the byte directly 
         pass
