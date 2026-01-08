@@ -67,7 +67,7 @@ def discardGain(number):
             helperFuncs.clearTerminal()
     except:
         pass
-    
+
 def ammoCard(card,times,damage,effect):
     match effect:
         case "single":
@@ -139,6 +139,8 @@ def damagePlayer(times,number):
             playerBlock -= number
         if finalNumber > 0:
             playerHealth -= finalNumber
+
+
 
 
 def damageEnemy(times,number):
@@ -289,3 +291,4 @@ def gameLoop():
     while enemies != {}:
         playerTurn()
         enemyTurn()
+    return "playMenu"

@@ -8,5 +8,7 @@ cardDef = {
            "well prepared" : ["draw 4 cards; 1 cost", "drawCards(3)", 1],
            "crossbow-reload" : ["reloads crossbow; 1 cost", "reloadCard('crossbow')", 1],
            "blunderbuss" : ["deals 2x2 damage, requires reload; 1 cost", "ammoCard('blunderbuss',2,2,'single')", 1],
-           "blunderbuss-reload" : ["deals 16 damage, reloads blunderbuss; 2 cost", "reloadCard('blunderbuss')", 2]
+           "blunderbuss-reload" : ["deals 16 damage, reloads blunderbuss; 2 cost", "reloadCard('blunderbuss')", 2],
+           "revolver" : ["deals 1d10 damage, 50% chance to damage again; 2 cost", "ammoCard('revolver',1,helperFuncs.diceRoll(1,10),'recursion')", 2],
+           "revolver-reload" : ["reloads revolver; 1 cost", "reloadCard('revolver')", 1]
            }

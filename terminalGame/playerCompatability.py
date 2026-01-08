@@ -18,7 +18,7 @@ visibleIntentions = {}
 handMax = 14
 discard = []
 hand = []
-deck = ["strike", "clean sweep", "strike", "strike", "strike", "strike", "strike", "strike", "strike", "block", "block", "block", "crossbow", "well prepared"]
+deck = ["revolver","revolver","revolver","revolver","revolver"]
 enemies = dict({})
 
 # resolveIntentions([str]) -> None
@@ -121,6 +121,13 @@ def ammoCard(card,times,damage,effect):
     match effect:
         case "single":
             damageEnemy(times,damage)
+        case "recursion":
+            damageEnemy(times,damage)
+            chanceCheck = random.randint(1,2)
+            while chanceCheck == 2:
+                damageEnemy(times,damage)
+                chanceCheck = random.randint(1,2)
+
     discard.remove(card)
     deck.append(card+"-reload")
 
@@ -134,7 +141,6 @@ def reloadCard(card):
     deck.append(card)
     discard.remove(card+"-reload")
         
-
 def damageEnemyAll(times,number):
     global enemies
     global visibleIntentions
@@ -166,6 +172,7 @@ def damageEnemy(times,number):
         except:
             print("Invalid Enemy")
             time.sleep(1)
+            target = input("Which enemy: ")
 def gainBlock(times,number):
     global playerBlock
     for i in range(times):
@@ -240,13 +247,17 @@ def playerTurn():
     helperFuncs.clearTerminal()
     print("your turn")
     time.sleep(1)
+    # Main turn loop
     while True:
         helperFuncs.clearTerminal()
         turnNumber += 1
+        # prevents hand being above max
         while len(hand) > handMax:
             hand.pop()
+        # prevents cost being too high
         while cost > costMax:
             cost -= 1
+        # prints all information
         print(f"hand: {hand}")
         print(f"discard: {discard}")
         print(f"deck: {deck}")

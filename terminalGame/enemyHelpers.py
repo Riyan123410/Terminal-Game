@@ -2,7 +2,7 @@ from enemyIntentions import intentionsList
 import random
 
 # determinePly(int) -> str
-# purpose: takes in an integer call turnNumber, then returns a string dependent on if it is even or odd.
+# purpose: takes in an integer call turnNumber, then returns a string dependent on if it is even or odd. Determines every other turn.
 # examples:
 #           determinePly(1) -> "turn2"
 #           determinePly(2) -> "turn1"
@@ -25,6 +25,7 @@ assert determinePly(2) == "turn1"
 def enemyIntentions(enemyName, turnNumber):
     global intentionsList
     attackIntentions = []
+    # sets the proper formating for the enemy intentions
     for i in range(len(intentionsList[enemyName][determinePly(turnNumber)])):
         attackIntentions.append(intentionsList[enemyName][determinePly(turnNumber)][i+1])
     return attackIntentions
