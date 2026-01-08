@@ -1,6 +1,7 @@
 import launchMode
 import os
 import helperFuncs
+import userInput
 from regularMode.menus import regularMainMenu
 from regularMode.menus import regularHtpMenu
 from regularMode.menus import regularPlayMenu
@@ -27,8 +28,13 @@ def main():
     # clear before starting
     helperFuncs.clearTerminal()
 
-    # get launch mode and start game after
+    # TODO: uncomment
     isRegularMode = launchMode.main()
+    # get launch mode and start game after
+    # if os.name == "nt":
+    #     isRegularMode = launchMode.main()
+    # else:
+    #     isRegularMode = False
 
     while gameState != "quit":
         if isRegularMode:
