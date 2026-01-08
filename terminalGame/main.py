@@ -8,11 +8,25 @@ from regularMode.menus import regularPlayMenu
 
 coins = 0
 
-# set each game state
+# setGameStateCompatibility(str) -> str
+# purpose: Handles game state transitions in compatibility mode.
+#          Runs game state based on input (gameState)
+#          Always returns quit when the game state returns quit
+# examples:
+#          setGameStateCompatibility("mainMenu") -> "quit"
+#          setGameStateCompatibility("game state that doesnt exist") -> "quit"
+#          setGameStateCompatibility("") -> "quit"
 def setGameStateCompatibility(gameState):
     return "quit"
 
-# set game state
+# setGameStateCompatibility(str) -> str
+# purpose: Handles game state transitions in regular mode. Runs game
+#          state based on input (gameState) Always returns quit when
+#          the game state returns or a inccorect game state is recieved
+# examples:
+#          setGameStateCompatibility("mainMenu") -> "quit"
+#          setGameStateCompatibility("game state that doesnt exist") -> "quit"
+#          setGameStateCompatibility("") -> "quit"
 def setGameStateRegular(gameState):
     match gameState:
         case "mainMenu":
@@ -21,8 +35,15 @@ def setGameStateRegular(gameState):
             return regularHtpMenu.main()
         case "playMenu":
             return regularPlayMenu.main(coins)
+    
+    helperFuncs.clearTerminal()
+    print(gameState)
     return "quit"
 
+# main() -> None
+# purpose: Game starts here here, sets launch mode, and starts the main game loop.
+# examples:
+#          main() -> None
 def main():
     gameState = "mainMenu"
 
@@ -33,7 +54,7 @@ def main():
     isRegularMode = launchMode.main()
     # get launch mode and start game after
     # if os.name == "nt":
-    #     isRegularMode = launchMode.main()
+    #     isRegularMode = launchMode.main()i
     # else:
     #     isRegularMode = False
 
@@ -42,8 +63,5 @@ def main():
             gameState = setGameStateRegular(gameState)
         else:
             gameState = setGameStateCompatibility(gameState)
-    
-    helperFuncs.clearTerminal()
-    print("quit")
 
 main()
