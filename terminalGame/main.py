@@ -17,7 +17,9 @@ coins = 0
 #          setGameStateCompatibility("game state that doesnt exist") -> "quit"
 #          setGameStateCompatibility("") -> "quit"
 def setGameStateCompatibility(gameState):
-    return "quit"
+    helperFuncs.clearTerminal()
+    print(gameState)
+    return "no compatability yet"
 
 # setGameStateCompatibility(str) -> str
 # purpose: Handles game state transitions in regular mode. Runs game
