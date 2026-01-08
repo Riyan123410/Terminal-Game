@@ -6,6 +6,7 @@ from regularMode.menus import regularMainMenu
 from regularMode.menus import regularHtpMenu
 from regularMode.menus import regularPlayMenu
 
+coins = 0
 
 # set each game state
 def setGameStateCompatibility(gameState):
@@ -19,7 +20,7 @@ def setGameStateRegular(gameState):
         case "htp":
             return regularHtpMenu.main()
         case "playMenu":
-            return 
+            return regularPlayMenu.main(coins)
     return "quit"
 
 def main():

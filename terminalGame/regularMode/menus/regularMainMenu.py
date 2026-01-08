@@ -12,7 +12,7 @@ def main():
     currentSelected = MENU_MAX
     # print when first entered
     helperFuncs.clearTerminal()
-    print(asciiMenus.getMainMenuArt()[MENU_MAX])
+    print(asciiMenus.getMainMenuArt()[currentSelected])
     while True:
         # get input and use it to change selected
         inputList = userInput.getInputList()

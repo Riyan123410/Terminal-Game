@@ -73,7 +73,7 @@ def getMainMenuArt():
   return (str(mainMenu["title"]) + str(mainMenu["quit"]) + str(mainMenu["controls"]), 
           str(mainMenu["title"]) + str(mainMenu["htp"]) + str(mainMenu["controls"]),
           str(mainMenu["title"]) + str(mainMenu["play"]) + str(mainMenu["controls"])
-        )
+  )
 
 playMenu = {
   "background" : r"""
@@ -111,4 +111,15 @@ playMenu = {
            (__)  \____/\_/\_/(__/                         /_/ (____/\_)(_/ \__/(__)  
 """
 }
-print(playMenu["background"])
+
+def displayPlayMenuControls(coins):
+  return f"""
+==========================================================================================
+[A] left    [D] right    [Space] select                              [{coins}] coins
+"""
+
+def getPlayMenuArt(coins):
+  return (
+    str(playMenu["background"]) + str(playMenu["playSelected"]) + displayPlayMenuControls(coins),
+    str(playMenu["background"]) + str(playMenu["shopSelected"]) + displayPlayMenuControls(coins)
+  )
