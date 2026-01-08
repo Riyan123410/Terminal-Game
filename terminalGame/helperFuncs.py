@@ -58,6 +58,8 @@ def diceRoll(times,size):
             roll += random.randint(size,-1)
     return roll
 
+# testing not plausible due to random
+
 
 # menuLoop(int, dict, str, (), function) -> str
 # purpose: The menu loop that handles input, selection, ASCII art display,
