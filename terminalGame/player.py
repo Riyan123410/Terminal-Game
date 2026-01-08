@@ -37,7 +37,13 @@ def resolveIntentions(resolveList):
     helperFuncs.clearTerminal()
 
 
-
+def deckDiscard(number):
+    global deck
+    global discard
+    for i in range(number):
+        card = random.randint(0,len(deck) - 1)
+        deck.remove(card)
+        discard.append(card)
 
 
 # discardGain(int) -> None
