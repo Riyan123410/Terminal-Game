@@ -19,7 +19,7 @@ coins = 0
 def setGameStateCompatibility(gameState):
     helperFuncs.clearTerminal()
     print(gameState)
-    return "no compatability yet"
+    return "quit"
 
 # setGameStateCompatibility(str) -> str
 # purpose: Handles game state transitions in regular mode. Runs game
