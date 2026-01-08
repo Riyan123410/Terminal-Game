@@ -3,7 +3,6 @@ import random
 import time
 from enemyIntentions import intentionsList
 from cardDefinitions import cardDef
-import cardDefinitions
 import enemyHelpers
 
 playerHealth = 50
@@ -23,7 +22,7 @@ deck = ["strike", "clean sweep", "strike", "strike", "strike", "strike", "strike
 enemies = dict({})
 
 # resolveIntentions([str]) -> None
-# purpose: takes in a list called list, then executes all strings within the list as functions associated with it's name.
+# purpose: takes in a list called resolveList, then executes all strings within the list as functions associated with it's name.
 # examples:
 #           resolveIntentions("damagePlayer(1,2)")                        -> playerHealth - 2
 #           resolveIntentions("discardCardRand(2)")                       -> len(hand) - 2
@@ -204,7 +203,8 @@ def playerTurn():
         print(f"block: {playerBlock}")
         print(visibleIntentions)
         print(enemies)
-
+        if enemies == {}:
+            return
         playCard = input().lower()
         try:
             effect = cardDef[playCard][1]

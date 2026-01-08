@@ -13,7 +13,7 @@ def getInput():
             return ''
         try:
             # try to convert char from a byte to a string
-            char = char.decode('latin1')
+            char = char.decode('ASCII')
         except:
             # if failed to convert just pass and return the byte directly 
             pass
