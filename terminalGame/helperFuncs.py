@@ -83,7 +83,7 @@ def menuLoop(currentSelected, menuDir, menuRange, artFunc, nextStates):
         # try to change menu
         inputList = userInput.getInputList()
         try:
-            currentSelected = changeWithClamp(currentSelected, userInput[menuDir], menuRange[0], menuRange[1])
+            currentSelected = changeWithClamp(currentSelected, inputList[menuDir], menuRange[0], menuRange[1])
         except:
             print("user input is incorrect")
         
