@@ -1,4 +1,9 @@
-import msvcrt
+import sys
+try:
+    import msvcrt
+except:
+    print("input system not compatable")
+    sys.exit()
 
 def getInput():
     # get character without pressing enter
@@ -6,7 +11,7 @@ def getInput():
     try:
         # try to convert char from a byte to a string
         # TODO: change to ASCII
-        char = char.decode('latin1')
+        char = char.decode('ASCII')
     except:
         # if failed to convert just pass and return the byte directly 
         pass

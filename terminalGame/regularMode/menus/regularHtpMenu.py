@@ -26,4 +26,4 @@ def main():
 
         # clear and update
         helperFuncs.clearTerminal()
-        print(menu)
+        print("no how to play yet")

@@ -3,6 +3,8 @@ import os
 import helperFuncs
 from regularMode.menus import regularMainMenu
 from regularMode.menus import regularHtpMenu
+from regularMode.menus import regularPlayMenu
+
 
 # set each game state
 def setGameStateCompatibility(gameState):
@@ -15,6 +17,8 @@ def setGameStateRegular(gameState):
             return regularMainMenu.main()
         case "htp":
             return regularHtpMenu.main()
+        case "playMenu":
+            return 
     return "quit"
 
 def main():
