@@ -1,3 +1,5 @@
+# import asciiHelpers
+
 launchMode = r"""
 Please full screen your terminal in order for ascii art to display properly,                                                   ‾‾‾‾‾‾|
 make sure you can see the frame properly on the top left, this paragraph should only be 3 lines                                ‾‾‾‾| |
@@ -99,16 +101,22 @@ playMenu = {
                   `.`.<                                ####################################
 """,
   "playSelected" : r"""
-        __  ____  __     __   _  _                             ____  _  _   __  ____ 
-        \ \(  _ \(  )   / _\ ( \/ )                           / ___)/ )( \ /  \(  _ \
-         ) )) __// (_/\/    \ )  /                            \___ \) __ ((  O )) __/
-        /_/(__)  \____/\_/\_/(__/                             (____/\_)(_/ \__/(__)  
+        __  ____  __     __   _  _                             ____  _  _   __  ____               ____   __    ___  __ _ 
+        \ \(  _ \(  )   / _\ ( \/ )                           / ___)/ )( \ /  \(  _ \             (  _ \ / _\  / __)(  / )
+         ) )) __// (_/\/    \ )  /                            \___ \) __ ((  O )) __/              ) _ (/    \( (__  )  ( 
+        /_/(__)  \____/\_/\_/(__/                             (____/\_)(_/ \__/(__)               (____/\_/\_/ \___)(__\_)
 """,
   "shopSelected" : r"""
-            ____  __     __   _  _                        __   ____  _  _   __  ____ 
-           (  _ \(  )   / _\ ( \/ )                       \ \ / ___)/ )( \ /  \(  _ \
-            ) __// (_/\/    \ )  /                         ) )\___ \) __ ((  O )) __/
-           (__)  \____/\_/\_/(__/                         /_/ (____/\_)(_/ \__/(__)  
+            ____  __     __   _  _                        __   ____  _  _   __  ____               ____   __    ___  __ _ 
+           (  _ \(  )   / _\ ( \/ )                       \ \ / ___)/ )( \ /  \(  _ \             (  _ \ / _\  / __)(  / )
+            ) __// (_/\/    \ )  /                         ) )\___ \) __ ((  O )) __/              ) _ (/    \( (__  )  ( 
+           (__)  \____/\_/\_/(__/                         /_/ (____/\_)(_/ \__/(__)               (____/\_/\_/ \___)(__\_)
+""",
+  "backSelected" : r"""
+            ____  __     __   _  _                             ____  _  _   __  ____           __  ____   __    ___  __ _ 
+           (  _ \(  )   / _\ ( \/ )                           / ___)/ )( \ /  \(  _ \          \ \(  _ \ / _\  / __)(  / )
+            ) __// (_/\/    \ )  /                            \___ \) __ ((  O )) __/           ) )) _ (/    \( (__  )  ( 
+           (__)  \____/\_/\_/(__/                             (____/\_)(_/ \__/(__)            /_/(____/\_/\_/ \___)(__\_)
 """
 }
 
@@ -121,5 +129,63 @@ def displayPlayMenuControls(coins):
 def getPlayMenuArt(coins):
   return (
     str(playMenu["background"]) + str(playMenu["playSelected"]) + displayPlayMenuControls(coins),
-    str(playMenu["background"]) + str(playMenu["shopSelected"]) + displayPlayMenuControls(coins)
+    str(playMenu["background"]) + str(playMenu["shopSelected"]) + displayPlayMenuControls(coins),
+    str(playMenu["background"]) + str(playMenu["backSelected"]) + displayPlayMenuControls(coins)
   )
+
+shop = {
+  "bookshelfHeight" : 12,
+  "backSlot" : r"""
+__________________
+||--------------||
+|| ============ ||
+|| |   BACK   | ||
+|| |  deals   | ||
+|| |emotional | ||
+|| |damage to | ||
+|| |shopkeeper| ||
+|| |cost: FREE| ||
+|| ============ ||
+||--------------||
+||______________||
+""",
+  "cards" : {
+    "strike" : r"""
+______________________________
+||--------------------------||
+||         [coins] 1        ||
+||                          ||
+|| ======================== ||
+|| |        STRIKE        | ||
+|| |   deals 4 damage,    | ||
+|| |      1 target        | ||
+|| |      cost: 1         | ||
+|| ======================== ||
+||--------------------------||
+||__________________________||
+"""
+  },
+  "select" : {
+    "arrow" : r"""
+              __             .
+             /  \            .
+            /    \           .
+            ‾‾||‾‾           .
+              ||             .
+              ‾‾             .
+""",
+    "blank" : r"""
+                             .
+                             .
+                             .
+                             .
+                             .
+                             .
+""",
+    "height" : 6
+  }
+}
+
+def getShopMenuArt():
+  return 
+

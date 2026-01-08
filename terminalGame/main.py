@@ -2,9 +2,11 @@ import launchMode
 import os
 import helperFuncs
 import userInput
+import player
 from regularMode.menus import regularMainMenu
 from regularMode.menus import regularHtpMenu
 from regularMode.menus import regularPlayMenu
+from regularMode.menus import regularShopMenu
 
 coins = 0
 
@@ -37,15 +39,16 @@ def setGameStateRegular(gameState):
             return regularHtpMenu.main()
         case "playMenu":
             return regularPlayMenu.main(coins)
+        case "gameLoop":
+            return player.gameLoop()
+        case "shop":
+            return regularShopMenu.main()
     
-    helperFuncs.clearTerminal()
     print(gameState)
     return "quit"
 
 # main() -> None
 # purpose: Game starts here here, sets launch mode, and starts the main game loop.
-# examples:
-#          main() -> None
 def main():
     gameState = "mainMenu"
 

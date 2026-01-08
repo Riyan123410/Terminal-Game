@@ -3,10 +3,10 @@ from asciiArt import asciiHelpers
 import userInput
 import helperFuncs
 
-MENU_MAX = 1
+MENU_MAX = 2
 MENU_MIN = 0
 MENU_DIR = "xDir"
-nextGameState = ("play", "shop")
+nextGameState = ("play", "shop", "mainMenu")
 
 def main(coins):
     return helperFuncs.menuLoop(

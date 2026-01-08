@@ -1,2 +1,2 @@
 def main():
-    return "quit"
+    return "this is an intended feature"
