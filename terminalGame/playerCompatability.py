@@ -34,12 +34,19 @@ def resolveIntentions(resolveList):
         for e in enemies:
             healthList[e] = enemies[e]["health"]
         helperFuncs.clearTerminal()
-
+        print(healthList)
+        print(i["description"])
+        if playerBlock > 0:
+            print(playerBlock)
+        print(playerHealth)
         time.sleep(0.5)
         exec(i["effect"])
     helperFuncs.clearTerminal()
-
-
+    print(healthList)
+    print(i["description"])
+    if playerBlock > 0:
+        print(playerBlock)
+    print(playerHealth)
 
 
 
@@ -55,13 +62,14 @@ def discardGain(number):
     i = 0
     try:
         while (i < number):
-
+            print(hand)
             discarding = input("Card to discard: ")
             if discarding in hand:
                 discardCard(discarding)
                 cost += 1
                 i += 1
             else:
+                print("Invalid Card")
                 i += 1
                 time.sleep(1)
             helperFuncs.clearTerminal()
@@ -81,15 +89,15 @@ def enemyDamageSelf(times,number):
 
 # defineCard() -> None
 # purpose: runs a sequence to print the description of cards in compatability mode.
-# def defineCard():
-#     global cardDef
-#     print(hand)
-#     cardInput = input("Which Card: ")
-#     try:
-#         print(cardDef[cardInput][0])
-#     except:
-#         print("Invalid Card")
-#     time.sleep(2)
+def defineCard():
+    global cardDef
+    print(hand)
+    cardInput = input("Which Card: ")
+    try:
+        print(cardDef[cardInput][0])
+    except:
+        print("Invalid Card")
+    time.sleep(2)
 
 
 # damagePlayer(int,int) -> None
@@ -116,7 +124,7 @@ def damageEnemy(times,number):
     global visibleIntentions
     while i < times:
         helperFuncs.clearTerminal()
-
+        print(list(enemies.keys()))
         target = input("Which enemy: ")
         try:
             enemies[target]["health"] -= number
@@ -126,7 +134,7 @@ def damageEnemy(times,number):
                 enemies.pop(target)
                 visibleIntentions.pop(target)
         except:
-
+            print("Invalid Enemy")
             time.sleep(1)
 def gainBlock(times,number):
     global playerBlock
@@ -200,7 +208,7 @@ def playerTurn():
     cost += costGain
     playerBlock = 0
     helperFuncs.clearTerminal()
- 
+    print("your turn")
     time.sleep(1)
     while True:
         helperFuncs.clearTerminal()
@@ -209,14 +217,20 @@ def playerTurn():
             hand.pop()
         while cost > costMax:
             cost -= 1
-
+        print(f"hand: {hand}")
+        print(f"discard: {discard}")
+        print(f"deck: {deck}")
+        print(f"cost: {cost}")
+        print(f"health: {playerHealth}")
+        print(f"block: {playerBlock}")
+        print(visibleIntentions)
         if enemies == {}:
             return
         playCard = input().lower()
         try:
             effect = cardDef[playCard][1]
         except:
-
+                print("Invalid Card")
                 time.sleep(1)
         else:
             currentCardCost = cardDef[playCard][2]
@@ -228,7 +242,7 @@ def playerTurn():
                     exec(effect)
                     
                 else:
-
+                    print("Not enough cost")
                     time.sleep(1)
             elif playCard == "define":
                 helperFuncs.clearTerminal()
@@ -239,7 +253,7 @@ def playerTurn():
                 discardCardRand(len(hand))
                 return
             else:
-
+                print("Card not in hand")
                 time.sleep(1)
 def enemyTurn():
     global playerHealth
@@ -248,12 +262,12 @@ def enemyTurn():
     global visibleIntentions
     enemyList = list(enemies.keys())
     for i in range(len(enemies)):
-
+        print(enemies[enemyList[i]])
         resolveIntentions(enemies[enemyList[i]]["attacks"])
     # Determine next enemies attack
     visibleIntentions = enemyHelpers.determineIntentions(enemies, turnNumber)[1]
 
-def gameLoop():
+def gameLoopCompatable():
     startCombat()
     while enemies != {}:
         playerTurn()
