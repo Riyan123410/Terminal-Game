@@ -29,10 +29,7 @@ enemies = dict({})
 #           resolveIntentions(["damagePlayer(2,2)", "damagePlayer(1,5)"]) -> playerHealth - 7
 def resolveIntentions(resolveList):
     global intentionsList
-    healthList = {}
     for i in resolveList:
-        for e in enemies:
-            healthList[e] = enemies[e]["health"]
         helperFuncs.clearTerminal()
 
         time.sleep(0.5)
@@ -68,10 +65,23 @@ def discardGain(number):
     except:
         pass
 
+# ammoCard(str,int,int,str) -> None
+# purpose: takes in multiple strings and integers called card, times, damage, and effect. It then performs an action based off effect, using
+#           times and damage, before replacing itself with the related reload card.
 def ammoCard(card,times,damage,effect):
+    # determining what happens
     match effect:
         case "single":
             damageEnemy(times,damage)
+        case "recursion":
+            damageEnemy(times,damage)
+            chanceCheck = random.randint(1,2)
+
+            while chanceCheck == 2:
+                damageEnemy(times,damage)
+                chanceCheck = random.randint(1,2)
+
+    # replaces card with the reload card
     discard.remove(card)
     deck.append(card+"-reload")
 
@@ -99,6 +109,8 @@ def damageEnemyAll(times,number):
                 enemies.pop(enemyList[i])
                 visibleIntentions.pop(enemyList[i])
 
+# enemyDamageSelf(int,int) -> None
+# purpose: takes in two integers called times and number, and reduces the enemies health by number x times.
 def enemyDamageSelf(times,number):
     global enemies
     global visibleIntentions
@@ -110,6 +122,7 @@ def enemyDamageSelf(times,number):
                 enemies.pop(addEnemy)
                 visibleIntentions.pop(addEnemy)
 
+# Not used for non-compatability mode
 # defineCard() -> None
 # purpose: runs a sequence to print the description of cards in compatability mode.
 # def defineCard():

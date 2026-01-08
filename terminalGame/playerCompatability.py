@@ -18,7 +18,7 @@ visibleIntentions = {}
 handMax = 14
 discard = []
 hand = []
-deck = ["revolver","revolver","revolver","revolver","revolver"]
+deck = ["revolver","revolver","revolver","revolver","revolver", "cannon"]
 enemies = dict({})
 
 # resolveIntentions([str]) -> None
@@ -76,6 +76,8 @@ def discardGain(number):
     except:
         pass
 
+# enemyDamageSelf(int,int) -> None
+# purpose: takes in two integers called times and number, and reduces the enemies health by number x times.
 def enemyDamageSelf(times,number):
     global enemies
     global visibleIntentions
@@ -118,16 +120,19 @@ def damagePlayer(times,number):
             playerHealth -= finalNumber
 
 def ammoCard(card,times,damage,effect):
+    # determining what happens
     match effect:
         case "single":
             damageEnemy(times,damage)
         case "recursion":
             damageEnemy(times,damage)
-            chanceCheck = random.randint(1,2)
-            while chanceCheck == 2:
-                damageEnemy(times,damage)
-                chanceCheck = random.randint(1,2)
+            chanceCheck = random.randint(1,5)
 
+            while chanceCheck >= 3:
+                damageEnemy(times,damage)
+                chanceCheck = random.randint(1,5)
+
+    # replaces card with the reload card
     discard.remove(card)
     deck.append(card+"-reload")
 
@@ -153,15 +158,16 @@ def damageEnemyAll(times,number):
             if enemies[enemyList[i]]["health"] <= 0:
                 enemies.pop(enemyList[i])
                 visibleIntentions.pop(enemyList[i])
-
+        if enemies == {}:
+            return
 def damageEnemy(times,number):
     i = 0
     global enemies
     global visibleIntentions
-    helperFuncs.clearTerminal()
-    print(list(enemies.keys()))
-    target = input("Which enemy: ")
     while i < times:
+        helperFuncs.clearTerminal()
+        print(list(enemies.keys()))
+        target = input("Which enemy: ")
         try:
             enemies[target]["health"] -= number
             visibleIntentions = enemyHelpers.updateEnemyHealth(visibleIntentions,enemies)
@@ -172,7 +178,8 @@ def damageEnemy(times,number):
         except:
             print("Invalid Enemy")
             time.sleep(1)
-            target = input("Which enemy: ")
+        if enemies == {}:
+            return
 def gainBlock(times,number):
     global playerBlock
     for i in range(times):
