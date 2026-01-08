@@ -54,7 +54,8 @@ def determineIntentions(enemies,turnNumber):
         visibleIntentions[enemyList[i]]["attacks"] = {}
         for e in range(len(intentionsList[enemyList[i]][determinePly(turnNumber)])):
             visibleIntentions[enemyList[i]]["attacks"][e+1] = (enemies[enemyList[i]]["attacks"][e]["description"])
-            visibleIntentions = updateEnemyHealth(visibleIntentions,enemies)
+            
+    visibleIntentions = updateEnemyHealth(visibleIntentions,enemies)
     return [enemies,visibleIntentions]
 
 # determineEnemies({[{str}]}, int) -> {[{str}]}

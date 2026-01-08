@@ -9,7 +9,7 @@ playerHealth = 50
 costMax = 4
 cost = 0
 playerBlock = 0
-difficulty = 0.5
+difficulty = 2
 combatDifficulty = 0
 costGain = 3
 startingDraw = 5
@@ -116,6 +116,21 @@ def damagePlayer(times,number):
             playerBlock -= number
         if finalNumber > 0:
             playerHealth -= finalNumber
+
+def ammoCard(card,times,damage,effect):
+    match effect:
+        case "single":
+            damageEnemy(times,damage)
+    discard.remove(card)
+    match card:
+        case "crossbow":
+            deck.append("crossbow-reload")
+
+def reloadCard(card):
+    match card:
+        case "crossbow":
+            deck.append("crossbow")
+            discard.remove("crossbow-reload")
 
 
 def damageEnemy(times,number):
@@ -224,6 +239,7 @@ def playerTurn():
         print(f"health: {playerHealth}")
         print(f"block: {playerBlock}")
         print(visibleIntentions)
+        print(enemies)
         if enemies == {}:
             return
         playCard = input().lower()
@@ -272,3 +288,4 @@ def gameLoopCompatable():
     while enemies != {}:
         playerTurn()
         enemyTurn()
+gameLoopCompatable()
