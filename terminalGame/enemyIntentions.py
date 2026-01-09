@@ -13,7 +13,7 @@ intentionsList = {
         "health" : 20,
         "diff" : 1
         },
-        "bush" : 
+    "bush" : 
         {"turn2" : 
             {
                 1 : {"description" : "deal 1d4 damage", "effect" : "damagePlayer(1,helperFuncs.diceRoll(1,4))"}, 

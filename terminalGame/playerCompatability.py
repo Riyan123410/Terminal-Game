@@ -134,6 +134,9 @@ def damagePlayer(times,number):
             playerHealth -= finalNumber
             roll = finalNumber
 
+# ammoCard(str,int,int,str) -> None
+# purpose: takes in multiple strings and integers called card, times, damage, and effect. It then performs an action based off effect, using
+#           times and damage, before replacing itself with the related reload card.
 def ammoCard(card,times,damage,effect):
     # determining what happens
     match effect:
@@ -142,11 +145,10 @@ def ammoCard(card,times,damage,effect):
         case "recursion":
             damageEnemy(times,damage)
             chanceCheck = random.randint(1,5)
-
+            # replaying loop
             while chanceCheck >= 3:
                 damageEnemy(times,damage)
                 chanceCheck = random.randint(1,5)
-
     # replaces card with the reload card
     discard.remove(card)
     deck.append(card+"-reload")
@@ -336,4 +338,5 @@ def gameLoopCompatable():
     while enemies != {}:
         playerTurn()
         enemyTurn()
+    return("playMenu")
 gameLoopCompatable()

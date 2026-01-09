@@ -68,8 +68,10 @@ def determineEnemies(enemies,difficulty):
     attempts = 0
     maxAttempts = 15
     global intentionsList
+    # Finds
     while (combatDifficulty < difficulty) and (attempts <= maxAttempts):
         addEnemy = random.choice(list(intentionsList.keys()))
+        # Finds a random enemy in the intentions list within the current combat difficulty
         if intentionsList[addEnemy]["diff"] + combatDifficulty <= difficulty:
             if addEnemy not in enemies:
                 enemies[addEnemy] = {}

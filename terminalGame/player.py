@@ -82,7 +82,7 @@ def ammoCard(card,times,damage,effect):
         case "recursion":
             damageEnemy(times,damage)
             chanceCheck = random.randint(1,2)
-
+            # replaying loop
             while chanceCheck == 2:
                 damageEnemy(times,damage)
                 chanceCheck = random.randint(1,2)
