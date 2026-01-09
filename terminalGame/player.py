@@ -187,7 +187,7 @@ def enemyDamageSelf(times,number):
 #     print(hand)
 #     cardInput = input("Which Card: ")
 #     try:
-#         print(cardDef[cardInput][0])
+#         print(cardDef[cardInput]["description"])
 #     except:
 #         print("Invalid Card")
 #     time.sleep(2)
@@ -347,12 +347,12 @@ def playerTurn():
         # takes string
         playCard = getInput("").lower()
         try:
-            effect = cardDef[playCard][1]
+            effect = cardDef[playCard]["effect"]
         except:
 
                 time.sleep(1)
         else:
-            currentCardCost = cardDef[playCard][2]
+            currentCardCost = cardDef[playCard]["cost"]
             if (playCard in hand):
                 if cost - currentCardCost > -1:
                     helperFuncs.clearTerminal()
