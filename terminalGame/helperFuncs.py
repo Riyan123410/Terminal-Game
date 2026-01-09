@@ -97,3 +97,7 @@ def menuLoop(currentSelected, menuDir, menuRange, artFunc, nextStates):
             print(artFunc()[currentSelected])
         except:
             print("function for ascii art is out of range")
+
+def getCoins():
+    saveFile = open("save.txt", "r")
+    return int(saveFile.readline())

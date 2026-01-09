@@ -37,7 +37,10 @@ def indexToArrow(currentSelected):
         arrowList.append(asciiMenus.shop["select"]["arrow"])
     return arrowList
 
-def main(coins):
+def main():
+    # get coins
+    coins = helperFuncs.getCoins()
+
     # set current selected and clear terminal to print shop
     currentSelected = MENU_MIN
     helperFuncs.clearTerminal()
@@ -47,7 +50,7 @@ def main(coins):
     saveFile = open("save.txt", "r")
     saveFile.seek(0)
     # read the data from the save file and close it
-    cards = saveFile.read()
+    cards = saveFile.readlines()
     saveFile.close()
     
     # loop
@@ -70,9 +73,9 @@ def main(coins):
                 saveCardsAndCoins(cards, coins)
                 return "playMenu"
             elif coins >= itemPrice:
-                # subtrace coins and append the cards list based on what you bought
+                # subtrace coins and append the cards list based on what you bought with \n so its on another lin
                 coins -= itemPrice
-                cards.append(currentStock[currentSelected - 2])
+                cards.append(currentStock[currentSelected - 2] + "\n")
             else:
                 print("Not enough coins")
 
@@ -81,12 +84,13 @@ def getArt(currentSelected, coins):
     bookShelf = asciiHelpers.combineCardStrings(listToBookshelf(currentStock), asciiMenus.shop["bookshelfHeight"])
     arrow = asciiHelpers.combineCardStrings(indexToArrow(currentSelected), asciiMenus.shop["select"]["height"])
     controls = asciiMenus.getCoinMenuControls(coins)
-    return  bookShelf + arrow + controls
+    saveWarning = "Warning! purchased items will not be saved until you press back"
+    return  bookShelf + arrow + controls + saveWarning
 
 def saveCardsAndCoins(cards, coins):
-    # open file in write mode, set the first line to coins and write the file
+    # open file in write mode, set the index to coins with \n so its another line and write the file
     saveFile = open("save.txt", "w")
-    cards[0] = coins
+    cards[0] = str(coins) + "\n"
     saveFile.writelines(cards)
 
     # close file as its done being used

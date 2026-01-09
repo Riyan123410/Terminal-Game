@@ -2,11 +2,11 @@ from asciiArt import asciiMenus
 import userInput
 import helperFuncs
 
-MENU_MAX = 2
-MENU_MIN = 0
-MENU_DIR = "yDir"
-nextGameState = ("quit","htp", "playMenu")
 
+MENU_DIR = "yDir"
+nextGameState = ("quit", "credits", "htp", "playMenu")
+MENU_MAX = len(nextGameState) - 1
+MENU_MIN = 0
 
 
 def main():

@@ -2,13 +2,12 @@ import launchMode
 import os
 import helperFuncs
 import userInput
-import player
+import gameCredits
 from regularMode import regularShop
 from regularMode.menus import regularMainMenu
 from regularMode.menus import regularHtpMenu
 from regularMode.menus import regularPlayMenu
 
-coins = 10
 
 # setGameStateCompatibility(str) -> str
 # purpose: Handles game state transitions in compatibility mode.
@@ -37,12 +36,14 @@ def setGameStateRegular(gameState):
             return regularMainMenu.main()
         case "htp":
             return regularHtpMenu.main()
+        case "credits":
+            return gameCredits.main()
         case "playMenu":
-            return regularPlayMenu.main(coins)
+            return regularPlayMenu.main()
         case "gameLoop":
             return player.gameLoop()
         case "shop":
-            return regularShop.main(coins)
+            return regularShop.main()
     
     print(gameState)
     return "quit"
@@ -72,6 +73,5 @@ def main():
     # run the game until a game sate returns quit
     while gameState != "quit":
         gameState = setGameState(gameState)
-        
 
 main()
