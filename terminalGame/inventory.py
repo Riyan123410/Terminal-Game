@@ -1,2 +1,2 @@
 coins = 10
-cards = []
+cards = ["strike", "strike", "strike", "strike", "strike", "strike", "block", "block", "block", "crossbow"]
