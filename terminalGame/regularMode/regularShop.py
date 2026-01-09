@@ -9,6 +9,7 @@ itemCoins = {
     "strike" : 1,
     "soldOut" : 0
 }
+
 currentStock = []
 
 MENU_MAX = 5
@@ -71,17 +72,20 @@ def main():
 
         # check if space is pressed so an action can be done
         if inputList["space"] == True:
-            # get price of item so it can be used later, subtract 2 because 1 for the back button
-            # the other is because items start at 1 not 0
-            itemPrice = itemCoins[currentStock[currentSelected - 2]]
+            
             # if its the last item in the list return main menu to go there, if not purchase an item if you have enough coins
             if currentSelected == MENU_MAX:
                 saveCardsAndCoins(cards, coins)
                 return "playMenu"
-            elif coins >= itemPrice and currentStock[currentSelected - 1] != "soldOut":
+
+            # get price of item so it can be used later, subtract 1 because current selected is 1-5 while list is 0-4
+            itemPrice = itemCoins[currentStock[currentSelected - 1]]
+
+            # check if you can buy the item
+            if coins >= itemPrice and currentStock[currentSelected - 1] != "soldOut":
                 # subtrace coins and append the cards list based on what you bought with \n so its on another lin
                 coins -= itemPrice
-                cards.append(currentStock[currentSelected - 2] + "\n")
+                cards.append(currentStock[currentSelected - 1] + "\n")
                 # set the item to sold out
                 currentStock[currentSelected - 1] = "soldOut"
         
