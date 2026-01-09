@@ -21,7 +21,7 @@ visibleIntentions = {}
 handMax = 14
 discard = []
 hand = []
-deck = ["strike", "clean sweep", "strike", "strike", "strike", "strike", "strike", "strike", "strike", "block", "block", "block", "crossbow", "well prepared"]
+deck = []
 enemies = dict({})
 
 # compatability mode
@@ -363,8 +363,6 @@ def gameLoop(isCompatabilityMode):
     # set compatability
     global compatability
     compatability = isCompatabilityMode
-    compatability = True
-
     startCombat()
     while enemies != {}:
         playerTurn()
