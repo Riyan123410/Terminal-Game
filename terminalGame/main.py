@@ -3,12 +3,12 @@ import os
 import helperFuncs
 import userInput
 import player
+from regularMode import regularShop
 from regularMode.menus import regularMainMenu
 from regularMode.menus import regularHtpMenu
 from regularMode.menus import regularPlayMenu
-from regularMode.menus import regularShopMenu
 
-coins = 0
+coins = 10
 
 # setGameStateCompatibility(str) -> str
 # purpose: Handles game state transitions in compatibility mode.
@@ -42,7 +42,7 @@ def setGameStateRegular(gameState):
         case "gameLoop":
             return player.gameLoop()
         case "shop":
-            return regularShopMenu.main()
+            return regularShop.main(coins)
     
     print(gameState)
     return "quit"
@@ -64,9 +64,11 @@ def main():
     #     isRegularMode = False
 
     while gameState != "quit":
+        # set game state based on compatability mode
         if isRegularMode:
             gameState = setGameStateRegular(gameState)
         else:
             gameState = setGameStateCompatibility(gameState)
+        
 
 main()

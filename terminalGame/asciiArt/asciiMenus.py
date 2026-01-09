@@ -120,17 +120,17 @@ playMenu = {
 """
 }
 
-def displayPlayMenuControls(coins):
+def getCoinMenuControls(coins):
   return f"""
-==========================================================================================
-[A] left    [D] right    [Space] select                              [{coins}] coins
+===============================================================================================================================
+[A] left    [D] right    [Space] select                                                                      [{coins}] coins
 """
 
 def getPlayMenuArt(coins):
   return (
-    str(playMenu["background"]) + str(playMenu["playSelected"]) + displayPlayMenuControls(coins),
-    str(playMenu["background"]) + str(playMenu["shopSelected"]) + displayPlayMenuControls(coins),
-    str(playMenu["background"]) + str(playMenu["backSelected"]) + displayPlayMenuControls(coins)
+    str(playMenu["background"]) + str(playMenu["playSelected"]) + getCoinMenuControls(coins),
+    str(playMenu["background"]) + str(playMenu["shopSelected"]) + getCoinMenuControls(coins),
+    str(playMenu["background"]) + str(playMenu["backSelected"]) + getCoinMenuControls(coins)
   )
 
 shop = {
@@ -138,13 +138,13 @@ shop = {
   "backSlot" : r"""
 __________________
 ||--------------||
+|| [coins] FREE ||
 || ============ ||
 || |   BACK   | ||
 || |  deals   | ||
 || |emotional | ||
 || |damage to | ||
 || |shopkeeper| ||
-|| |cost: FREE| ||
 || ============ ||
 ||--------------||
 ||______________||
@@ -181,6 +181,14 @@ ______________________________
                              .
                              .
                              .
+""",
+  "lastArrow" : r"""
+        __  .
+       /  \ .
+      /    \.
+      ‾‾||‾‾.
+        ||  .
+        ‾‾
 """,
     "height" : 6
   }
