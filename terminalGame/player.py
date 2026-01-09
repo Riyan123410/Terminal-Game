@@ -373,50 +373,6 @@ def playerTurn():
                 return
             else:
                 compPrint("Invalid Card")
-                time.sleep(1)rFuncs.clearTerminal()
-        turnNumber += 1
-        while len(hand) > handMax:
-            hand.pop()
-        while cost > costMax:
-            cost -= 1
-        compPrint(f"hand: {hand}")
-        compPrint(f"discard: {discard}")
-        compPrint(f"deck: {deck}")
-        compPrint(f"cost: {cost}")
-        compPrint(f"health: {playerHealth}")
-        compPrint(f"block: {playerBlock}")
-        compPrint(visibleIntentions)
-        if enemies == {}:
-            return
-        # takes string
-        playCard = getInput("").lower()
-        try:
-            effect = cardDef[playCard][1]
-        except:
-
-                time.sleep(1)
-        else:
-            currentCardCost = cardDef[playCard][2]
-            if (playCard in hand):
-                if cost - currentCardCost > -1:
-                    helperFuncs.clearTerminal()
-                    discardCard(playCard)
-                    cost -= currentCardCost
-                    exec(effect)
-                    
-                else:
-                    compPrint("Invalid Card")
-                    time.sleep(1)
-            elif playCard == "define":
-                helperFuncs.clearTerminal()
-                exec(effect)
-            elif playCard == "end":
-                time.sleep(1)
-                helperFuncs.clearTerminal()
-                discardCardRand(len(hand))
-                return
-            else:
-                compPrint("Invalid Card")
                 time.sleep(1)
 def enemyTurn():
     global playerHealth
