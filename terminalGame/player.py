@@ -6,7 +6,7 @@ from cardDefinitions import cardDef
 import enemyHelpers
 import inventory
 
-
+# game
 playerHealth = 50
 costMax = 4
 cost = 0
@@ -22,6 +22,9 @@ discard = []
 hand = []
 deck = ["strike", "clean sweep", "strike", "strike", "strike", "strike", "strike", "strike", "strike", "block", "block", "block", "crossbow", "well prepared"]
 enemies = dict({})
+
+# compatability mode
+compatability = True
 
 # resolveIntentions([str]) -> None
 # purpose: takes in a list called resolveList, then executes all strings within the list as functions associated with it's name.
@@ -61,7 +64,7 @@ def discardGain(number):
     try:
         while (i < number):
 
-            discarding = input("Card to discard: ")
+            discarding = getInput("Card to discard: ")
             if discarding in hand:
                 discardCard(discarding)
                 cost += 1
@@ -162,10 +165,10 @@ def damagePlayer(times,number):
             playerHealth -= finalNumber
 
 
-def getInputEnemy():
+def getInput(string):
     global compatability
     if compatability:
-        target = input("Choose an enemy: ")
+        target = input(string)
     else:
         print("reg")
     return target
@@ -179,7 +182,7 @@ def damageEnemy(times,number):
     while i < times:
         helperFuncs.clearTerminal()
 
-        target = getInputEnemy()
+        target = getInput("Choose an enemy: ")
         try:
             enemies[target]["health"] -= number
             enemyHelpers.updateEnemyHealth(visibleIntentions,enemies)
@@ -282,7 +285,7 @@ def playerTurn():
         if enemies == {}:
             return
         # takes string
-        playCard = input().lower()
+        playCard = getInput("").lower()
         try:
             effect = cardDef[playCard][1]
         except:
