@@ -6,7 +6,8 @@ import os
 import random
 
 itemCoins = {
-    "strike" : 1
+    "strike" : 1,
+    "soldOut" : 0
 }
 currentStock = []
 
@@ -42,7 +43,7 @@ def main():
     # use global current stock and reset it
     global currentStock
     currentStock = []
-    # create shop items by making into a list so a random index can be chosen
+    # create shop items by making it  into a list so a random index can be chosen
     itemsList = list(itemCoins)
     for i in range(MENU_MAX - 1):
         currentStock.append(random.choice(itemsList))
@@ -77,12 +78,12 @@ def main():
             if currentSelected == MENU_MAX:
                 saveCardsAndCoins(cards, coins)
                 return "playMenu"
-            elif coins >= itemPrice:
+            elif coins >= itemPrice and currentStock[currentSelected - 1] != "soldOut":
                 # subtrace coins and append the cards list based on what you bought with \n so its on another lin
                 coins -= itemPrice
                 cards.append(currentStock[currentSelected - 2] + "\n")
-            else:
-                print("Not enough coins")
+                # set the item to sold out
+                currentStock[currentSelected - 1] = "soldOut"
         
         # create arrow
         helperFuncs.clearTerminal()

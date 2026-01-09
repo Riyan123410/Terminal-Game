@@ -200,12 +200,12 @@ ______________________________
 ||--------------------------||
 ||      [coins] FREE        ||
 ||                          ||
-|| ======================== ||
-|| |      SOLD OUT        | ||
-|| |   you better not     | ||
-|| | refresh the shop for | ||
-|| |     more items       | ||
-|| ======================== ||
+|| XXXXXXXXXXXXXXXXXXXXXXXX ||
+||        SOLD OUT          ||
+||     you better not       ||
+||   refresh the shop for   ||
+||       more items         ||
+|| XXXXXXXXXXXXXXXXXXXXXXXX ||
 ||--------------------------||
 ||__________________________||
 """
