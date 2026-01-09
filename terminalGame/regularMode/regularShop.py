@@ -86,7 +86,7 @@ def main():
             itemPrice = itemCoins[currentStock[currentSelected - 1]]
 
             # check if you can buy the item
-            if coins >= itemPrice and currentStock[currentSelected - 1] != "soldOut" and len(cards) < MAX_CARDS:
+            if coins >= itemPrice and currentStock[currentSelected - 1] != "soldOut" and len(cards) <= MAX_CARDS:
                 # subtrace coins and append the cards list based on what you bought with \n so its on another lin
                 coins -= itemPrice
                 cards.append(currentStock[currentSelected - 1] + "\n")
@@ -102,9 +102,9 @@ def getArt(currentSelected, coins, cards):
     bookShelf = asciiHelpers.combineCardStrings(listToBookshelf(currentStock), asciiMenus.shop["bookshelfHeight"])
     arrow = asciiHelpers.combineCardStrings(indexToArrow(currentSelected), asciiMenus.shop["select"]["height"])
     controls = asciiMenus.getCoinMenuControls(coins)
-    info = f"Warning! purchased items will not be saved until you press back\n Current deck: {helperFuncs.removeEndlinesInList(cards)}"
-    if len(cards) >= MAX_CARDS:
-        info = f"Warning! purchased items will not be saved until you press back\n Cannot purchase cards - deck cap reached of {MAX_CARDS}"
+    info = f"Warning! purchased items will not be saved until you press back\nCurrent deck: {getTotalCardList(cards)}"
+    if len(cards) > MAX_CARDS:
+        info = f"Warning! purchased items will not be saved until you press back\nCannot purchase cards - deck cap reached of {MAX_CARDS}"
     return  bookShelf + arrow + controls + info
 
 def saveCardsAndCoins(cards, coins):
@@ -116,3 +116,12 @@ def saveCardsAndCoins(cards, coins):
     # close file as its done being used
     saveFile.close()
     
+def getTotalCardList(cards):
+    newList = []
+    # make sure it does only have one index
+    if len(cards) <= 1:
+        return []
+    # loop from first index to remove the coins
+    for i in range(1, len(cards)):
+        newList.append(helperFuncs.removeEndlinesInList(cards)[i])
+    return newList

@@ -108,5 +108,8 @@ def removeEndlinesInList(stringList):
     # make sure it doesnt change original variable
     newList = []
     for string in stringList:
-        newList.append(string.replace("\n", ""))
+        # do an if statment to check if we arent just appending an empty string
+        replacedEndlines = string.replace("\n", "")
+        if replacedEndlines != "":
+            newList.append(replacedEndlines)
     return newList
