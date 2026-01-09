@@ -3,6 +3,7 @@ import os
 import helperFuncs
 import userInput
 import gameCredits
+import player
 from regularMode import regularShop
 from regularMode.menus import regularMainMenu
 from regularMode.menus import regularHtpMenu
