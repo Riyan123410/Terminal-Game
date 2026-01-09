@@ -13,5 +13,7 @@ cardDef = {
            "revolver-reload" : ("reloads revolver; 1 cost", "reloadCard('revolver')", 1),
            "cannon" : ("deals 4d12 damage to everything; 4 cost", "damageEnemyAll(4,helperFuncs.diceRoll(1,12))", 4),
            "shridhar" : ("win", "damageEnemyAll(1, 10000000)", 0),
-           "multi-strike" : ("deals 5x4 damage to all enemies; 3 cost", "damageEnemyAll(4,5)", 3)
+           "multi-strike" : ("deals 5x4 damage to all enemies; 3 cost", "damageEnemyAll(4,5)", 3),
+           "organ gun" : ("deals 8d4 damage to random enemies; 3 cost", "damageEnemyRand(8,helperFuncs.diceRoll(1,4))", 3),
+           "tactical reload" : ("reloads 2 cards in your deck; 1 cost", "reloadCard('all',2)", 1)
            }

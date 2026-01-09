@@ -11,7 +11,7 @@ playerHealth = 50
 costMax = 4
 cost = 0
 playerBlock = 0
-difficulty = 0.5
+difficulty = 1
 combatDifficulty = 0
 costGain = 3
 startingDraw = 5
@@ -62,10 +62,12 @@ def deckDiscard(number):
     global deck
     global discard
     for i in range(number):
-        card = random.randint(0,len(deck) - 1)
-        deck.remove(card)
-        discard.append(card)
-
+        try:
+            card = random.randint(0,len(deck) - 1)
+            deck.remove(card)
+            discard.append(card)
+        except:
+            pass
 
 # discardGain(int) -> None
 # purpose: takes in an integer called number, then discards as many entrys from number from the hand, and increases cost by number discarded.
@@ -112,15 +114,44 @@ def ammoCard(card,times,damage,effect):
     discard.remove(card)
     deck.append(card+"-reload")
 
-def reloadCard(card):
+def damageEnemyRand(times,number):
+    global enemies
+    global roll
+    global visibleIntentions
+    roll = []
+    helperFuncs.clearTerminal()
+    enemyList = list(enemies.keys())
+    for i in range(times):
+        enemies[enemyList[random.randint(0,(enemyList)-1)]]["health"] -= number
+        roll.append(number)
+        checkEnemyHealth()
+def checkEnemyHealth():
+    enemyList = list(enemies.keys())
+    for i in range(len(enemyList)):
+        if enemies[enemyList[i]]["health"] <= 0:
+            enemies.pop(enemyList[i])
+            visibleIntentions.pop(enemyList[i])
+
+def reloadCard(card,times):
     global deck
     global discard
+    cardsRemoved = 0
+    i = 0
     match card:
         case "blunderbuss":
             damageEnemyAll(1,16)
 
-    deck.append(card)
-    discard.remove(card+"-reload")
+    if times == 1:
+        deck.append(card)
+        discard.remove(card+"-reload")
+    else:
+        while (i < len(deck)) and (cardsRemoved <= times):
+            card = deck[i]
+            if card[-7] == "-":
+                deck.append(card[:-7])
+                deck.remove(card)
+                cardsRemoved += 1
+            i += 1
         
 
 def damageEnemyAll(times,number):
@@ -135,9 +166,7 @@ def damageEnemyAll(times,number):
             enemies[enemyList[i]]["health"] -= number
             roll.append(number)
             visibleIntentions = enemyHelpers.updateEnemyHealth(visibleIntentions,enemies)
-            if enemies[enemyList[i]]["health"] <= 0:
-                enemies.pop(enemyList[i])
-                visibleIntentions.pop(enemyList[i])
+            checkEnemyHealth()
 
 # enemyDamageSelf(int,int) -> None
 # purpose: takes in two integers called times and number, and reduces the enemies health by number x times.
@@ -148,9 +177,7 @@ def enemyDamageSelf(times,number):
         addEnemy = random.choice(list(enemies.keys()))
         enemies[addEnemy]["health"] -= number
         enemyHelpers.updateEnemyHealth(visibleIntentions,enemies)
-        if enemies[addEnemy]["health"] <= 0:
-                enemies.pop(addEnemy)
-                visibleIntentions.pop(addEnemy)
+        checkEnemyHealth()
 
 # Not used for non-compatability mode
 # defineCard() -> None
@@ -363,6 +390,7 @@ def gameLoop(isCompatabilityMode):
     # set compatability
     global compatability
     compatability = isCompatabilityMode
+    compatability = True
     startCombat()
     while enemies != {}:
         playerTurn()
