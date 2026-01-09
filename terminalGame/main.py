@@ -63,12 +63,15 @@ def main():
     # else:
     #     isRegularMode = False
 
+    # set game state based on compatability mode
+    if isRegularMode:
+        setGameState = setGameStateRegular
+    else:
+        setGameState = setGameStateCompatibility
+
+    # run the game until a game sate returns quit
     while gameState != "quit":
-        # set game state based on compatability mode
-        if isRegularMode:
-            gameState = setGameStateRegular(gameState)
-        else:
-            gameState = setGameStateCompatibility(gameState)
+        gameState = setGameState(gameState)
         
 
 main()
