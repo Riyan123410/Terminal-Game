@@ -102,3 +102,11 @@ def menuLoop(currentSelected, menuDir, menuRange, artFunc, nextStates):
 def getCoins():
     saveFile = open("save.txt", "r")
     return int(saveFile.readline())
+
+
+def removeEndlinesInList(stringList):
+    # make sure it doesnt change original variable
+    newList = []
+    for string in stringList:
+        newList.append(string.replace("\n", ""))
+    return newList
