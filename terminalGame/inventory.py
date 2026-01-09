@@ -1,2 +1,2 @@
-coins = 0
+coins = 10
 cards = []

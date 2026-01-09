@@ -4,6 +4,7 @@ import helperFuncs
 import userInput
 import os
 import random
+import inventory
 
 # shop variables
 itemCoins = {
@@ -54,18 +55,12 @@ def main():
         currentStock.append(random.choice(itemsList))
 
     # get coins
-    coins = helperFuncs.getCoins()
-
-    # open the save file where your coins can be saved 
-    saveFile = open("save.txt", "r")
-    saveFile.seek(0)
-    # read the data from the save file and close it
-    cards = saveFile.readlines()
-    saveFile.close()
+    coins = inventory.coins
 
     # set current selected and clear terminal to print shop
     currentSelected = MENU_MIN
     helperFuncs.clearTerminal()
+    cards = inventory.cards
     print(getArt(currentSelected, coins, cards))
     
     # loop
@@ -79,7 +74,6 @@ def main():
             
             # if its the last item in the list return main menu to go there, if not purchase an item if you have enough coins
             if currentSelected == MENU_MAX:
-                saveCardsAndCoins(cards, coins)
                 return "playMenu"
 
             # get price of item so it can be used later, subtract 1 because current selected is 1-5 while list is 0-4
@@ -87,9 +81,9 @@ def main():
 
             # check if you can buy the item
             if coins >= itemPrice and currentStock[currentSelected - 1] != "soldOut" and len(cards) <= MAX_CARDS:
-                # subtrace coins and append the cards list based on what you bought with \n so its on another lin
+                # subtrace coins and append the cards list based on what you bought
                 coins -= itemPrice
-                cards.append(currentStock[currentSelected - 1] + "\n")
+                cards.append(currentStock[currentSelected - 1])
                 # set the item to sold out
                 currentStock[currentSelected - 1] = "soldOut"
         
@@ -102,26 +96,7 @@ def getArt(currentSelected, coins, cards):
     bookShelf = asciiHelpers.combineCardStrings(listToBookshelf(currentStock), asciiMenus.shop["bookshelfHeight"])
     arrow = asciiHelpers.combineCardStrings(indexToArrow(currentSelected), asciiMenus.shop["select"]["height"])
     controls = asciiMenus.getCoinMenuControls(coins)
-    info = f"Warning! purchased items will not be saved until you press back\nCurrent deck: {getTotalCardList(cards)}"
+    info = f"Warning! purchased items will not be saved until you press back\nCurrent deck: {cards}"
     if len(cards) > MAX_CARDS:
         info = f"Warning! purchased items will not be saved until you press back\nCannot purchase cards - deck cap reached of {MAX_CARDS}"
     return  bookShelf + arrow + controls + info
-
-def saveCardsAndCoins(cards, coins):
-    # open file in write mode, set the index to coins with \n so its another line and write the file
-    saveFile = open("save.txt", "w")
-    cards[0] = str(coins) + "\n"
-    saveFile.writelines(cards)
-
-    # close file as its done being used
-    saveFile.close()
-    
-def getTotalCardList(cards):
-    newList = []
-    # make sure it does only have one index
-    if len(cards) <= 1:
-        return []
-    # loop from first index to remove the coins
-    for i in range(1, len(cards)):
-        newList.append(helperFuncs.removeEndlinesInList(cards)[i])
-    return newList

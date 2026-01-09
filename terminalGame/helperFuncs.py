@@ -97,13 +97,6 @@ def menuLoop(currentSelected, menuDir, menuRange, artFunc, nextStates):
         except:
             print("function for ascii art is out of range")
 
-# getCoins() -> int
-# purpose: returns the number of coins saved in the file save.txt
-def getCoins():
-    saveFile = open("save.txt", "r")
-    return int(saveFile.readline())
-
-
 def removeEndlinesInList(stringList):
     # make sure it doesnt change original variable
     newList = []
