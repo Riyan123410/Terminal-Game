@@ -4,6 +4,8 @@ import time
 from enemyIntentions import intentionsList
 from cardDefinitions import cardDef
 import enemyHelpers
+import inventory
+
 
 playerHealth = 50
 costMax = 4
@@ -160,6 +162,13 @@ def damagePlayer(times,number):
             playerHealth -= finalNumber
 
 
+def getInputEnemy():
+    global compatability
+    if compatability:
+        target = input("Choose an enemy: ")
+    else:
+        print("reg")
+
 
 
 def damageEnemy(times,number):
@@ -169,7 +178,7 @@ def damageEnemy(times,number):
     while i < times:
         helperFuncs.clearTerminal()
 
-        target = input("Which enemy: ")
+        target = getInputEnemy()
         try:
             enemies[target]["health"] -= number
             enemyHelpers.updateEnemyHealth(visibleIntentions,enemies)
@@ -233,7 +242,14 @@ def discardCard(name):
 def startCombat():
     global enemies
     global turnNumber
+    global deck
+    global hand
+    global discard
+    global inventory
     global visibleIntentions
+    deck = inventory.cards.copy()
+    hand = []
+    discard = []
     setup = enemyHelpers.determineIntentions(enemyHelpers.determineEnemies(enemies,difficulty), turnNumber)
     enemies = setup[0]
     visibleIntentions = setup[1]

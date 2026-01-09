@@ -4,6 +4,7 @@ import time
 from enemyIntentions import intentionsList
 from cardDefinitions import cardDef
 import enemyHelpers
+import inventory
 
 playerHealth = 50
 costMax = 4
@@ -250,7 +251,14 @@ def discardCard(name):
 def startCombat():
     global enemies
     global turnNumber
+    global deck
+    global hand
+    global discard
+    global inventory
     global visibleIntentions
+    deck.copy(inventory.cards)
+    hand = []
+    discard = []
     setup = enemyHelpers.determineIntentions(enemyHelpers.determineEnemies(enemies,difficulty), turnNumber)
     enemies = setup[0]
     visibleIntentions = setup[1]
