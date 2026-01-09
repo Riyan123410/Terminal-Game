@@ -29,8 +29,6 @@ def changeWithClamp(num, change, minNum, maxNum):
 
 # clearTerminal() -> None
 # purpose: Clears the terminal based on the current operating system
-# examples:
-#          clearTerminal() -> None
 def clearTerminal():
     # Check the operating system name
     if os.name == 'nt':
@@ -65,11 +63,12 @@ def diceRoll(times,size):
 # purpose: The menu loop that handles input, selection, ASCII art display,
 #          and returns the next game state. To do this it needs the starting
 #          selecting with (currentSelected), the direction the menu is going
-#          in (menuDir) can be "xDir" or "yDir", the range (menuRange) and (nextStates)
-#          for a list of all possible game states the menu can lead to in order
+#          in (menuDir) can be "xDir" or "yDir" making it accept WS or AD input, 
+#          the range (menuRange) of the optns and (nextStates) for a list of 
+#          all possible game states the menu can lead to in order
 # examples:
-#          menuLoop(2, "yDir", "yDir", (0, 2), getMainMenuArt) -> "playMenu"
-#          menuLoop(0, "xDir", "xDir", (0, 1), lambda coins: getPlayMenuArt(coins)) -> "shop"
+#          menuLoop(2, "yDir", (0, 2), getMainMenuArt, ("play", "shop", "mainMenu")) -> "mainMenu"
+#          menuLoop(0, "xDir", (0, 3), getPlayMenuArt, ("quit", "credits", "htp", "playMenu")) -> "quit"
 def menuLoop(currentSelected, menuDir, menuRange, artFunc, nextStates):
 
     # reset terminal and try to print art function
@@ -98,6 +97,8 @@ def menuLoop(currentSelected, menuDir, menuRange, artFunc, nextStates):
         except:
             print("function for ascii art is out of range")
 
+# getCoins() -> int
+# purpose: returns the number of coins saved in the file save.txt
 def getCoins():
     saveFile = open("save.txt", "r")
     return int(saveFile.readline())

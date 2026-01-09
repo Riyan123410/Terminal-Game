@@ -42,7 +42,7 @@ def setGameStateRegular(gameState):
         case "playMenu":
             return regularPlayMenu.main()
         case "gameLoop":
-            return player.gameLoop()
+            return player.gameLoop() # i m p o s t e r              TODO: remove this
         case "shop":
             return regularShop.main()
     
@@ -50,7 +50,7 @@ def setGameStateRegular(gameState):
     return "quit"
 
 # main() -> None
-# purpose: Game starts here here, sets launch mode, and starts the main game loop.
+# purpose: Game starts here here, sets launch mode, and runs the main game loop.
 def main():
     gameState = "mainMenu"
 

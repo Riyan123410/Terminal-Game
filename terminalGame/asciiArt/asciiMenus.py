@@ -238,7 +238,3 @@ ______________________________
     "height" : 6
   }
 }
-
-def getShopMenuArt():
-  return 
-
