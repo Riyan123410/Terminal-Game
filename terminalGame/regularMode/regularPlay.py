@@ -1,4 +1,6 @@
 import player
 
+isCompatabilityMode = False
+
 def main():
-    player.gameLoop()
+    player.gameLoop(isCompatabilityMode)

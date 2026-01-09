@@ -358,7 +358,11 @@ def enemyTurn():
     # Determine next enemies attack
     visibleIntentions = enemyHelpers.determineIntentions(enemies, turnNumber)[1]
 
-def gameLoop():
+def gameLoop(isCompatabilityMode):
+    # set compatability
+    global compatability
+    compatability = isCompatabilityMode
+
     startCombat()
     while enemies != {}:
         playerTurn()
