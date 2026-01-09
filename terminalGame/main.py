@@ -42,8 +42,6 @@ def setGameStateRegular(gameState):
             return gameCredits.main()
         case "playMenu":
             return regularPlayMenu.main()
-        case "gameLoop":
-            return player.gameLoop() # i m p o s t e r              TODO: remove this
         case "shop":
             return regularShop.main()
         case "regularPlay":
