@@ -11,6 +11,7 @@ cardDef = {
            "blunderbuss-reload" : ("deals 16 damage, reloads blunderbuss; 2 cost", "reloadCard('blunderbuss')", 2),
            "revolver" : ("deals 1d10 damage, 50% chance to damage again; 2 cost", "ammoCard('revolver',1,helperFuncs.diceRoll(1,10),'recursion')", 2),
            "revolver-reload" : ("reloads revolver; 1 cost", "reloadCard('revolver')", 1),
-           "cannon" : ("deals 4d8 damage to everything; 4 cost", "damageEnemyAll(4,helperFuncs.diceRoll(1,8))", 4),
-           "shridhar" : ("win", "damageEnemyAll(1, 10000000)", 0)
+           "cannon" : ("deals 4d12 damage to everything; 4 cost", "damageEnemyAll(4,helperFuncs.diceRoll(1,12))", 4),
+           "shridhar" : ("win", "damageEnemyAll(1, 10000000)", 0),
+           "multi-strike" : ("deals 5x4 damage to all enemies; 3 cost", "damageEnemyAll(4,5)", 3)
            }

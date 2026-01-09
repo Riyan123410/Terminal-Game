@@ -8,6 +8,7 @@ import enemyHelpers
 playerHealth = 50
 costMax = 4
 cost = 0
+roll = 0
 playerBlock = 0
 difficulty = 2
 combatDifficulty = 0
@@ -29,6 +30,7 @@ enemies = dict({})
 #           resolveIntentions(["damagePlayer(2,2)", "damagePlayer(1,5)"]) -> playerHealth - 7
 def resolveIntentions(resolveList):
     global intentionsList
+    global roll
     healthList = {}
     for i in resolveList:
         for e in enemies:
@@ -36,6 +38,7 @@ def resolveIntentions(resolveList):
         helperFuncs.clearTerminal()
         print(healthList)
         print(i["description"])
+        print(f"roll: {roll}")
         if playerBlock > 0:
             print(playerBlock)
         print(playerHealth)
@@ -44,6 +47,7 @@ def resolveIntentions(resolveList):
     helperFuncs.clearTerminal()
     print(healthList)
     print(i["description"])
+    print(f"roll: {roll}")
     if playerBlock > 0:
         print(playerBlock)
     print(playerHealth)
@@ -87,11 +91,13 @@ def discardGain(number):
 # purpose: takes in two integers called times and number, and reduces the enemies health by number x times.
 def enemyDamageSelf(times,number):
     global enemies
+    global roll
     global visibleIntentions
     for i in range(times):
         addEnemy = random.choice(list(enemies.keys()))
         enemies[addEnemy]["health"] -= number
         enemyHelpers.updateEnemyHealth(visibleIntentions,enemies)
+        roll = number
         if enemies[addEnemy]["health"] <= 0:
                 enemies.pop(addEnemy)
                 visibleIntentions.pop(addEnemy)
@@ -116,6 +122,7 @@ def defineCard():
 #           damagePlayer(4,1) -> playerHealth - 4
 #           damagePlayer(2,2) -> playerHealth - 4
 def damagePlayer(times,number):
+    global roll
     global playerHealth
     global playerBlock
     finalNumber = number
@@ -125,6 +132,7 @@ def damagePlayer(times,number):
             playerBlock -= number
         if finalNumber > 0:
             playerHealth -= finalNumber
+            roll = finalNumber
 
 def ammoCard(card,times,damage,effect):
     # determining what happens
