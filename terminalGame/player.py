@@ -16,6 +16,7 @@ combatDifficulty = 0
 costGain = 3
 startingDraw = 5
 turnNumber = 0
+roll = []
 visibleIntentions = {}
 handMax = 14
 discard = []
@@ -34,12 +35,27 @@ compatability = True
 #           resolveIntentions(["damagePlayer(2,2)", "damagePlayer(1,5)"]) -> playerHealth - 7
 def resolveIntentions(resolveList):
     global intentionsList
+    global roll
+    healthList = {}
     for i in resolveList:
+        for e in enemies:
+            healthList[e] = enemies[e]["health"]
         helperFuncs.clearTerminal()
-
+        compPrint(healthList)
+        compPrint(i["description"])
+        compPrint(f"roll: {roll}")
+        if playerBlock > 0:
+            compPrint(playerBlock)
+        compPrint(playerHealth)
         time.sleep(0.5)
         exec(i["effect"])
     helperFuncs.clearTerminal()
+    compPrint(healthList)
+    compPrint(i["description"])
+    compPrint(f"roll: {roll}")
+    if playerBlock > 0:
+        compPrint(playerBlock)
+    compPrint(playerHealth)
 
 
 def deckDiscard(number):
@@ -109,12 +125,15 @@ def reloadCard(card):
 
 def damageEnemyAll(times,number):
     global enemies
+    global roll
     global visibleIntentions
+    roll = []
     helperFuncs.clearTerminal()
     enemyList = list(enemies.keys())
     for i in range(len(enemyList)):
         for e in range(times):
             enemies[enemyList[i]]["health"] -= number
+            roll.append(number)
             visibleIntentions = enemyHelpers.updateEnemyHealth(visibleIntentions,enemies)
             if enemies[enemyList[i]]["health"] <= 0:
                 enemies.pop(enemyList[i])
@@ -156,8 +175,11 @@ def enemyDamageSelf(times,number):
 def damagePlayer(times,number):
     global playerHealth
     global playerBlock
+    global roll
     finalNumber = number
+    roll = []
     for i in range(times):
+        roll.append(number)
         if playerBlock > 0:
             finalNumber = number - playerBlock
             playerBlock -= number
@@ -173,18 +195,22 @@ def getInput(string):
         print("reg")
     return target
 
-
+def compPrint(string):
+    if compatability:
+        print(string)
 
 def damageEnemy(times,number):
     i = 0
     global enemies
     global visibleIntentions
+    global roll
     while i < times:
         helperFuncs.clearTerminal()
-
+        compPrint(list(enemies.keys()))
         target = getInput("Choose an enemy: ")
         try:
             enemies[target]["health"] -= number
+            roll.append(number)
             enemyHelpers.updateEnemyHealth(visibleIntentions,enemies)
             i += 1
             if enemies[target]["health"] <= 0:
@@ -272,7 +298,7 @@ def playerTurn():
     cost += costGain
     playerBlock = 0
     helperFuncs.clearTerminal()
- 
+    compPrint("your turn")
     time.sleep(1)
     while True:
         helperFuncs.clearTerminal()
@@ -281,7 +307,13 @@ def playerTurn():
             hand.pop()
         while cost > costMax:
             cost -= 1
-
+        compPrint(f"hand: {hand}")
+        compPrint(f"discard: {discard}")
+        compPrint(f"deck: {deck}")
+        compPrint(f"cost: {cost}")
+        compPrint(f"health: {playerHealth}")
+        compPrint(f"block: {playerBlock}")
+        compPrint(visibleIntentions)
         if enemies == {}:
             return
         # takes string
@@ -312,7 +344,7 @@ def playerTurn():
                 discardCardRand(len(hand))
                 return
             else:
-
+                compPrint("Invalid Card")
                 time.sleep(1)
 def enemyTurn():
     global playerHealth
