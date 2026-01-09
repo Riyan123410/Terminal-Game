@@ -6,7 +6,7 @@ import inventory
 
 # menu constants
 MENU_DIR = "xDir"
-nextGameState = ("play", "shop", "mainMenu")
+nextGameState = ("regularPlay", "shop", "mainMenu")
 MENU_MAX = len(nextGameState) - 1
 MENU_MIN = 0
 

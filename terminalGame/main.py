@@ -5,6 +5,7 @@ import userInput
 import gameCredits
 import player
 from regularMode import regularShop
+from regularMode import regularPlay
 from regularMode.menus import regularMainMenu
 from regularMode.menus import regularHtpMenu
 from regularMode.menus import regularPlayMenu
@@ -45,6 +46,8 @@ def setGameStateRegular(gameState):
             return player.gameLoop() # i m p o s t e r              TODO: remove this
         case "shop":
             return regularShop.main()
+        case "regularPlay":
+            return regularPlay.main()
     
     print(gameState)
     return "quit"
