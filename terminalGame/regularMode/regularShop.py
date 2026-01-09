@@ -20,7 +20,6 @@ MENU_DIR = "xDir"
 currentSelected = MENU_MIN
 
 # shop constants
-MAX_CARDS = 7
 
 def listToBookshelf(currentStock):
     # create empty bookshelf list
@@ -80,7 +79,7 @@ def main():
             itemPrice = itemCoins[currentStock[currentSelected - 1]]
 
             # check if you can buy the item
-            if coins >= itemPrice and currentStock[currentSelected - 1] != "soldOut" and len(cards) <= MAX_CARDS:
+            if coins >= itemPrice and currentStock[currentSelected - 1] != "soldOut":
                 # subtrace coins and append the cards list based on what you bought
                 coins -= itemPrice
                 cards.append(currentStock[currentSelected - 1])
@@ -97,6 +96,4 @@ def getArt(currentSelected, coins, cards):
     arrow = asciiHelpers.combineCardStrings(indexToArrow(currentSelected), asciiMenus.shop["select"]["height"])
     controls = asciiMenus.getCoinMenuControls(coins)
     info = f"Warning! purchased items will not be saved until you press back\nCurrent deck: {cards}"
-    if len(cards) > MAX_CARDS:
-        info = f"Warning! purchased items will not be saved until you press back\nCannot purchase cards - deck cap reached of {MAX_CARDS}"
     return  bookShelf + arrow + controls + info

@@ -188,6 +188,7 @@ def damagePlayer(times,number):
 
 
 def getInput(string):
+    target = ""
     global compatability
     if compatability:
         target = input(string)
@@ -333,7 +334,7 @@ def playerTurn():
                     exec(effect)
                     
                 else:
-
+                    compPrint("Invalid Card")
                     time.sleep(1)
             elif playCard == "define":
                 helperFuncs.clearTerminal()
@@ -362,6 +363,7 @@ def gameLoop(isCompatabilityMode):
     # set compatability
     global compatability
     compatability = isCompatabilityMode
+    compatability = True
 
     startCombat()
     while enemies != {}:
