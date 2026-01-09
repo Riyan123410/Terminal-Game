@@ -5,7 +5,7 @@ import userInput
 import gameCredits
 import player
 from regularMode import regularShop
-from regularMode import regularPlay
+from regularMode import regularPlayer
 from regularMode.menus import regularMainMenu
 from regularMode.menus import regularHtpMenu
 from regularMode.menus import regularPlayMenu
@@ -47,7 +47,7 @@ def setGameStateRegular(gameState):
         case "shop":
             return regularShop.main()
         case "regularPlay":
-            return regularPlay.main()
+            return regularPlayer.main()
     
     print(gameState)
     return "quit"

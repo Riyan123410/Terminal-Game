@@ -73,6 +73,7 @@ def main():
             
             # if its the last item in the list return main menu to go there, if not purchase an item if you have enough coins
             if currentSelected == MENU_MAX:
+                inventory.coins = coins
                 return "playMenu"
 
             # get price of item so it can be used later, subtract 1 because current selected is 1-5 while list is 0-4
@@ -95,5 +96,5 @@ def getArt(currentSelected, coins, cards):
     bookShelf = asciiHelpers.combineCardStrings(listToBookshelf(currentStock), asciiMenus.shop["bookshelfHeight"])
     arrow = asciiHelpers.combineCardStrings(indexToArrow(currentSelected), asciiMenus.shop["select"]["height"])
     controls = asciiMenus.getCoinMenuControls(coins)
-    info = f"Warning! purchased items will not be saved until you press back\nCurrent deck: {cards}"
+    info = f"Current deck: {cards}"
     return  bookShelf + arrow + controls + info
