@@ -39,8 +39,9 @@ def indexToArrow(currentSelected):
 
 def main():
 
-    # use global current stock
+    # use global current stock and reset it
     global currentStock
+    currentStock = []
     # create shop items by making into a list so a random index can be chosen
     itemsList = list(itemCoins)
     for i in range(MENU_MAX - 1):
