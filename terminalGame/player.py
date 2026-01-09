@@ -168,6 +168,7 @@ def getInputEnemy():
         target = input("Choose an enemy: ")
     else:
         print("reg")
+    return target
 
 
 
@@ -280,6 +281,7 @@ def playerTurn():
 
         if enemies == {}:
             return
+        # takes string
         playCard = input().lower()
         try:
             effect = cardDef[playCard][1]
