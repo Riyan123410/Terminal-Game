@@ -3,12 +3,12 @@ from asciiArt import asciiMenus
 import helperFuncs
 import userInput
 import os
+import random
 
 itemCoins = {
-    "strike" : 1,
-    "block" : 1
+    "strike" : 1
 }
-currentStock = ["strike", "strike", "strike", "strike"]
+currentStock = []
 
 MENU_MAX = 5
 MENU_MIN = 1
@@ -38,6 +38,14 @@ def indexToArrow(currentSelected):
     return arrowList
 
 def main():
+
+    # use global current stock
+    global currentStock
+    # create shop items by making into a list so a random index can be chosen
+    itemsList = list(itemCoins)
+    for i in range(MENU_MAX - 1):
+        currentStock.append(random.choice(itemsList))
+
     # get coins
     coins = helperFuncs.getCoins()
 
@@ -59,10 +67,6 @@ def main():
         inputList = userInput.getInputList()
         currentSelected = helperFuncs.changeWithClamp(currentSelected, inputList[MENU_DIR], MENU_MIN, MENU_MAX)
 
-        # create arrow
-        helperFuncs.clearTerminal()
-        print(getArt(currentSelected, coins))
-
         # check if space is pressed so an action can be done
         if inputList["space"] == True:
             # get price of item so it can be used later, subtract 2 because 1 for the back button
@@ -78,6 +82,10 @@ def main():
                 cards.append(currentStock[currentSelected - 2] + "\n")
             else:
                 print("Not enough coins")
+        
+        # create arrow
+        helperFuncs.clearTerminal()
+        print(getArt(currentSelected, coins))
 
 def getArt(currentSelected, coins):
     # get each asii art of the shop from menus and return it
