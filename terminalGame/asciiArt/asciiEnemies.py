@@ -1,4 +1,5 @@
 ENEMY_HEIGHT = 11
+ARROW_HEIGHT = 6
 
 def getArt(name, hp):
     art = {
@@ -8,7 +9,7 @@ BUSH   ______           |
      ###\ |/   #o#      |
       #  |()     #      |
         ,'  `           |
-Health: {hp}               |
+Health: {hp}              |
 Attacks:                |
     1) deal 1d4 damage  |
     2) heal an ally for |
@@ -22,7 +23,7 @@ GOOSE    __             |
          '.-.\          |
          /|  \\         |
          _\_):,         |
-Health: {hp}               |
+Health: {hp}              |
 Attacks:                |
     1) deal 2d4 damage  |
     2) Discard 1 card   |
@@ -36,7 +37,7 @@ WILD BUSH _____         |
      XXX\ |/   XoX      |
       X  |()     X      |
         ,'  `           |
-Health: {hp}               |
+Health: {hp}              |
 Attacks:                |
     1) deal 1d4 damage  |
     2) heal an ally for |
@@ -48,7 +49,7 @@ Attacks:                |
 TREE   ###o##           |
       #\#|#/##          |
         )|(             |
-Health: {hp}               |
+Health: {hp}              |
 Attacks:                |
     1) deal 2d6 damage  |
     2) heal an ally for |
@@ -59,3 +60,21 @@ Attacks:                |
 """
     }
     return art[name]
+
+arrow = {
+    "arrow" : r"""
+          __            .
+         /  \           .
+        /    \          .
+        ‾‾||‾‾          .
+          ||            .
+          ‾‾            .
+""", "blank" : r"""
+                        .
+                        .
+                        .
+                        .
+                        .
+                        .
+"""
+}

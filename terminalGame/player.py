@@ -20,6 +20,12 @@ discard = []
 hand = []
 deck = []
 enemies = dict({})
+enemies = {
+        "bush" : {"health" : 14},
+        "goose" : {"health" : 13},
+        "wild bush" : {"health" : 12},
+        "tree" : {"health" : 11}
+    }
 COST_GAIN = 3
 STARTING_DRAW = 5
 HAND_MAX = 14

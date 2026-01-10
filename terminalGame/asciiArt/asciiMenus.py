@@ -238,3 +238,21 @@ ______________________________
     "height" : 6
   }
 }
+
+playControls = {
+  "playCard" : r"""
+===============================================================================================================================
+Select a card in order to play it or click on the decks in order to view the discard or deck pile
+[A] left    [D] right    [W] up    [S] down    [Space] select
+""",
+  "discardCard" : r"""
+===============================================================================================================================
+Select a card in order to discard it or click on the decks in order to view the discard or deck pile
+[A] left    [D] right    [W] up    [S] down    [Space] select
+""",
+  "selectEnemy" : r"""
+===============================================================================================================================
+Select an enemy in order to attack it
+[A] left    [D] right    [Space] select
+"""
+}

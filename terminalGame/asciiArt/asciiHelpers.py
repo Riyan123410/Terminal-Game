@@ -4,6 +4,7 @@ import player
 from asciiArt import asciiCards
 from asciiArt import asciiHelpers
 from asciiArt import asciiEnemies
+from asciiArt import asciiMenus
 
 
 MAX_CARD_LENGTH = 7
@@ -113,18 +114,23 @@ def displayCards(cards):
     if hand[1] != ():
         print(combineCardStrings(hand[1], asciiCards.CARD_HEIGHT))
 
-def printPlayMain(cards, cardSelected, deckSelected):
+def printPlayMain(cards, cardSelected, deckSelected, isDiscarding):
     # first display with first deck selected and make card selected deck + 1 so it isnt selected
     helperFuncs.clearTerminal()
     displayEnemies()
     print(asciiCards.getDeckArt()[deckSelected])
     displayCards(createAsciiCardList(cards, cardSelected))
+    # depending on if you are discarding print those contorls
+    if isDiscarding:
+        print(asciiMenus.playControls["discardCard"])
+    else:
+        print(asciiMenus.playControls["playCard"])
 
 
 # actually call this in order to print the play menu
-def displayMainPlay(cards, deckSelected, cardSelected, menuRange, yRange, currentSelectedY):
+def displayMainPlay(cards, deckSelected, cardSelected, menuRange, yRange, currentSelectedY, isDiscarding):
 
-    printPlayMain(cards, cardSelected, deckSelected)
+    printPlayMain(cards, cardSelected, deckSelected, isDiscarding)
     menuY = currentSelectedY
     currentSelected = menuRange[0]
 
@@ -143,7 +149,7 @@ def displayMainPlay(cards, deckSelected, cardSelected, menuRange, yRange, curren
             return (currentSelected, currentSelectedY)
 
         # print
-        asciiHelpers.printPlayMain(cards, cardSelected, deckSelected)
+        asciiHelpers.printPlayMain(cards, cardSelected, deckSelected, isDiscarding)
 
         # if the y is going down make current selected fo down
         currentSelectedY = helperFuncs.changeWithClamp(currentSelectedY, inputList["yDir"],yRange[0], yRange[1])
@@ -173,3 +179,17 @@ def displayEnemies():
     for enemy in enemies.keys():
         stringList.append(asciiEnemies.getArt(enemy, enemies[enemy]["health"]))
     print(asciiHelpers.combineCardStrings(stringList, asciiEnemies.ENEMY_HEIGHT))
+
+
+def indexToArrow(currentSelected, menuMax, blankString, arrowString, lastArrow):
+    # create empty list
+    arrowList = []
+    # based on index subtract one to make a space for the arrow
+    for i in range(currentSelected - 1):
+        arrowList.append(blankString)
+    # add the arrow and return the list
+    if currentSelected == menuMax:
+        arrowList.append(lastArrow)
+    else:
+        arrowList.append(arrowString)
+    return arrowList

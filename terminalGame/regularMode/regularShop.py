@@ -30,19 +30,6 @@ def listToBookshelf(currentStock):
     bookshelfList.append(asciiMenus.shop["backSlot"])
     return bookshelfList
 
-def indexToArrow(currentSelected):
-    # create empty list
-    arrowList = []
-    # based on index subtract one to make a space for the arrow
-    for i in range(currentSelected - 1):
-        arrowList.append(asciiMenus.shop["select"]["blank"])
-    # add the arrow and return the list
-    if currentSelected == MENU_MAX:
-        arrowList.append(asciiMenus.shop["select"]["lastArrow"])
-    else:
-        arrowList.append(asciiMenus.shop["select"]["arrow"])
-    return arrowList
-
 def main():
 
     # use global current stock and reset it
@@ -94,7 +81,8 @@ def main():
 def getArt(currentSelected, coins, cards):
     # get each asii art of the shop from menus and return it
     bookShelf = asciiHelpers.combineCardStrings(listToBookshelf(currentStock), asciiMenus.shop["bookshelfHeight"])
-    arrow = asciiHelpers.combineCardStrings(indexToArrow(currentSelected), asciiMenus.shop["select"]["height"])
+    indexToArrow = asciiHelpers.indexToArrow(currentSelected, MENU_MAX, asciiMenus.shop["select"]["blank"], asciiMenus.shop["select"]["arrow"], asciiMenus.shop["select"]["lastArrow"])
+    arrow = asciiHelpers.combineCardStrings(indexToArrow, asciiMenus.shop["select"]["height"])
     controls = asciiMenus.getCoinMenuControls(coins)
     info = f"Current deck: {cards}"
     return  bookShelf + arrow + controls + info
