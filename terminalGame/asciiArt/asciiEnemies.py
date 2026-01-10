@@ -1,6 +1,14 @@
+# constants for art height
 ENEMY_HEIGHT = 11
 ARROW_HEIGHT = 6
 
+# getArt(str, int) -> str
+# purpose: returns ASCII art for a given enemy name from parameter (name)
+#          with its health from parameter (hp)
+# examples:
+#          getArt("bush", 5) -> "bush art" with hp 5
+#          getArt("goose", 10) -> "bush art" with hp 10
+#          getArt("fsdi", 20) -> "INCORRECT NAME"
 def getArt(name, hp):
     art = {
         "bush" : rf"""
@@ -59,8 +67,12 @@ Attacks:                |
        from your deck   |
 """
     }
-    return art[name]
+    try:
+        return art[name]
+    except:
+        return "INCORRECT NAME"
 
+# dictionary for all arrow art
 arrow = {
     "arrow" : r"""
           __            .

@@ -19,8 +19,10 @@ MENU_MIN = 1
 MENU_DIR = "xDir"
 currentSelected = MENU_MIN
 
-# shop constants
 
+# listToBookshelf([str]) -> [str]
+# purpose: converts a list of stock items from the parameter list [currentStock] 
+#          into their ASCII art cards and appends the back slot at the end
 def listToBookshelf(currentStock):
     # create empty bookshelf list
     bookshelfList = []
@@ -30,8 +32,27 @@ def listToBookshelf(currentStock):
     bookshelfList.append(asciiMenus.shop["backSlot"])
     return bookshelfList
 
-def main():
 
+# getArt(int, int, [str]) -> str
+# purpose: generates the full ASCII shop display including bookshelf, selection arrow,
+#          coin display, and deck info based on current selection parmeter (currentSelected)
+#          and the cards with the parameter (cards) it also prints the coins with the parameter
+#          (coins)
+def getArt(currentSelected, coins, cards):
+    # get each asii art of the shop from menus and return it
+    bookShelf = asciiHelpers.combineCardStrings(listToBookshelf(currentStock), asciiMenus.shop["bookshelfHeight"])
+    indexToArrow = asciiHelpers.indexToArrow(currentSelected, MENU_MAX, asciiMenus.shop["select"]["blank"], asciiMenus.shop["select"]["arrow"], asciiMenus.shop["select"]["lastArrow"])
+    arrow = asciiHelpers.combineCardStrings(indexToArrow, asciiMenus.shop["select"]["height"])
+    controls = asciiMenus.getCoinMenuControls(coins)
+    info = f"Current deck: {cards}"
+    return  bookShelf + arrow + controls + info
+
+
+# main() -> str
+# purpose: runs the shop interface, handles input and purchases, 
+#          updates inventory, and always returns "playMenu" when the
+#          back button is pressed
+def main():
     # use global current stock and reset it
     global currentStock
     currentStock = []
@@ -77,12 +98,3 @@ def main():
         # create arrow
         helperFuncs.clearTerminal()
         print(getArt(currentSelected, coins, cards))
-
-def getArt(currentSelected, coins, cards):
-    # get each asii art of the shop from menus and return it
-    bookShelf = asciiHelpers.combineCardStrings(listToBookshelf(currentStock), asciiMenus.shop["bookshelfHeight"])
-    indexToArrow = asciiHelpers.indexToArrow(currentSelected, MENU_MAX, asciiMenus.shop["select"]["blank"], asciiMenus.shop["select"]["arrow"], asciiMenus.shop["select"]["lastArrow"])
-    arrow = asciiHelpers.combineCardStrings(indexToArrow, asciiMenus.shop["select"]["height"])
-    controls = asciiMenus.getCoinMenuControls(coins)
-    info = f"Current deck: {cards}"
-    return  bookShelf + arrow + controls + info

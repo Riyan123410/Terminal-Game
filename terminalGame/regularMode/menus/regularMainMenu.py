@@ -8,7 +8,9 @@ nextGameState = ("quit", "credits", "htp", "playMenu")
 MENU_MAX = len(nextGameState) - 1
 MENU_MIN = 0
 
-
+# main() -> str
+# purpose: runs the regular main menu loop, and returns the next game state
+#          based on what was chosen
 def main():
     return asciiHelpers.menuLoop(
         MENU_MAX,

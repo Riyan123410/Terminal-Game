@@ -56,8 +56,13 @@ def diceRoll(times,size):
             roll += random.randint(size,-1)
     return roll
 
-# testing not plausible due to random
 
+# removeEndlinesInList([str]) -> [str]
+# purpose: removes newline characters from each string in a list and filters out empty strings
+# examples:
+#          removeEndlinesInList(["a\n", "\n", "b\n"]) -> ["a", "b"]
+#          removeEndlinesInList(["\n", "\n"]) -> []
+#          removeEndlinesInList(["how are\nyou", "test\n"]) -> ["how areyou", "test"]
 def removeEndlinesInList(stringList):
     # make sure it doesnt change original variable
     newList = []

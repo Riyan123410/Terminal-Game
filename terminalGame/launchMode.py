@@ -7,17 +7,24 @@ from asciiArt import asciiMenus
 TEXT_DELAY = 1
 
 
-# clear after
+# clearInTime(int/float) -> None
+# purpose: waits for the parameter (seconds) long
+#          and than clears the terminal
 def clearInTime(seconds):
     time.sleep(seconds)
     helperFuncs.clearTerminal()
 
-# text for select launch mode
+# printLaunch() -> None
+# purpose: clears the terminal and prints the launch mode text
 def printLaunch():
     helperFuncs.clearTerminal()
     print(str(asciiMenus.launchMode))
 
-# select launch mode
+# selectMode() -> bool
+# purpose: asks the user to select a launch mode and
+#          checks input until a valid option is chosen
+#          retuns true if input is 0, returns false if
+#          input is 1
 def selectMode():
     # set input to invalid
     validInput = False
@@ -42,6 +49,11 @@ def selectMode():
             print("Invalid input")
     return isRegularMode
 
+# afterLaunchSelected(bool) -> None
+# purpose: clears the terminal, displays the selected launch
+#          mode, then waits before clearing again, takes in the
+#          parameter (isRegularMode) to print to the user what
+#          was chosen
 def afterLaunchSelected(isRegularMode):
     # clear screen and print selected mode
     helperFuncs.clearTerminal()
@@ -50,7 +62,11 @@ def afterLaunchSelected(isRegularMode):
     # wait and reset
     clearInTime(TEXT_DELAY)
 
-# main call all funcitons
+# main() -> bool
+# purpose: main function that displays the launch menu,
+#          gets what mode was selected and starts after launch mode
+#          finall returns the mode which can be true for regular
+#          or fase for compatability
 def main():
     printLaunch()
     mode = selectMode()

@@ -1,5 +1,4 @@
-# import asciiHelpers
-
+# launc mode string
 launchMode = r"""
 Please full screen your terminal in order for ascii art to display properly,                                                   ‾‾‾‾‾‾|
 make sure you can see the frame properly on the top left, this paragraph should only be 3 lines                                ‾‾‾‾| |
@@ -12,6 +11,7 @@ If art is not displayed correctly compatibilty mode can be used.                
 [0] Continue    [1] Compatibility Mode
 """
 
+# dictionary of all the art needed for the main menu
 mainMenu = {
   "title" : r"""
  ________  ___  ___  _____ ______   ________  _________  ___  ___      ___ _______      
@@ -101,6 +101,11 @@ mainMenu = {
 """
 }
 
+# getMainMenuArt() -> (str, str, str, str)
+# purpose: returns ASCII art strings for each main menu option (quit, credits, htp, play)
+#          in a tuple for each option last to first
+# examples:
+#          getMainMenuArt() -> (title+quit+controls, title+credits+controls, title+htp+controls, title+play+controls)
 def getMainMenuArt():
   return (str(mainMenu["title"]) + str(mainMenu["quit"]) + str(mainMenu["controls"]), 
           str(mainMenu["title"]) + str(mainMenu["credits"]) + str(mainMenu["controls"]),
@@ -108,6 +113,7 @@ def getMainMenuArt():
           str(mainMenu["title"]) + str(mainMenu["play"]) + str(mainMenu["controls"]),
   )
 
+# dictionary for all the art needed in the play menu
 playMenu = {
   "background" : r"""
                                    ___                                                    .
@@ -151,12 +157,26 @@ playMenu = {
 """
 }
 
+# getCoinMenuControls(int) -> str
+# purpose: returns a ASCII string showing controls and the current coin count
+#          with the input (coins)
+# examples:
+#          getCoinMenuControls(10) -> string with "[10] coins"
+#          getCoinMenuControls(0) -> string with "[0] coins"
+#          getCoinMenuControls(999) -> string with "[999] coins"
 def getCoinMenuControls(coins):
   return f"""
 ===============================================================================================================================
 [A] left    [D] right    [Space] select                                                       [{coins}] coins
 """
 
+# getPlayMenuArt(int) -> (str, str, str)
+# purpose: returns ASCII art strings for each play menu option (play, shop, back) including coin display
+#          witht the parameter coins and returns each optons all in a tuple
+# examples:
+#          getPlayMenuArt(10) -> (background+playSelected+coins with 10 coins, background+shopSelected+coins with 10 coins, background+backSelected+coins with 10 coins)
+#          getPlayMenuArt(0) -> (background+playSelected+coins with 0 coins, background+shopSelected+coins with 0 coins, background+backSelected+coins with 0 coins)
+#          getPlayMenuArt(999) -> (background+playSelected+coins with 999 coins, background+shopSelected+coins with 999 coins, background+backSelected+coins with 999 coins)
 def getPlayMenuArt(coins):
   return (
     str(playMenu["background"]) + str(playMenu["playSelected"]) + getCoinMenuControls(coins),
@@ -164,6 +184,7 @@ def getPlayMenuArt(coins):
     str(playMenu["background"]) + str(playMenu["backSelected"]) + getCoinMenuControls(coins)
   )
 
+# shop dictionary with all the shop art
 shop = {
   "bookshelfHeight" : 12,
   "backSlot" : r"""
@@ -239,6 +260,7 @@ ______________________________
   }
 }
 
+# all the contrls for the actual game
 playControls = {
   "playCard" : r"""
 ===============================================================================================================================

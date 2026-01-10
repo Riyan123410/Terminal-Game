@@ -9,6 +9,13 @@ from asciiArt import asciiMenus
 
 MAX_CARD_LENGTH = 7
 
+# findWidth(str) -> int
+# purpose: calculates the width of an ASCII string by finding the first \n character after the first line
+#          from the inputed string (string)
+# examples:
+#          findWidth("abc\n") -> 3
+#          findWidth("a\bc\df\n") -> 1
+#          findWidth("\n\n") -> 0
 def findWidth(string):
     # replace endlines so you can find it not starting at the begining since that is an endline
     replaceEndlines = string.replace("\n", "~")
@@ -18,6 +25,15 @@ def findWidth(string):
         width = 0
     return width
 
+# combineStrings(str, str, int, int) -> str
+# purpose: combines two ASCII strings horizontally given their widths and height
+#          from the parameters (width1) and (height) the strings are also given
+#          with parameter (string1) which would be on the left and (string2)
+#          which would be on the right
+# examples:
+#          combineStrings("abc\n", "123\n", 3, 1) -> "abc123\n"
+#          combineStrings("a\nb\n", "x\ny\n", 1, 2) -> "ax\nby\n"
+#          combineStrings("", "x\n", 0, 1) -> "x\n"
 def combineStrings(string1, string2, width1, height):
     # find width of strings
     width2 = findWidth(string2)
@@ -33,6 +49,14 @@ def combineStrings(string1, string2, width1, height):
         combinedString += "\n"
     return combinedString
 
+# combineCardStrings([str], int) -> str
+# purpose: combines a list of ASCII card strings horizontally into one large string
+#          with the parameter (cards) being a list of strings and the height is also
+#          required with the parameter (height)
+# examples:
+#          combineCardStrings(["abc\n", "123\n"], 1) -> "abc123\n"
+#          combineCardStrings([], 1) -> ""
+#          combineCardStrings(["a\n", "b\n", "c\n"], 1) -> "abc\n"
 def combineCardStrings(cards, height):
     # set string and len
     combinedString = ""
@@ -44,7 +68,13 @@ def combineCardStrings(cards, height):
 
     return combinedString
 
-# split hand you hand into 2 lists
+# splitHand([str], int) -> ([str], [str])
+# purpose: splits a hand of cards of parameter (totalHand) into two lists 
+#          if is is more than the parameter (maxLen)
+# examples:
+#          splitHand(["a","b","c"], 2) -> (["a","b"], ["c"])
+#          splitHand(["x","y"], 3) -> (["x","y"], [])
+#          splitHand([], 1) -> ([], [])
 def splitHand(totalHand, maxLen):
     newRow = []
     # loop through the hand remove and adding until your hand is less than the max
@@ -55,7 +85,14 @@ def splitHand(totalHand, maxLen):
     newRow.reverse()
     return (totalHand, newRow)
 
-# with a list of all the items create a string list with ascii art
+# createAsciiCardList([str], int) -> [str]
+# purpose: creates a list of ASCII card art strings from a list of
+#          card names inputed withe the parameter (cards) the paremter
+#          (currentSelected) will use a different artwork
+# examples:
+#          createAsciiCardList(["strike"], 0) -> ["selected strike art"]
+#          createAsciiCardList(["block"], 1) -> ["normal block art"]
+#          createAsciiCardList([], 0) -> []
 def createAsciiCardList(cards, currentSelected):
     asciiDeck = []
     # loop throught the car dlist
@@ -75,9 +112,6 @@ def createAsciiCardList(cards, currentSelected):
 #          in (menuDir) can be "xDir" or "yDir" making it accept WS or AD input, 
 #          the range (menuRange) of the optns and (nextStates) for a list of 
 #          all possible game states the menu can lead to in order
-# examples:
-#          menuLoop(2, "yDir", (0, 2), getMainMenuArt, ("play", "shop", "mainMenu")) -> "mainMenu"
-#          menuLoop(0, "xDir", (0, 3), getPlayMenuArt, ("quit", "credits", "htp", "playMenu")) -> "quit"
 def menuLoop(currentSelected, menuDir, menuRange, artFunc, nextStates):
 
     # reset terminal and try to print art function
@@ -106,7 +140,8 @@ def menuLoop(currentSelected, menuDir, menuRange, artFunc, nextStates):
         except:
             print("function for ascii art is out of range")
 
-# actually print the cards
+# displayCards([str]) -> None
+# purpose: prints a hand of cards with parameter (cards) in rows with ASCII art
 def displayCards(cards):
     hand = splitHand(cards, MAX_CARD_LENGTH)
     print(combineCardStrings(hand[0], asciiCards.CARD_HEIGHT))
@@ -157,7 +192,9 @@ def displayMainPlay(cards, deckSelected, cardSelected, menuRange, yRange, curren
     currentSelected = -1
     return (currentSelected, currentSelectedY)
 
-
+# displayDeck([str]) -> None
+# purpose: prints each card in a deck as selected ASCII art and waits for user input
+#          the cards printed will be a list of strings (deck)
 def displayDeck(deck):
     helperFuncs.clearTerminal()
     for card in deck:
@@ -165,14 +202,21 @@ def displayDeck(deck):
     print("[ENTER] to continue")
     input()
 
-# makes numbers compatable with ascii enemies
+# numToString(int) -> str
+# purpose: converts a number (num) into a string compatible with ASCII enemies
+#          (adds leading zero if < 10)
+# examples:
+#          numToString(5) -> "05"
+#          numToString(12) -> "12"
+#          numToString(0) -> "00"
 def numToString(num):
     string = ""
     if num < 10:
         string += "0"
     return string + str(num)
 
-# print enemies
+# displayEnemies() -> None
+# purpose: prints all enemies using ASCII art and prints them horizontally
 def displayEnemies():
     enemies = player.enemies
     stringList = []
@@ -181,6 +225,12 @@ def displayEnemies():
     print(asciiHelpers.combineCardStrings(stringList, asciiEnemies.ENEMY_HEIGHT))
 
 
+# indexToArrow(int, int, str, str, str) -> [str]
+# purpose: creates a list of strings representing arrows for menu selection
+# examples:
+#          indexToArrow(1, 3, "-", ">", "^") -> [">", "-", "-"]
+#          indexToArrow(2, 3, "-", ">", "^") -> ["-", ">", "-"]
+#          indexToArrow(3, 3, "-", ">", "^") -> ["-", "-", "^"]
 def indexToArrow(currentSelected, menuMax, blankString, arrowString, lastArrow):
     # create empty list
     arrowList = []

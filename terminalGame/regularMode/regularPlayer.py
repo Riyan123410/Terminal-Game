@@ -34,8 +34,11 @@ def main():
     return getCardSelected(hand, True)
 
 
-
-# actually choose and select the card with input
+# selectCard([str], bool) -> str
+# purpose: allows the player to select a card from their hand using input
+#          the card pool that can be selected from is the parameter (cards)
+#          it also prints the controls so the parameter (isDiscarding) is ued
+#          in order to print the correct controls
 def selectCard(cards, isDiscarding):
     global currentSelectedY
     currentSelected = MENU_MIN
@@ -79,6 +82,11 @@ def selectDeck(cards, isDiscarding):
     # update y
     currentSelectedY = selected[1]
 
+
+# getCardSelected([str], bool) -> str
+# purpose: loops until a card is selected by the player and returns it
+#          the card pool is from the list (cards) and also needs to print
+#          the controls so (isDiscarding) is used to print the correct
 def getCardSelected(cards, isDiscarding):
     # global variables
     global currentSelectedY
@@ -95,7 +103,8 @@ def getCardSelected(cards, isDiscarding):
         if card != "None":
             return card
 
-
+# getEnemySelected() -> str
+# purpose: lets the player select an enemy from the current list using input
 def getEnemySelected():
     # get max from enemy list
     enemyList = list(player.enemies.keys())
@@ -114,7 +123,10 @@ def getEnemySelected():
         if inputList["space"]:
             return enemyList[currentSelected - 1]
         
-
+# printEnemySelection(int, int) -> None
+# purpose: displays enemies, selection arrow, and controls in the terminal
+#          the arrow starts at the input (currentSelected) and the max the
+#          arrow does depends on the enemy max with the parameter (enemyMax)
 def printEnemySelection(currentSelected, enemyMax):
     helperFuncs.clearTerminal()
     indexToArrow = asciiHelpers.indexToArrow(currentSelected, enemyMax, asciiEnemies.arrow["blank"], asciiEnemies.arrow["arrow"],asciiEnemies.arrow["arrow"])

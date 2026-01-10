@@ -9,6 +9,10 @@ nextGameState = ("regularPlay", "shop", "mainMenu")
 MENU_MAX = len(nextGameState) - 1
 MENU_MIN = 0
 
+
+# main() -> str
+# purpose: runs the regular play menu loop, and returns the next game state
+#          based on what was chosen
 def main():
     # get coins
     coins = inventory.coins
