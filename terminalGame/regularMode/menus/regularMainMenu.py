@@ -1,5 +1,5 @@
 from asciiArt import asciiMenus
-import userInput
+from asciiArt import asciiHelpers
 import helperFuncs
 
 
@@ -10,7 +10,7 @@ MENU_MIN = 0
 
 
 def main():
-    return helperFuncs.menuLoop(
+    return asciiHelpers.menuLoop(
         MENU_MAX,
         MENU_DIR,
         (MENU_MIN, MENU_MAX),

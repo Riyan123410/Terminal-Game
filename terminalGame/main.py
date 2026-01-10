@@ -1,7 +1,5 @@
 import launchMode
-import os
 import helperFuncs
-import userInput
 import gameCredits
 import player
 from regularMode import regularShop

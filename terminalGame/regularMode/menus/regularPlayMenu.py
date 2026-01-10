@@ -1,6 +1,5 @@
 from asciiArt import asciiMenus
 from asciiArt import asciiHelpers
-import userInput
 import helperFuncs
 import inventory
 
@@ -15,7 +14,7 @@ def main():
     coins = inventory.coins
 
     # return the next game state based on the menu loop
-    return helperFuncs.menuLoop(
+    return asciiHelpers.menuLoop(
         MENU_MIN,
         MENU_DIR,
         (MENU_MIN, MENU_MAX),

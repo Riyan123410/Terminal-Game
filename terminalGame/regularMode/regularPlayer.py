@@ -4,3 +4,4 @@ isCompatabilityMode = False
 
 def main():
     player.gameLoop(isCompatabilityMode)
+    return "quit"
