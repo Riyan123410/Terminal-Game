@@ -1,8 +1,10 @@
 import helperFuncs
 import userInput
+import player
 from asciiArt import asciiCards
 from asciiArt import asciiHelpers
 from asciiArt import asciiEnemies
+
 
 MAX_CARD_LENGTH = 7
 
@@ -111,18 +113,18 @@ def displayCards(cards):
     if hand[1] != ():
         print(combineCardStrings(hand[1], asciiCards.CARD_HEIGHT))
 
-def printPlayMain(cards, cardSelected, deckSelected, enemies):
+def printPlayMain(cards, cardSelected, deckSelected):
     # first display with first deck selected and make card selected deck + 1 so it isnt selected
     helperFuncs.clearTerminal()
-    displayEnemies(enemies)
+    displayEnemies()
     print(asciiCards.getDeckArt()[deckSelected])
     displayCards(createAsciiCardList(cards, cardSelected))
 
 
 # actually call this in order to print the play menu
-def displayMainPlay(cards, deckSelected, cardSelected, menuRange, yRange, currentSelectedY, enemies):
+def displayMainPlay(cards, deckSelected, cardSelected, menuRange, yRange, currentSelectedY):
 
-    printPlayMain(cards, cardSelected, deckSelected, enemies)
+    printPlayMain(cards, cardSelected, deckSelected)
     menuY = currentSelectedY
     currentSelected = menuRange[0]
 
@@ -141,7 +143,7 @@ def displayMainPlay(cards, deckSelected, cardSelected, menuRange, yRange, curren
             return (currentSelected, currentSelectedY)
 
         # print
-        asciiHelpers.printPlayMain(cards, cardSelected, deckSelected, enemies)
+        asciiHelpers.printPlayMain(cards, cardSelected, deckSelected)
 
         # if the y is going down make current selected fo down
         currentSelectedY = helperFuncs.changeWithClamp(currentSelectedY, inputList["yDir"],yRange[0], yRange[1])
@@ -165,8 +167,9 @@ def numToString(num):
     return string + str(num)
 
 # print enemies
-def displayEnemies(enemies):
+def displayEnemies():
+    enemies = player.enemies
     stringList = []
-    for enemy in enemies:
-        stringList.append(asciiEnemies.getArt(enemy, 1))
+    for enemy in enemies.keys():
+        stringList.append(asciiEnemies.getArt(enemy, enemies[enemy]["health"]))
     print(asciiHelpers.combineCardStrings(stringList, asciiEnemies.ENEMY_HEIGHT))

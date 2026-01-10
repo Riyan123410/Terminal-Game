@@ -13,16 +13,16 @@ cost = 0
 playerBlock = 0
 difficulty = 1
 combatDifficulty = 0
-costGain = 3
-startingDraw = 5
 turnNumber = 0
 roll = []
 visibleIntentions = {}
-handMax = 14
 discard = []
 hand = []
 deck = []
 enemies = dict({})
+COST_GAIN = 3
+STARTING_DRAW = 5
+HAND_MAX = 14
 
 # compatability mode
 compatability = True
@@ -82,7 +82,7 @@ def discardGain(number):
     try:
         while (i < number):
 
-            discarding = getInput("Card to discard: ")
+            discarding = getCard("Card to discard: ")
             if discarding in hand:
                 discardCard(discarding)
                 cost += 1
@@ -214,7 +214,16 @@ def damagePlayer(times,number):
             playerHealth -= finalNumber
 
 
-def getInput(string):
+def getEnemy(string):
+    target = ""
+    global compatability
+    if compatability:
+        target = input(string)
+    else:
+        print("reg")
+    return target
+
+def getCard(string):
     target = ""
     global compatability
     if compatability:
@@ -235,7 +244,7 @@ def damageEnemy(times,number):
     while i < times:
         helperFuncs.clearTerminal()
         compPrint(list(enemies.keys()))
-        target = getInput("Choose an enemy: ")
+        target = getEnemy("Choose an enemy: ")
         try:
             enemies[target]["health"] -= number
             roll.append(number)
@@ -322,8 +331,8 @@ def playerTurn():
     global costMax
     global cardDef
     global turnNumber
-    drawCards(startingDraw)
-    cost += costGain
+    drawCards(STARTING_DRAW)
+    cost += COST_GAIN
     playerBlock = 0
     helperFuncs.clearTerminal()
     compPrint("your turn")
@@ -331,7 +340,7 @@ def playerTurn():
     while True:
         helperFuncs.clearTerminal()
         turnNumber += 1
-        while len(hand) > handMax:
+        while len(hand) > HAND_MAX:
             hand.pop()
         while cost > costMax:
             cost -= 1
@@ -345,7 +354,7 @@ def playerTurn():
         if enemies == {}:
             return
         # takes string
-        playCard = getInput("").lower()
+        playCard = getCard("").lower()
         try:
             effect = cardDef[playCard]["effect"]
         except:
