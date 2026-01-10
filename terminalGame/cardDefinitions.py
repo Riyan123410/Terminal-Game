@@ -81,7 +81,7 @@ cardDef = {
     },
     "tactical reload": {
         "description": "reloads 2 cards in your deck; 1 cost",
-        "effect": "reloadCard('all, 2)",
+        "effect": "reloadCard('all', 2)",
         "cost": 1
     }
 }
