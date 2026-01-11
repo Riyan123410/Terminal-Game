@@ -26,10 +26,6 @@ def setGameStateCompatibility(gameState):
 # purpose: Handles game state transitions in regular mode. Runs game
 #          state based on input (gameState) Always returns quit when
 #          the game state returns or a inccorect game state is recieved
-# examples:
-#          setGameStateCompatibility("mainMenu") -> "quit"
-#          setGameStateCompatibility("game state that doesnt exist") -> "quit"
-#          setGameStateCompatibility("") -> "quit"
 def setGameStateRegular(gameState):
     match gameState:
         case "mainMenu":

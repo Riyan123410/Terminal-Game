@@ -30,7 +30,7 @@ cardDef = {
         "cost": 1
     },
     "well prepared": {
-        "description": "draw 4 cards; 1 cost",
+        "description": "draw 3 cards; 1 cost",
         "effect": "drawCards(3)",
         "cost": 1
     },
