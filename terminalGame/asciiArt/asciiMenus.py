@@ -278,7 +278,7 @@ ______________________________
 ||         [coins] 8        ||
 ||                          ||
 || ======================== ||
-|| |     WELL PREPARED    | ||
+|| |     BLUNDERBUSS      | ||
 || |   deals 2x2 damage   | ||
 || |   requires reload    | ||
 || |      cost: 1         | ||

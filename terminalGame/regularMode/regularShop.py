@@ -60,6 +60,15 @@ def getArt(currentSelected, coins, cards):
     return  bookShelf + arrow + controls + info
 
 
+def resetStock():
+    global currentStock
+
+    currentStock = []
+    # create shop items by making it  into a list so a random index can be chosen
+    itemsList = list(itemCoins)
+    for i in range(MENU_MAX - 1):
+        currentStock.append(random.choice(itemsList))
+
 # main() -> str
 # purpose: runs the shop interface, handles input and purchases, 
 #          updates inventory, and always returns "playMenu" when the
@@ -67,11 +76,6 @@ def getArt(currentSelected, coins, cards):
 def main():
     # use global current stock and reset it
     global currentStock
-    currentStock = []
-    # create shop items by making it  into a list so a random index can be chosen
-    itemsList = list(itemCoins)
-    for i in range(MENU_MAX - 1):
-        currentStock.append(random.choice(itemsList))
 
     # get coins
     coins = inventory.coins
@@ -110,3 +114,5 @@ def main():
         # create arrow
         helperFuncs.clearTerminal()
         print(getArt(currentSelected, coins, cards))
+
+resetStock()

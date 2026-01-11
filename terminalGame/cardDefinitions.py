@@ -56,7 +56,7 @@ cardDef = {
     },
     "revolver-reload": {
         "description": "reloads revolver; 1 cost",
-        "effect": "reloadCard('revolver'')",
+        "effect": "reloadCard('revolver')",
         "cost": 1
     },
     "cannon": {

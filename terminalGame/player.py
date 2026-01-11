@@ -122,7 +122,7 @@ def ammoCard(card,times,damage,effect):
             damageEnemy(times,damage)
             chanceCheck = random.randint(1,2)
             # replaying loop
-            while chanceCheck == 2:
+            while chanceCheck == 2 and enemies != {}:
                 damageEnemy(times,damage)
                 chanceCheck = random.randint(1,2)
 
