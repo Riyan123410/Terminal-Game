@@ -46,7 +46,7 @@ cardDef = {
     },
     "blunderbuss-reload": {
         "description": "deals 16 damage, reloads blunderbuss; 2 cost",
-        "effect": "reloadCard('blunderbuss')",
+        "effect": "reloadCard('blunderbuss', 1)",
         "cost": 2
     },
     "revolver": {
@@ -56,7 +56,7 @@ cardDef = {
     },
     "revolver-reload": {
         "description": "reloads revolver; 1 cost",
-        "effect": "reloadCard('revolver')",
+        "effect": "reloadCard('revolver', 1)",
         "cost": 1
     },
     "cannon": {
@@ -76,7 +76,7 @@ cardDef = {
     },
     "organ gun": {
         "description": "deals 8d4 damage to random enemies; 3 cost",
-        "effect": "damageEnemyRand(8, helperFuncs.diceRoll(1, 4))",
+        "effect": "ammoCard('organ gun', 8, 2, 'all')",
         "cost": 3
     },
     "tactical reload": {

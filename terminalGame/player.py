@@ -125,7 +125,8 @@ def ammoCard(card,times,damage,effect):
             while chanceCheck == 2 and enemies != {}:
                 damageEnemy(times,damage)
                 chanceCheck = random.randint(1,2)
-
+        case "all":
+            damageEnemyRand(times, helperFuncs.diceRoll(1, damage))
     # replaces card with the reload card
     discard.remove(card)
     deck.append(card+"-reload")
