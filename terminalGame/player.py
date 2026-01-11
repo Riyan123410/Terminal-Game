@@ -41,18 +41,24 @@ def resolveIntentions(resolveList):
     global roll
     healthList = {}
     print(resolveList)
+    # Main loop for each enemies attack
     for i in range(len(list(resolveList.keys()))):
+        # Health viewing for compatability
         for j in enemies:
             healthList[j] = enemies[j]["health"]
+        # printing information for compatability
         helperFuncs.clearTerminal()
         compPrint(healthList)
         compPrint(resolveList[i+1]["description"])
         compPrint(f"roll: {roll}")
+        #  shows block if it is above 0
         if playerBlock > 0:
             compPrint(playerBlock)
         compPrint(playerHealth)
         time.sleep(0.5)
+        # executes the function associated with the effect
         exec(resolveList[i+1]["effect"])
+    # printing updated information
     helperFuncs.clearTerminal()
     compPrint(healthList)
     compPrint(resolveList[i+1]["description"])
