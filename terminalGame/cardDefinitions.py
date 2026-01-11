@@ -81,7 +81,7 @@ cardDef = {
     },
     "organ gun-reload": {
         "description": "reloads organ gun; 3 cost",
-        "effect": "reloadCard('organ gun')",
+        "effect": "reloadCard('organ gun', 1)",
         "cost": 1
     },
     "tactical reload": {
