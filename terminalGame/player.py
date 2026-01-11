@@ -1,10 +1,16 @@
 import helperFuncs
 import random
 import time
+from regularMode import regularPlayer
 from enemyIntentions import intentionsList
 from cardDefinitions import cardDef
 import enemyHelpers
 import inventory
+
+# game constants
+COST_GAIN = 3
+STARTING_DRAW = 5
+HAND_MAX = 14
 
 # game
 playerHealth = 50
@@ -20,15 +26,6 @@ discard = []
 hand = []
 deck = []
 enemies = dict({})
-enemies = {
-        "bush" : {"health" : 14},
-        "goose" : {"health" : 13},
-        "wild bush" : {"health" : 12},
-        "tree" : {"health" : 11}
-    }
-COST_GAIN = 3
-STARTING_DRAW = 5
-HAND_MAX = 14
 
 # compatability mode
 compatability = True
@@ -43,21 +40,22 @@ def resolveIntentions(resolveList):
     global intentionsList
     global roll
     healthList = {}
-    for i in resolveList:
-        for e in enemies:
-            healthList[e] = enemies[e]["health"]
+    print(resolveList)
+    for i in range(len(list(resolveList.keys()))):
+        for j in enemies:
+            healthList[j] = enemies[j]["health"]
         helperFuncs.clearTerminal()
         compPrint(healthList)
-        compPrint(i["description"])
+        compPrint(resolveList[i+1]["description"])
         compPrint(f"roll: {roll}")
         if playerBlock > 0:
             compPrint(playerBlock)
         compPrint(playerHealth)
         time.sleep(0.5)
-        exec(i["effect"])
+        exec(resolveList[i+1]["effect"])
     helperFuncs.clearTerminal()
     compPrint(healthList)
-    compPrint(i["description"])
+    compPrint(resolveList[i+1]["description"])
     compPrint(f"roll: {roll}")
     if playerBlock > 0:
         compPrint(playerBlock)
@@ -87,8 +85,8 @@ def discardGain(number):
     i = 0
     try:
         while (i < number):
-
-            discarding = getCard("Card to discard: ")
+            # get card is true for is discarding
+            discarding = getCard("Card to discard: ", True)
             if discarding in hand:
                 discardCard(discarding)
                 cost += 1
@@ -221,21 +219,25 @@ def damagePlayer(times,number):
 
 
 def getEnemy(string):
-    target = ""
     global compatability
+    global hand
+    target = ""
+    # determines to use input or function
     if compatability:
         target = input(string)
     else:
-        print("reg")
+        target = regularPlayer.getEnemySelected()
     return target
 
-def getCard(string):
-    target = ""
+def getCard(string, isDiscarding):
     global compatability
+    global hand
+    target = ""
+    # determines to use input or function
     if compatability:
         target = input(string)
     else:
-        print("reg")
+        target = regularPlayer.getCardSelected(hand, isDiscarding)
     return target
 
 def compPrint(string):
@@ -359,8 +361,8 @@ def playerTurn():
         compPrint(visibleIntentions)
         if enemies == {}:
             return
-        # takes string
-        playCard = getCard("").lower()
+        # takes string false for is not discarding
+        playCard = getCard("", False).lower()
         try:
             effect = cardDef[playCard]["effect"]
         except:
@@ -395,7 +397,7 @@ def enemyTurn():
     global turnNumber
     global visibleIntentions
     enemyList = list(enemies.keys())
-    for i in range(len(enemies)):
+    for i in range(len(list(enemies.keys()))):
 
         resolveIntentions(enemies[enemyList[i]]["attacks"])
     # Determine next enemies attack
@@ -405,7 +407,6 @@ def gameLoop(isCompatabilityMode):
     # set compatability
     global compatability
     compatability = isCompatabilityMode
-    compatability = True
     startCombat()
     while enemies != {}:
         playerTurn()

@@ -7,11 +7,7 @@ from asciiArt import asciiMenus
 from asciiArt import asciiEnemies
 
 # variables
-hand = ["strike", "strike", "strike", "strike", "strike", "strike", "strike", "strike", "strike"]
-deck = ["strike", "strike", "strike"]
-discard = ["strike", "strike"]
 currentSelectedY = 0
-currentMaxHand = len(hand) - 1
 
 isCompatabilityMode = False
 
@@ -21,7 +17,7 @@ MAX_HAND = 14
 # menu constants
 MENU_DIR_X = "xDir"
 MENU_DIR_Y = "yDir"
-DECKS_MAX = 1
+DECKS_MAX = 2
 MENU_MIN = 0
 
 # menu up and down constants
@@ -29,9 +25,9 @@ Y_MIN = 0
 Y_MAX = 1
 
 def main():
-    # player.gameLoop(isCompatabilityMode)
+    player.gameLoop(isCompatabilityMode)
     # return getEnemySelected()
-    return getCardSelected(hand, True)
+    # return getCardSelected(hand, True)
 
 
 # selectCard([str], bool) -> str
@@ -41,6 +37,7 @@ def main():
 #          in order to print the correct controls
 def selectCard(cards, isDiscarding):
     global currentSelectedY
+    currentMaxHand = len(player.hand) - 1
     currentSelected = MENU_MIN
     # first display with first deck selected and make card selected deck + 1 so it isnt selected
     selected = asciiHelpers.displayMainPlay(
@@ -74,13 +71,16 @@ def selectDeck(cards, isDiscarding):
         isDiscarding)
     
     # first option is the deck, the other is discard if selected display it
-    if selected[0] == 0:
-        asciiHelpers.displayDeck(deck)
-    if selected[0] == 1:
-        asciiHelpers.displayDeck(discard)
-
-    # update y
+    match selected[0]:
+        case 0:
+            asciiHelpers.displayDeck(player.deck)
+        case 1:
+            asciiHelpers.displayDeck(player.discard)
+        case 2:
+            return "end"
+    # update y and end is not selected so return none
     currentSelectedY = selected[1]
+    return "None"
 
 
 # getCardSelected([str], bool) -> str
@@ -98,7 +98,7 @@ def getCardSelected(cards, isDiscarding):
         if currentSelectedY == Y_MIN:
             card = selectCard(cards, isDiscarding)
         else:
-            selectDeck(cards, isDiscarding)
+            card = selectDeck(cards, isDiscarding)
         # when recieving an input check if its a real card to return
         if card != "None":
             return card
@@ -134,4 +134,4 @@ def printEnemySelection(currentSelected, enemyMax):
     # print the enemys on top, than the selection arrow and finally the controls
     asciiHelpers.displayEnemies()
     print(asciiHelpers.combineCardStrings(indexToArrow, asciiEnemies.ARROW_HEIGHT))
-    print(asciiMenus.playControls["selectEnemy"])
+    print(asciiMenus.getPlayControls("selectEnemy", player.cost))

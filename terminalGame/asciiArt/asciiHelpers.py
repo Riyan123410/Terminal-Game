@@ -157,9 +157,9 @@ def printPlayMain(cards, cardSelected, deckSelected, isDiscarding):
     displayCards(createAsciiCardList(cards, cardSelected))
     # depending on if you are discarding print those contorls
     if isDiscarding:
-        print(asciiMenus.playControls["discardCard"])
+        print(asciiMenus.getPlayControls("discardCard", player.cost))
     else:
-        print(asciiMenus.playControls["playCard"])
+        print(asciiMenus.getPlayControls("playCard", player.cost))
 
 
 # actually call this in order to print the play menu
@@ -220,8 +220,10 @@ def numToString(num):
 def displayEnemies():
     enemies = player.enemies
     stringList = []
+    # loop through each enemy in enemy dict
     for enemy in enemies.keys():
-        stringList.append(asciiEnemies.getArt(enemy, enemies[enemy]["health"]))
+        # put each enemy next to each other
+        stringList.append(asciiEnemies.getArt(enemy, numToString(enemies[enemy]["health"]), formatDescriptionList(getAttackDescriptions(enemy))))
     print(asciiHelpers.combineCardStrings(stringList, asciiEnemies.ENEMY_HEIGHT))
 
 
@@ -243,3 +245,89 @@ def indexToArrow(currentSelected, menuMax, blankString, arrowString, lastArrow):
     else:
         arrowList.append(arrowString)
     return arrowList
+
+
+# format enemy descriptions
+def formatDescription(description):
+    descriptionList = description.split().copy()
+    line = ""
+    lines = []
+
+    for i in range(asciiEnemies.DESCRIPTION_HEIGHT):
+
+        wordsAdded = 0
+        # get each word in the descpription 
+        for word in descriptionList:
+            # add it to the current line if its les than the max len
+            if len(line) + len(word) + 1 < asciiEnemies.DESCRIPTION_LEN:
+                line += word + " "
+                wordsAdded += 1
+        # remove all words used
+        for i in range(wordsAdded):
+            descriptionList.pop(0)
+        
+        # add spaces until reached max len after add | to finish the line, do -2 for the space and |
+        while len(line) < asciiEnemies.DESCRIPTION_LEN - 2:
+            line += " "
+        line += "|\n"
+
+        # append each line to the lines list and clear line
+        lines.append(line)
+        line = ""
+    
+    return "".join(lines)
+
+# getAttackDescriptions(str) -> [str]
+# purpose: Takes in a string called enemyName, then finds the attack descriptions for that specific enemy in the enemy list,
+#           and returns them.
+# examples:
+#           getAttackDescriptions("goose") -> ["deal 2d4 damage", "Discard 1 card from your deck"]
+#           getAttackDescriptions("bush")  -> [""]
+def getAttackDescriptions(enemyName):
+    enemies = player.enemies
+    attackDescriptions = []
+    # finds the number of attacks the enemy has
+    numOfAttacks = len(list(enemies[enemyName]["attacks"].keys()))
+    # appends the attack description to attack descriptions
+    for i in range(numOfAttacks):
+        attackDescriptions.append(enemies[enemyName]["attacks"][i+1]["description"])
+    return attackDescriptions
+
+
+
+def formatDescription(description):
+    descriptionList = description.split().copy()
+    line = ""
+    lines = []
+
+    for i in range(asciiEnemies.DESCRIPTION_HEIGHT):
+
+        wordsAdded = 0
+        # get each word in the descpription 
+        for word in descriptionList:
+            # add it to the current line if its les than the max len
+            if len(line) + len(word) + 1 < asciiEnemies.DESCRIPTION_LEN:
+                line += word + " "
+                wordsAdded += 1
+        # remove all words used
+        for i in range(wordsAdded):
+            descriptionList.pop(0)
+        
+        # add spaces until reached max len after add | to finish the line, do -2 for the space and |
+        while len(line) < asciiEnemies.DESCRIPTION_LEN - 2:
+            line += " "
+        line += "|\n"
+
+        # append each line to the lines list and clear line
+        lines.append(line)
+        line = ""
+    
+    return "".join(lines)
+
+def formatDescriptionList(descriptionList):
+    totalDescriptions = []
+    # loop through the descrption lists and append
+    for description in descriptionList:
+        totalDescriptions.append(formatDescription(description))
+    # join total description list into a string
+    return "".join(totalDescriptions)

@@ -1,7 +1,7 @@
 # constants for art height
-ENEMY_HEIGHT = 10
+ENEMY_HEIGHT = 11
 ARROW_HEIGHT = 6
-DESCRIPTION_LEN = 25
+DESCRIPTION_LEN = 26
 DESCRIPTION_HEIGHT = 2
 
 # getArt(str, int) -> str
@@ -15,50 +15,42 @@ DESCRIPTION_HEIGHT = 2
 def getArt(name, hp, currentAttack):
     art = {
         "bush" : rf"""
-       ______           |
+BUSH   ______           |
       #o# \#|_#,#       |
      ###\ |/   #o#      |
-      #  |()     #      |
         ,'  `           |
-        BUSH            |
 Health: {hp}              |
 Intention:              |
 {currentAttack}
 """,
 
         "goose" : rf"""
-         __             |
+GOOSE     __            |
       -=(o '|           |
-         '.-.\          |
-         /|  \\         |
+         /|  \          |
          _\_):,         |
-         GOOSE          |
 Health: {hp}              |
 Intention:              |
 {currentAttack}
 """,
 
         "wild bush" : rf"""
-          _____         |
+WILD BUSH _____         |
       XoX |X|_X,X       |
      XXX\ |/   XoX      |
-      X  |()     X      |
         ,'  `           |
-       WILD BUSH        |
 Health: {hp}              |
-Attacks:                |
+Intention:              |
 {currentAttack}
 """,
 
         "tree" : rf"""
-        #o###           |
-      #####o###         |
+TREE  #####o###         |
      #o#\#|#/###        |
       ###\|/#o#         |
          )|(            |
-        TREE            |
 Health: {hp}              |
-Attacks:                |
+Intention:              |
 {currentAttack}
 """
     }

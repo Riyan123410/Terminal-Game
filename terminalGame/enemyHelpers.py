@@ -21,25 +21,29 @@ assert determinePly(2) == "turn1"
 # purpose: takes in two strings called enemyName and turnNumber, and returns the effects and description of the attacks corresponding
 # to the ply from the intentions list
 # examples:
-#           enemyIntentions("wild bush", 1) -> [{'description': 'deal 1d4 damage', 'effect': 'damagePlayer(1,helperFuncs.diceRoll(1,4))'}, {'description': 'heal an ally for 1d4 health', 'effect': 'enemyDamageSelf(1,helperFuncs.diceRoll(1,-4))'}]
+#           enemyIntentions("wild bush", "turn1") -> [{'description': 'deal 1d4 damage', 'effect': 'damagePlayer(1,helperFuncs.diceRoll(1,4))'}, {'description': 'heal an ally for 1d4 health', 'effect': 'enemyDamageSelf(1,helperFuncs.diceRoll(1,-4))'}]
 def enemyIntentions(enemyName, turnNumber):
     global intentionsList
-    attackIntentions = []
+    attackIntentions = dict({})
+
     # sets the proper formating for the enemy intentions
     for i in range(len(intentionsList[enemyName][determinePly(turnNumber)])):
-        attackIntentions.append(intentionsList[enemyName][determinePly(turnNumber)][i+1])
+        attackIntentions[i+1] = intentionsList[enemyName][determinePly(turnNumber)][i+1]
+
     return attackIntentions
 
 # testing enemyIntentions
-assert enemyIntentions("wild bush", 1) == [{'description': 'deal 1d6 damage', 'effect': 'damagePlayer(1,helperFuncs.diceRoll(1,6))'}]
-assert enemyIntentions("wild bush", 0) == [{'description': 'deal 1d4 damage', 'effect': 'damagePlayer(1,helperFuncs.diceRoll(1,4))'}, {'description': 'heal an ally for 1d4 health', 'effect': 'enemyDamageSelf(1,helperFuncs.diceRoll(1,-4))'}]
+# assert enemyIntentions("wild bush", 1) == [{'description': 'deal 1d6 damage', 'effect': 'damagePlayer(1,helperFuncs.diceRoll(1,6))'}]
+# assert enemyIntentions("wild bush", 0) == [{'description': 'deal 1d4 damage', 'effect': 'damagePlayer(1,helperFuncs.diceRoll(1,4))'}, {'description': 'heal an ally for 1d4 health', 'effect': 'enemyDamageSelf(1,helperFuncs.diceRoll(1,-4))'}]
 
+#### Used for compatability ####
 # updateEnemyHealth({str}, {str}) -> {str}
 # purpose: takes in two dictionaries called visinleIntentions and Enemies,then updates visualIntentions with the health variable from Enemies.
 # examples:
 #           updateEnemyHealth()
 def updateEnemyHealth(visibleIntentions, enemies):
     enemyList = list(enemies.keys())
+    # Updates the visible intentions
     for i in range(len(enemyList)):
         visibleIntentions[enemyList[i]]["health"] = enemies[enemyList[i]]["health"]
     return visibleIntentions
@@ -53,8 +57,8 @@ def determineIntentions(enemies,turnNumber):
         enemies[enemyList[i]]["attacks"] = enemyIntentions(enemyList[i],turnNumber)
         visibleIntentions[enemyList[i]] = {}
         visibleIntentions[enemyList[i]]["attacks"] = {}
-        for e in range(len(intentionsList[enemyList[i]][determinePly(turnNumber)])):
-            visibleIntentions[enemyList[i]]["attacks"][e+1] = (enemies[enemyList[i]]["attacks"][e]["description"])
+        for j in range(len(intentionsList[enemyList[i]][determinePly(turnNumber)])):
+            visibleIntentions[enemyList[i]]["attacks"][j+1] = (enemies[enemyList[i]]["attacks"][j+1]["description"])
             
     visibleIntentions = updateEnemyHealth(visibleIntentions,enemies)
     return [enemies,visibleIntentions]

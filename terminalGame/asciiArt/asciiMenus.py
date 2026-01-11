@@ -261,20 +261,22 @@ ______________________________
 }
 
 # all the contrls for the actual game
-playControls = {
-  "playCard" : r"""
+def getPlayControls(controlName, cost):
+  playControls = {
+    "playCard" : f"""
 ===============================================================================================================================
-Select a card in order to play it or click on the decks in order to view the discard or deck pile
-[A] left    [D] right    [W] up    [S] down    [Space] select
-""",
-  "discardCard" : r"""
+Select a card in order to play it, click on the decks in order to view the discard or deck pile, or end your turn
+[A] left    [D] right    [W] up    [S] down    [Space] select                                             [{cost}] Cost
+  """,
+    "discardCard" : f"""
 ===============================================================================================================================
-Select a card in order to discard it or click on the decks in order to view the discard or deck pile
-[A] left    [D] right    [W] up    [S] down    [Space] select
-""",
-  "selectEnemy" : r"""
+Select a card in order to discard it, click on the decks in order to view the discard or deck pile, or end your turn
+[A] left    [D] right    [W] up    [S] down    [Space] select                                             [{cost}] Cost
+  """,
+    "selectEnemy" : f"""
 ===============================================================================================================================
 Select an enemy in order to attack it
-[A] left    [D] right    [Space] select
-"""
-}
+[A] left    [D] right    [Space] select                                                                   [{cost}] Cost
+  """
+  }
+  return playControls[controlName]
