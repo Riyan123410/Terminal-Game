@@ -19,6 +19,7 @@ MENU_DIR_X = "xDir"
 MENU_DIR_Y = "yDir"
 DECKS_MAX = 2
 MENU_MIN = 0
+ARROW_MIN = 1
 
 # menu up and down constants
 Y_MIN = 0
@@ -109,14 +110,14 @@ def getEnemySelected():
     # get max from enemy list
     enemyList = list(player.enemies.keys())
     enemyMax = len(enemyList)
-    currentSelected = MENU_MIN
+    currentSelected = ARROW_MIN
 
     printEnemySelection(currentSelected, enemyMax)
 
     while True:
         inputList = userInput.getInputList()
         # add one to menu min since arrow starts at 1 not 0
-        currentSelected = helperFuncs.changeWithClamp(currentSelected, inputList[MENU_DIR_X], MENU_MIN + 1, enemyMax)
+        currentSelected = helperFuncs.changeWithClamp(currentSelected, inputList[MENU_DIR_X], ARROW_MIN, enemyMax)
         printEnemySelection(currentSelected, enemyMax)
         
         # when selected return enemy - 1 since arrow at 1 not 0

@@ -303,12 +303,18 @@ def formatDescription(description):
     for i in range(asciiEnemies.DESCRIPTION_HEIGHT):
 
         wordsAdded = 0
+        overfill = False
         # get each word in the descpription 
-        for word in descriptionList:
-            # add it to the current line if its les than the max len
-            if len(line) + len(word) + 1 < asciiEnemies.DESCRIPTION_LEN:
-                line += word + " "
-                wordsAdded += 1
+        while not overfill:
+            # add it to the current line if its les than the max len, do a try just in case there is arent any words
+            try:
+                if len(line) + len(descriptionList[wordsAdded]) + 1 < asciiEnemies.DESCRIPTION_LEN:
+                    line += descriptionList[wordsAdded] + " "
+                    wordsAdded += 1
+                else:
+                    overfill = True
+            except:
+                overfill = True
         # remove all words used
         for i in range(wordsAdded):
             descriptionList.pop(0)
@@ -329,5 +335,8 @@ def formatDescriptionList(descriptionList):
     # loop through the descrption lists and append
     for description in descriptionList:
         totalDescriptions.append(formatDescription(description))
-    # join total description list into a string
-    return "".join(totalDescriptions)
+    # has to do total descriptions twice each times
+    if len(totalDescriptions) < 2:
+        totalDescriptions.append(formatDescription(" "))
+    # join total description list into a string with a next line so its seperated
+    return "\n".join(totalDescriptions)
