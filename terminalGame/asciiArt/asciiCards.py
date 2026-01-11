@@ -164,9 +164,9 @@ art = {
 (                      )
  )   __,____ REVOLVER ( 
 (  / __.=--"           )
- )/#(-'  deals 1d10   ( 
+ )/#(-'  deals 2d8    ( 
 ( `-' damage, 1 target,)
- )50% chance to reuse ( 
+ )60% chance to reuse ( 
 (       [AMMO]         )
  `-._.-._.--._.-._.-.-' 
 """

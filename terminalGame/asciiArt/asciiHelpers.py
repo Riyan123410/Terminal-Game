@@ -157,9 +157,9 @@ def printPlayMain(cards, cardSelected, deckSelected, isDiscarding):
     displayCards(createAsciiCardList(cards, cardSelected))
     # depending on if you are discarding print those contorls
     if isDiscarding:
-        print(asciiMenus.getPlayControls("discardCard", player.cost))
+        print(asciiMenus.getPlayControls("discardCard", player.cost, player.playerHealth))
     else:
-        print(asciiMenus.getPlayControls("playCard", player.cost))
+        print(asciiMenus.getPlayControls("playCard", player.cost, player.playerHealth))
 
 
 # actually call this in order to print the play menu
@@ -308,7 +308,8 @@ def formatDescription(description):
         while not overfill:
             # add it to the current line if its les than the max len, do a try just in case there is arent any words
             try:
-                if len(line) + len(descriptionList[wordsAdded]) + 1 < asciiEnemies.DESCRIPTION_LEN:
+                # add 2 because of extra space and | character
+                if len(line) + len(descriptionList[wordsAdded]) + 2 < asciiEnemies.DESCRIPTION_LEN:
                     line += descriptionList[wordsAdded] + " "
                     wordsAdded += 1
                 else:

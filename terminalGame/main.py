@@ -1,7 +1,7 @@
 import launchMode
 import helperFuncs
 import gameCredits
-import player
+import endGame
 from regularMode import regularShop
 from regularMode import regularPlayer
 from regularMode.menus import regularMainMenu
@@ -40,7 +40,10 @@ def setGameStateRegular(gameState):
             return regularShop.main()
         case "regularPlay":
             return regularPlayer.main()
-    
+        case "won":
+            return endGame.win()
+        case "lost":
+            return endGame.lose()
     print(gameState)
     return "quit"
 
@@ -61,13 +64,13 @@ def main():
     #     isRegularMode = False
 
     # set game state based on compatability mode
-    if isRegularMode:
-        setGameState = setGameStateRegular
-    else:
-        setGameState = setGameStateCompatibility
+    
 
     # run the game until a game sate returns quit
     while gameState != "quit":
-        gameState = setGameState(gameState)
+        if isRegularMode:
+            gameState = setGameStateRegular(gameState)
+        else:
+            gameState = setGameStateCompatibility(gameState)
 
 main()

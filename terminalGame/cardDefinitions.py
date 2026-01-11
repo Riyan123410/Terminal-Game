@@ -50,8 +50,8 @@ cardDef = {
         "cost": 2
     },
     "revolver": {
-        "description": "deals 1d10 damage, 50% chance to damage again; 2 cost",
-        "effect": "ammoCard('revolver', 1, helperFuncs.diceRoll(1, 10), 'recursion')",
+        "description": "deals 2d8 damage, 60% chance to damage again; 2 cost",
+        "effect": "ammoCard('revolver', 1, helperFuncs.diceRoll(2, 8), 'recursion')",
         "cost": 2
     },
     "revolver-reload": {
@@ -70,8 +70,8 @@ cardDef = {
         "cost": 0
     },
     "multi-strike": {
-        "description": "deals 5x4 damage to all enemies; 3 cost",
-        "effect": "damageEnemyAll(4, 5)",
+        "description": "deals 4x3 damage to all enemies; 3 cost",
+        "effect": "damageEnemyAll(3, 4)",
         "cost": 3
     },
     "organ gun": {
@@ -83,5 +83,11 @@ cardDef = {
         "description": "reloads 2 cards in your deck; 1 cost",
         "effect": "reloadCard('all', 2)",
         "cost": 1
+    },
+    "super block": {
+        "description": "gain 10 block; 2 cost",
+        "effect": "gainBlock(1, 10)",
+        "cost": 2
     }
 }
+    

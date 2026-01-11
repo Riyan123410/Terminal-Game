@@ -23,7 +23,6 @@ Health: {hp}              |
 Intention:              |
 {currentAttack}
 """,
-
         "goose" : rf"""
 GOOSE     __            |
       -=(o '|           |
@@ -43,9 +42,35 @@ Health: {hp}              |
 Intention:              |
 {currentAttack}
 """,
-
         "tree" : rf"""
 TREE  #####o###         |
+     #o#\#|#/###        |
+      ###\|/#o#         |
+         )|(            |
+Health: {hp}              |
+Intention:              |
+{currentAttack}
+""",
+        "canadian goose" : rf"""
+CANADIAN GOOSE          |
+     #o#\#|#/###        |
+      ###\|/#o#         |
+         )|(            |
+Health: {hp}              |
+Intention:              |
+{currentAttack}
+""",
+        "squirrel" : rf"""
+SQUIRREL                |
+     #o#\#|#/###        |
+      ###\|/#o#         |
+         )|(            |
+Health: {hp}              |
+Intention:              |
+{currentAttack}
+""",
+        "giant goose" : rf"""
+GIANT GOOSE             |
      #o#\#|#/###        |
       ###\|/#o#         |
          )|(            |
@@ -77,3 +102,4 @@ arrow = {
                         .
 """
 }
+

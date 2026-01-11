@@ -8,8 +8,20 @@ import inventory
 
 # shop variables
 itemCoins = {
-    "strike" : 1,
-    "soldOut" : 0
+    "soldOut" : 0,
+    "strike" : 3,
+    "crossbow" : 6,
+    "block" : 2,
+    "clean sweep" : 4,
+    "well prepared" : 4,
+    "blunderbuss" : 8,
+    "revolver" : 3,
+    "crossbow" : 6,
+    "cannon" : 4,
+    "multi-strike" : 8,
+    "organ gun" : 6,
+    "tactical reload" : 3,
+    "super block" : 4
 }
 currentStock = []
 

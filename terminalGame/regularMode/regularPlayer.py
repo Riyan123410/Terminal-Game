@@ -26,9 +26,10 @@ Y_MIN = 0
 Y_MAX = 1
 
 def main():
-    player.gameLoop(isCompatabilityMode)
-    # return getEnemySelected()
-    # return getCardSelected(hand, True)
+    won = player.gameLoop(isCompatabilityMode)
+    if won:
+        return "won"
+    return "lost"
 
 
 # selectCard([str], bool) -> str
@@ -135,4 +136,4 @@ def printEnemySelection(currentSelected, enemyMax):
     # print the enemys on top, than the selection arrow and finally the controls
     asciiHelpers.displayEnemies()
     print(asciiHelpers.combineCardStrings(indexToArrow, asciiEnemies.ARROW_HEIGHT))
-    print(asciiMenus.getPlayControls("selectEnemy", player.cost))
+    print(asciiMenus.getPlayControls("selectEnemy", player.cost, player.playerHealth))

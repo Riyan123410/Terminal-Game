@@ -11,13 +11,15 @@ import inventory
 COST_GAIN = 3
 STARTING_DRAW = 5
 HAND_MAX = 14
+PLAYER_HEALTH_MAX = 50
+DIFFICULTY_MODIFIER = 0.5
 
 # game
 playerHealth = 50
 costMax = 4
 cost = 0
 playerBlock = 0
-difficulty = 1
+difficulty = float(0.5)
 combatDifficulty = 0
 turnNumber = 0
 roll = []
@@ -29,6 +31,11 @@ enemies = dict({})
 
 # compatability mode
 compatability = True
+
+def compSleep(seconds):
+    global compatability
+    if compatability:
+        time.sleep(seconds)
 
 # resolveIntentions([str]) -> None
 # purpose: takes in a list called resolveList, then executes all strings within the list as functions associated with it's name.
@@ -55,7 +62,7 @@ def resolveIntentions(resolveList):
         if playerBlock > 0:
             compPrint(playerBlock)
         compPrint(playerHealth)
-        time.sleep(0.5)
+        compSleep(0.5)
         # executes the function associated with the effect
         exec(resolveList[i+1]["effect"])
     # printing updated information
@@ -66,7 +73,6 @@ def resolveIntentions(resolveList):
     if playerBlock > 0:
         compPrint(playerBlock)
     compPrint(playerHealth)
-
 
 def deckDiscard(number):
     global deck
@@ -269,7 +275,7 @@ def damageEnemy(times,number):
                 visibleIntentions.pop(target)
         except:
 
-            time.sleep(1)
+            compSleep(1)
 def gainBlock(times,number):
     global playerBlock
     for i in range(times):
@@ -326,18 +332,23 @@ def startCombat():
     global deck
     global hand
     global discard
+    global playerHealth
     global inventory
     global visibleIntentions
     deck = inventory.cards.copy()
     hand = []
     discard = []
+    playerHealth = PLAYER_HEALTH_MAX
     setup = enemyHelpers.determineIntentions(enemyHelpers.determineEnemies(enemies,difficulty), turnNumber)
     enemies = setup[0]
     visibleIntentions = setup[1]
+    helperFuncs.clearTerminal()
+    print("START COMBAT")
+    time.sleep(1)
 
 # playerTurn() -> None
 # purpose: starts the players turn, and starts taking their actions
-def playerTurn():
+def playerTurn():   
     global cost
     global hand
     global playerBlock
@@ -350,7 +361,7 @@ def playerTurn():
     playerBlock = 0
     helperFuncs.clearTerminal()
     compPrint("your turn")
-    time.sleep(1)
+    compSleep(1)
     while True:
         helperFuncs.clearTerminal()
         turnNumber += 1
@@ -373,7 +384,7 @@ def playerTurn():
             effect = cardDef[playCard]["effect"]
         except:
 
-                time.sleep(1)
+                compSleep(1)
         else:
             currentCardCost = cardDef[playCard]["cost"]
             if (playCard in hand):
@@ -385,18 +396,18 @@ def playerTurn():
                     
                 else:
                     compPrint("Invalid Card")
-                    time.sleep(1)
+                    compSleep(1)
             elif playCard == "define":
                 helperFuncs.clearTerminal()
                 exec(effect)
             elif playCard == "end":
-                time.sleep(1)
+                compSleep(1)
                 helperFuncs.clearTerminal()
                 discardCardRand(len(hand))
                 return
             else:
                 compPrint("Invalid Card")
-                time.sleep(1)
+                compSleep(1)
 def enemyTurn():
     global playerHealth
     global enemies
@@ -413,8 +424,16 @@ def gameLoop(isCompatabilityMode):
     # set compatability
     global compatability
     compatability = isCompatabilityMode
+
+    # set victory and start combat
+    won = True
     startCombat()
-    while enemies != {}:
+    # loop until our or all the enemies died
+    while enemies != {} and playerHealth > 0:
         playerTurn()
         enemyTurn()
-    return "playMenu"
+    # if your health is below 0 you lost
+    if playerHealth <= 0:
+        won = False
+        
+    return won
