@@ -1,70 +1,65 @@
 # constants for art height
-ENEMY_HEIGHT = 11
+ENEMY_HEIGHT = 10
 ARROW_HEIGHT = 6
+DESCRIPTION_LEN = 25
+DESCRIPTION_HEIGHT = 2
 
 # getArt(str, int) -> str
 # purpose: returns ASCII art for a given enemy name from parameter (name)
-#          with its health from parameter (hp)
+#          with its health from parameter (hp), make sure HP only has 2
+#          digits otherwise ASCII art will get messed up
 # examples:
 #          getArt("bush", 5) -> "bush art" with hp 5
 #          getArt("goose", 10) -> "bush art" with hp 10
 #          getArt("fsdi", 20) -> "INCORRECT NAME"
-def getArt(name, hp):
+def getArt(name, hp, currentAttack):
     art = {
         "bush" : rf"""
-BUSH   ______           |
+       ______           |
       #o# \#|_#,#       |
      ###\ |/   #o#      |
       #  |()     #      |
         ,'  `           |
+        BUSH            |
 Health: {hp}              |
-Attacks:                |
-    1) deal 1d4 damage  |
-    2) heal an ally for |
-       1d4 health       |
-    3) deal 1d6 damage  |
+Intention:              |
+{currentAttack}
 """,
 
         "goose" : rf"""
-GOOSE    __             |
+         __             |
       -=(o '|           |
          '.-.\          |
          /|  \\         |
          _\_):,         |
+         GOOSE          |
 Health: {hp}              |
-Attacks:                |
-    1) deal 2d4 damage  |
-    2) Discard 1 card   |
-       from your deck   |
-    3) deal 1d8 damage  |
+Intention:              |
+{currentAttack}
 """,
 
         "wild bush" : rf"""
-WILD BUSH _____         |
+          _____         |
       XoX |X|_X,X       |
      XXX\ |/   XoX      |
       X  |()     X      |
         ,'  `           |
+       WILD BUSH        |
 Health: {hp}              |
 Attacks:                |
-    1) deal 1d4 damage  |
-    2) heal an ally for |
-       1d4 health       |
-    3) deal 1d6 damage  |
+{currentAttack}
 """,
 
         "tree" : rf"""
-TREE   ###o##           |
-      #\#|#/##          |
-        )|(             |
+        #o###           |
+      #####o###         |
+     #o#\#|#/###        |
+      ###\|/#o#         |
+         )|(            |
+        TREE            |
 Health: {hp}              |
 Attacks:                |
-    1) deal 2d6 damage  |
-    2) heal an ally for |
-       1d8 health       |
-    3) deal 1d12 damage |
-    4) discard 1 card   |
-       from your deck   |
+{currentAttack}
 """
     }
     try:
