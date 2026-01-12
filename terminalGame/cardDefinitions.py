@@ -93,6 +93,18 @@ cardDef = {
         "description": "gain 10 block; 2 cost",
         "effect": "gainBlock(1, 10)",
         "cost": 2
-    }
+    },
+    "sonic speed": {
+        "description": "gain 5 haste; 1 cost",
+        "effect": "addEffect('haste', 1, 5)",
+        "cost": 1
+    },
+    "supressive fire": {
+        "description": "for each card with ammo played, gain 3 power; 2 cost",
+        "effect": "addEffect('supressive fire', 'supress', 1, 1, True)",
+        "cost": 2
+    },
 }
+
+ammoList = ["revolver", "crossbow", "organ gun", "blunderbuss"]
     

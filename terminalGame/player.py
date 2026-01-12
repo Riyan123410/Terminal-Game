@@ -3,7 +3,7 @@ import random
 import time
 from regularMode import regularPlayer
 from enemyIntentions import intentionsList
-from cardDefinitions import cardDef
+import cardDefinitions
 from effectDefinitions import effectDefinition
 import enemyHelpers
 import inventory
@@ -51,13 +51,15 @@ def addPower():
     else:
         return 0
 
-def addEffect(name, times, number):
+def addEffect(cardName, name, times, number, exert):
     global playerEffects
     for i in range(times):
         if name in playerEffects:
             playerEffects[name] += number
         else:
             playerEffects[name] = number
+    if exert:
+        discard.remove(cardName)
 
 def checkEffectValid():
     global playerEffects
@@ -68,13 +70,18 @@ def checkEffectValid():
             playerEffects.pop(effectList[i])
         i += 1
 
-def effectsRun(condition):
+def effectsRun(condition, cardName):
     global playerEffects
+
     for i in playerEffects:
         if i in effectDefinition and effectDefinition[i]["condition"] == condition:
             currentEffectDef = effectDefinition[i]
             exec(currentEffectDef["effect"])
             playerEffects[i] -= currentEffectDef["stacksLost"]
+        if "supress" in playerEffects:
+            if cardName in cardDefinitions.ammoList:
+                addEffect("", "power", 1, 3, False)
+
     checkEffectValid()
 
 def compSleep(seconds):
@@ -101,7 +108,7 @@ def resolveIntentions(resolveList):
         # printing information for compatability
         helperFuncs.clearTerminal()
         compPrint(healthList)
-        compPrint(resolveList[i+1]["description"])
+        compPrint(resolveList[i]["description"])
         compPrint(f"roll: {roll}")
         #  shows block if it is above 0
         if playerBlock > 0:
@@ -109,11 +116,11 @@ def resolveIntentions(resolveList):
         compPrint(playerHealth)
         compSleep(0.5)
         # executes the function associated with the effect
-        exec(resolveList[i+1]["effect"])
+        exec(resolveList[i]["effect"])
     # printing updated information
     helperFuncs.clearTerminal()
     compPrint(healthList)
-    compPrint(resolveList[i+1]["description"])
+    compPrint(resolveList[i]["description"])
     compPrint(f"roll: {roll}")
     if playerBlock > 0:
         compPrint(playerBlock)
@@ -408,7 +415,7 @@ def playerTurn():
     global playerBlock
     global playerHealth
     global costMax
-    global cardDef
+    global cardDefinitions
     global turnNumber
     drawCards(STARTING_DRAW)
     cost += COST_GAIN
@@ -416,7 +423,7 @@ def playerTurn():
     helperFuncs.clearTerminal()
     compPrint("your turn")
     compSleep(1)
-    effectsRun("startTurn")
+    effectsRun("startTurn", "")
     while True:
         helperFuncs.clearTerminal()
         turnNumber += 1
@@ -436,19 +443,19 @@ def playerTurn():
         # takes string false for is not discarding
         playCard = getCard("", False).lower()
         try:
-            effect = cardDef[playCard]["effect"]
+            effect = cardDefinitions.cardDef[playCard]["effect"]
         except:
 
                 compSleep(1)
         else:
-            currentCardCost = cardDef[playCard]["cost"]
+            currentCardCost = cardDefinitions.cardDef[playCard]["cost"]
             if (playCard in hand):
                 if cost - currentCardCost > -1:
                     helperFuncs.clearTerminal()
                     discardCard(playCard)
                     cost -= currentCardCost
                     exec(effect)
-                    effectsRun("cardPlay")
+                    effectsRun("cardPlay", playCard)
                 else:
                     compPrint("Invalid Card")
                     compSleep(1)
