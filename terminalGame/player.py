@@ -157,7 +157,8 @@ def reloadCard(card,times):
     match card:
         case "blunderbuss":
             damageEnemyAll(1,16)
-
+        case "organ gun":
+            gainBlock(1,4)
     if times == 1:
         deck.append(card)
         discard.remove(card+"-reload")
