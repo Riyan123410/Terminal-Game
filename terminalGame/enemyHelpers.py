@@ -28,7 +28,7 @@ def enemyIntentions(enemyName, turnNumber):
 
     # sets the proper formating for the enemy intentions
     for i in range(len(intentionsList[enemyName][determinePly(turnNumber)])):
-        attackIntentions[i+1] = intentionsList[enemyName][determinePly(turnNumber)][i+1]
+        attackIntentions[i] = intentionsList[enemyName][determinePly(turnNumber)][i]
 
     return attackIntentions
 
@@ -58,7 +58,7 @@ def determineIntentions(enemies,turnNumber):
         visibleIntentions[enemyList[i]] = {}
         visibleIntentions[enemyList[i]]["attacks"] = {}
         for j in range(len(intentionsList[enemyList[i]][determinePly(turnNumber)])):
-            visibleIntentions[enemyList[i]]["attacks"][j+1] = (enemies[enemyList[i]]["attacks"][j+1]["description"])
+            visibleIntentions[enemyList[i]]["attacks"][j] = (enemies[enemyList[i]]["attacks"][j]["description"])
             
     visibleIntentions = updateEnemyHealth(visibleIntentions,enemies)
     return [enemies,visibleIntentions]

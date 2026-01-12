@@ -290,7 +290,7 @@ def getAttackDescriptions(enemyName):
     numOfAttacks = len(list(enemies[enemyName]["attacks"].keys()))
     # appends the attack description to attack descriptions
     for i in range(numOfAttacks):
-        attackDescriptions.append(enemies[enemyName]["attacks"][i+1]["description"])
+        attackDescriptions.append(enemies[enemyName]["attacks"][i]["description"])
     return attackDescriptions
 
 
