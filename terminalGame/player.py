@@ -42,6 +42,10 @@ def checkEnemyHealth():
             enemies.pop(enemyList[i])
             visibleIntentions.pop(enemyList[i])
 
+def gainCost(number):
+    global cost
+    cost += number
+
 def addPower():
     if "power" in playerEffects:
         return playerEffects["power"]
@@ -143,7 +147,7 @@ def discardGain(number):
             discarding = getCard("Card to discard: ", True)
             if discarding in hand:
                 discardCard(discarding)
-                cost += 1
+                gainCost(1)
                 i += 1
             else:
                 i += 1
@@ -371,7 +375,7 @@ def resetEffects():
     global turnNumber
     playerEffects.clear()
     turnNumber = 0
-    
+
 
 # startCombat() -> None
 # purpose: initializes a combat encounter by determining enemies, the intentions, and health.
