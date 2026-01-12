@@ -7,21 +7,22 @@ import random
 import inventory
 
 # shop variables
+
+# prices are based on damage per cost, if applicable
 itemCoins = {
     "soldOut" : 0,
-    "strike" : 3,
-    "crossbow" : 6,
-    "block" : 2,
+    "strike" : 4,
+    "block" : 1,
     "clean sweep" : 4,
-    "well prepared" : 4,
-    "blunderbuss" : 8,
-    "revolver" : 6,
     "crossbow" : 6,
-    "cannon" : 4,
-    "multi-strike" : 8,
-    "organ gun" : 6,
-    "tactical reload" : 3,
-    "super block" : 4
+    "well prepared" : 4,
+    "blunderbuss" : 7,
+    "revolver" : 6,
+    "cannon" : 6,
+    "multi-strike" : 4,
+    "organ gun" : 5,
+    "tactical reload" : 2,
+    "super block" : 3
 }
 currentStock = []
 

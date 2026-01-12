@@ -2,6 +2,7 @@ import launchMode
 import helperFuncs
 import gameCredits
 import endGame
+import player
 from regularMode import regularShop
 from regularMode import regularPlayer
 from regularMode.menus import regularMainMenu
@@ -18,8 +19,9 @@ from regularMode.menus import regularPlayMenu
 #          setGameStateCompatibility("game state that doesnt exist") -> "quit"
 #          setGameStateCompatibility("") -> "quit"
 def setGameStateCompatibility(gameState):
-    helperFuncs.clearTerminal()
-    print(gameState)
+    # true for compatability mode
+    player.gameLoop(True)
+    print("game over - quitting")
     return "quit"
 
 # setGameStateCompatibility(str) -> str
