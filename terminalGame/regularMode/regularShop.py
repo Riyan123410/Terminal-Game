@@ -15,7 +15,7 @@ itemCoins = {
     "clean sweep" : 4,
     "well prepared" : 4,
     "blunderbuss" : 8,
-    "revolver" : 3,
+    "revolver" : 6,
     "crossbow" : 6,
     "cannon" : 4,
     "multi-strike" : 8,

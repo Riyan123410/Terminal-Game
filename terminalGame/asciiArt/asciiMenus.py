@@ -289,7 +289,7 @@ ______________________________
   "revolver" : r"""
 ______________________________
 ||--------------------------||
-||         [coins] 3        ||
+||         [coins] 6        ||
 ||                          ||
 || ======================== ||
 || |       REVOLVER       | ||
@@ -306,7 +306,7 @@ ______________________________
 ||         [coins] 4        ||
 ||                          ||
 || ======================== ||
-|| |       REVOLVER       | ||
+|| |       CANNON         | ||
 || |   deals 4d12 damage  | ||
 || |     to everything    | ||
 || |      cost: 4         | ||
@@ -377,9 +377,9 @@ ______________________________
 ||                          ||
 || XXXXXXXXXXXXXXXXXXXXXXXX ||
 ||        SOLD OUT          ||
-||     you better not       ||
-||   refresh the shop for   ||
-||       more items         ||
+||   you may be wondering   ||
+|| that you didn't buy this ||
+|| welp it was 1/14 chance  ||
 || XXXXXXXXXXXXXXXXXXXXXXXX ||
 ||--------------------------||
 ||__________________________||
