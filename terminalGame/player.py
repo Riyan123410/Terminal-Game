@@ -69,10 +69,10 @@ def checkEffectValid():
             playerEffects.pop(effectList[i])
         i += 1
 
-def cardPlayEffects():
+def effectsRun(condition):
     global playerEffects
     for i in playerEffects:
-        if i in effectDefinition and effectDefinition[i]["condition"] == "cardPlay":
+        if i in effectDefinition and effectDefinition[i]["condition"] == condition:
             currentEffectDef = effectDefinition[i]
             exec(currentEffectDef["effect"])
             playerEffects[i] -= currentEffectDef["stacksLost"]
@@ -417,6 +417,7 @@ def playerTurn():
     helperFuncs.clearTerminal()
     compPrint("your turn")
     compSleep(1)
+    effectsRun("startTurn")
     while True:
         helperFuncs.clearTerminal()
         turnNumber += 1
@@ -448,14 +449,13 @@ def playerTurn():
                     discardCard(playCard)
                     cost -= currentCardCost
                     exec(effect)
-                    cardPlayEffects()
+                    effectsRun("cardPlay")
                 else:
                     compPrint("Invalid Card")
                     compSleep(1)
             elif playCard == "define":
                 helperFuncs.clearTerminal()
                 exec(effect)
-                cardPlayEffects()
             elif playCard == "end":
                 compSleep(1)
                 helperFuncs.clearTerminal()
