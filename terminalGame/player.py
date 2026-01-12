@@ -337,12 +337,14 @@ def startCombat():
     global hand
     global discard
     global playerHealth
+    global cost
     global inventory
     global visibleIntentions
     deck = inventory.cards.copy()
     hand = []
     discard = []
     playerHealth = PLAYER_HEALTH_MAX
+    cost = 0
     setup = enemyHelpers.determineIntentions(enemyHelpers.determineEnemies(enemies,difficulty), turnNumber)
     enemies = setup[0]
     visibleIntentions = setup[1]
