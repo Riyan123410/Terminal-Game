@@ -1,15 +1,9 @@
 import player
 import userInput
 import helperFuncs
-from asciiArt import asciiCards
 from asciiArt import asciiHelpers
 from asciiArt import asciiMenus
 from asciiArt import asciiEnemies
-
-# variables
-currentSelectedY = 0
-
-isCompatabilityMode = False
 
 # game constants
 MAX_HAND = 14
@@ -20,13 +14,14 @@ MENU_DIR_Y = "yDir"
 DECKS_MAX = 2
 MENU_MIN = 0
 ARROW_MIN = 1
+IS_COMPATIBILITY_MODE = False
 
 # menu up and down constants
 Y_MIN = 0
 Y_MAX = 1
 
 def main():
-    won = player.gameLoop(isCompatabilityMode)
+    won = player.gameLoop(IS_COMPATIBILITY_MODE)
     if won:
         return "won"
     return "lost"
@@ -38,8 +33,9 @@ def main():
 #          it also prints the controls so the parameter (isDiscarding) is ued
 #          in order to print the correct controls
 def selectCard(cards, isDiscarding):
-    global currentSelectedY
-    currentMaxHand = len(player.hand) - 1
+    currentSelectedY = 0
+
+    currentMaxHand = len(cards) - 1
     currentSelected = MENU_MIN
     # first display with first deck selected and make card selected deck + 1 so it isnt selected
     selected = asciiHelpers.displayMainPlay(
@@ -56,7 +52,7 @@ def selectCard(cards, isDiscarding):
     currentSelectedY = selected[1]
 
     # the while loop didnt catch any card being selected so return none
-    return "None"
+    return None
 
 # choose to look at the deck
 def selectDeck(cards, isDiscarding):
@@ -102,7 +98,7 @@ def getCardSelected(cards, isDiscarding):
         else:
             card = selectDeck(cards, isDiscarding)
         # when recieving an input check if its a real card to return
-        if card != "None":
+        if card != None:
             return card
 
 # getEnemySelected() -> str

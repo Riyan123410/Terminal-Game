@@ -49,7 +49,6 @@ def updateEnemyHealth(visibleIntentions, enemies):
     return visibleIntentions
 
 def determineIntentions(enemies,turnNumber):
-    visibleIntentions = 0
     visibleIntentions = {}
     global intentionsList
     enemyList = list(enemies.keys())

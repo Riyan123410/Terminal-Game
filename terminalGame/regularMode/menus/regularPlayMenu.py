@@ -1,6 +1,5 @@
 from asciiArt import asciiMenus
 from asciiArt import asciiHelpers
-import helperFuncs
 import inventory
 
 # menu constants

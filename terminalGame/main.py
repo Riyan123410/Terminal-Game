@@ -46,6 +46,8 @@ def setGameStateRegular(gameState):
             return endGame.win()
         case "lost":
             return endGame.lose()
+        case _:
+            pass
     print(gameState)
     return "quit"
 

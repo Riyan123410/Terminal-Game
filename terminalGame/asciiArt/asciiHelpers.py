@@ -76,11 +76,12 @@ def combineCardStrings(cards, height):
 #          splitHand(["x","y"], 3) -> (["x","y"], [])
 #          splitHand([], 1) -> ([], [])
 def splitHand(totalHand, maxLen):
+    totalHandCopy = totalHand.copy()
     newRow = []
     # loop through the hand remove and adding until your hand is less than the max
     while len(totalHand) > maxLen:
         newRow.append(totalHand[-1])
-        totalHand.pop()
+        totalHandCopy.pop()
     # revers the 2nd list since we are adding to it backwards
     newRow.reverse()
     return (totalHand, newRow)

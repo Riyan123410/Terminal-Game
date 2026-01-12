@@ -1,6 +1,5 @@
 import os
 import random
-from asciiArt import asciiHelpers
 
 
 # clamp(int/float, int/float, int/float) -> int/float
@@ -42,10 +41,6 @@ def clearTerminal():
 # diceRoll(int, int) -> int
 # purpose: returns the sum of a random number from 1 to the input (size)
 #          the number of numbers generated are based on the parameter (times)
-# examples:
-#          diceRoll(2, 6) -> 2 to 12
-#          diceRoll(3, 1) -> 3
-#          diceRoll(1, -3) -> -1 to -3
 def diceRoll(times,size):
     roll = 0
     if size > 0:

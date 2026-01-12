@@ -1,6 +1,5 @@
 import helperFuncs
 import time
-import userInput
 from asciiArt import asciiMenus
 
 # constants
@@ -30,10 +29,10 @@ def selectMode():
     validInput = False
     # loop until a valid launch mode is selected
     while not validInput:
+        # input is true until it is proven false
+        validInput = True
         # try to set mode as if input is not a number there will be an error
         try:
-            # input is true until it is proven false
-            validInput = True
             currentInput = int(input())
             # based on input check if its the regular mode
             match currentInput:

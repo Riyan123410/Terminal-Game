@@ -2,7 +2,6 @@ from asciiArt import asciiHelpers
 from asciiArt import asciiMenus
 import helperFuncs
 import userInput
-import os
 import random
 import inventory
 
@@ -31,7 +30,6 @@ currentStock = []
 MENU_MAX = 5
 MENU_MIN = 1
 MENU_DIR = "xDir"
-currentSelected = MENU_MIN
 
 
 # listToBookshelf([str]) -> [str]
