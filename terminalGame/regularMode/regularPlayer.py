@@ -16,6 +16,9 @@ MENU_MIN = 0
 ARROW_MIN = 1
 IS_COMPATIBILITY_MODE = False
 
+# menu variables
+currentSelectedY = 0
+
 # menu up and down constants
 Y_MIN = 0
 Y_MAX = 1
@@ -33,7 +36,7 @@ def main():
 #          it also prints the controls so the parameter (isDiscarding) is ued
 #          in order to print the correct controls
 def selectCard(cards, isDiscarding):
-    currentSelectedY = 0
+    global currentSelectedY
 
     currentMaxHand = len(cards) - 1
     currentSelected = MENU_MIN
