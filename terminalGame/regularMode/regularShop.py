@@ -22,7 +22,9 @@ itemCoins = {
     "multi-strike" : 12 * 2,
     "organ gun" : 5 * 2,
     "tactical reload" : 2 * 2,
-    "super block" : 3 * 2
+    "super block" : 3 * 2,
+    "sonic speed" : 4 * 2,
+    "supressive fire" : 1 * 2
 }
 currentStock = []
 
