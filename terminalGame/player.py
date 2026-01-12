@@ -78,9 +78,8 @@ def effectsRun(condition, cardName):
             currentEffectDef = effectDefinition[i]
             exec(currentEffectDef["effect"])
             playerEffects[i] -= currentEffectDef["stacksLost"]
-        if "supress" in playerEffects:
-            if cardName in cardDefinitions.ammoList:
-                addEffect("", "power", 1, 3, False)
+    if "supress" in playerEffects and (cardName in cardDefinitions.ammoList):
+        addEffect("", "power", 1, 3, False)
 
     checkEffectValid()
 
