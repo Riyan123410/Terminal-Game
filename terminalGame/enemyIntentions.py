@@ -60,7 +60,7 @@ intentionsList = {
             }, 
         "turn1" : 
             {
-                1 : {"description" : "Gain 1d2 health", "effect" : "enemyDamageSelf(1,helperFuncs.diceRoll(1,2))"},
+                1 : {"description" : "Heal an ally for 1d2 health", "effect" : "enemyDamageSelf(1,helperFuncs.diceRoll(1,-2))"},
             },
         "health" : 45,
         "diff" : 2.5
