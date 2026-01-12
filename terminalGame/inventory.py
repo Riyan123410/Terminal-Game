@@ -2,7 +2,7 @@ import player
 
 DEFAULT_CARDS = ["strike", "strike", "strike", "strike", "strike", "block", "block", "block", "block", "block", "crossbow",]
 DEFAULT_COINS = 0
-COINS_MODIFIER = 3
+DIFFICULTY_COINS_CONVERSION = 2
 
 cards = DEFAULT_CARDS
 coins = 0
