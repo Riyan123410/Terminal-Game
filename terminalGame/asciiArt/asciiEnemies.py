@@ -52,10 +52,10 @@ Intention:              |
 {currentAttack}
 """,
         "canadian goose" : rf"""
-CANADIAN GOOSE  __       |
-   o____     -=(o '|     |
-   ||X||       /|  \     |
-   |           _\_):,    |
+CANADIAN GOOSE  __      |
+   o____     -=(o '|    |
+   ||X||       /|  \    |
+   |           _\_):,   |
 Health: {hp}              |
 Intention:              |
 {currentAttack}
