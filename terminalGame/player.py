@@ -180,7 +180,10 @@ def damageEnemyAll(times,number):
     enemyList = list(enemies.keys())
     for i in range(len(enemyList)):
         for e in range(times):
-            enemies[enemyList[i]]["health"] -= number
+            try:
+                enemies[enemyList[i]]["health"] -= number
+            except:
+                pass
             roll.append(number)
             visibleIntentions = enemyHelpers.updateEnemyHealth(visibleIntentions,enemies)
             checkEnemyHealth()
