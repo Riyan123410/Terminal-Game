@@ -1,7 +1,7 @@
 import player
 
 DEFAULT_CARDS = ["strike", "strike", "strike", "strike", "strike", "block", "block", "block", "block", "block", "crossbow"]
-DEFAULT_COINS = 9999999
+DEFAULT_COINS = 0
 DIFFICULTY_COINS_CONVERSION = 2
 
 cards = DEFAULT_CARDS.copy()

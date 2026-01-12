@@ -52,28 +52,28 @@ Intention:              |
 {currentAttack}
 """,
         "canadian goose" : rf"""
-CANADIAN GOOSE          |
-     #o#\#|#/###        |
-      ###\|/#o#         |
-         )|(            |
+CANADIAN GOOSE  __       |
+   o____     -=(o '|     |
+   ||X||       /|  \     |
+   |           _\_):,    |
 Health: {hp}              |
 Intention:              |
 {currentAttack}
 """,
         "squirrel" : rf"""
-SQUIRREL                |
-     #o#\#|#/###        |
-      ###\|/#o#         |
-         )|(            |
+SQUIRREL __   />>       |
+        (_ \.'  ')      |
+          \(  )<<       |
+           ''---'       |
 Health: {hp}              |
 Intention:              |
 {currentAttack}
 """,
         "giant goose" : rf"""
-GIANT GOOSE             |
-     #o#\#|#/###        |
-      ###\|/#o#         |
-         )|(            |
+GIANT GOOSE ___        |
+         -=(o  "\       |
+           /|    \      |
+            _\____):,   |
 Health: {hp}              |
 Intention:              |
 {currentAttack}
