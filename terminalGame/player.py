@@ -164,7 +164,7 @@ def reloadCard(card,times):
     else:
         while (i < len(deck)) and (cardsRemoved <= times):
             card = deck[i]
-            if "reload" in card:
+            if "-reload" in card:
                     deck.append(card[:-7])
                     deck.remove(card)
                     cardsRemoved += 1
