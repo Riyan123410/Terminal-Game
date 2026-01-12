@@ -10,6 +10,6 @@ def resetInventory():
     global coins
     global cards
     coins = DEFAULT_COINS
-    cards = DEFAULT_CARDS
+    cards = DEFAULT_CARDS.copy()
     player.difficulty = 0.5
     player.enemies = dict({})
