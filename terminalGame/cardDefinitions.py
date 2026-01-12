@@ -77,12 +77,12 @@ cardDef = {
     "organ gun": {
         "description": "deals 8d4 damage to random enemies; 3 cost",
         "effect": "ammoCard('organ gun', 4, 8, 'all')",
-        "cost": 3
+        "cost": 2
     },
     "organ gun-reload": {
-        "description": "reloads organ gun; 1 cost",
+        "description": "gain 4 block, reloads organ gun; 2 cost",
         "effect": "reloadCard('organ gun', 1)",
-        "cost": 1
+        "cost": 2
     },
     "tactical reload": {
         "description": "reloads 2 cards in your deck; 1 cost",
