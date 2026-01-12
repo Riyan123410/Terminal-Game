@@ -20,7 +20,7 @@ def win():
 """)
     player.difficulty += player.DIFFICULTY_MODIFIER
     inventory.coins += inventory.COINS_MODIFIER
-    player.turnNumber = 0
+    player.resetEffects()
     regularShop.resetStock()
     input()
     return "playMenu"
@@ -52,4 +52,5 @@ def lose():
 """)
     input()
     inventory.resetInventory()
+    player.resetEffects()
     return "mainMenu"

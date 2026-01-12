@@ -366,6 +366,13 @@ def discardCard(name):
     discard.append(name)
     hand.remove(name)
 
+def resetEffects():
+    global playerEffects
+    global turnNumber
+    playerEffects.clear()
+    turnNumber = 0
+    
+
 # startCombat() -> None
 # purpose: initializes a combat encounter by determining enemies, the intentions, and health.
 def startCombat():
