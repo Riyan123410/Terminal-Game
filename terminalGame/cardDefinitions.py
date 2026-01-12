@@ -75,7 +75,7 @@ cardDef = {
         "cost": 3
     },
     "organ gun": {
-        "description": "deals 8d4 damage to random enemies; 3 cost",
+        "description": "deals 8d4 damage to random enemies; 2 cost",
         "effect": "ammoCard('organ gun', 4, 8, 'all')",
         "cost": 2
     },

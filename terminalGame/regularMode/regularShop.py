@@ -9,20 +9,21 @@ import inventory
 # shop variables
 
 # prices are based on damage per cost, if applicable
+# multiplied by 2 since you gain coins exponentally
 itemCoins = {
     "soldOut" : 0,
-    "strike" : 4,
-    "block" : 1,
-    "clean sweep" : 4,
-    "crossbow" : 6,
-    "well prepared" : 4,
-    "blunderbuss" : 7,
-    "revolver" : 6,
-    "cannon" : 6,
-    "multi-strike" : 4,
-    "organ gun" : 5,
-    "tactical reload" : 2,
-    "super block" : 3
+    "strike" : 4 * 2,
+    "block" : 1 * 2,
+    "clean sweep" : 4 * 2,
+    "crossbow" : 6 * 2,
+    "well prepared" : 4 * 2,
+    "blunderbuss" : 7 * 2,
+    "revolver" : 6 * 2,
+    "cannon" : 12 * 2,
+    "multi-strike" : 12 * 2,
+    "organ gun" : 5 * 2,
+    "tactical reload" : 2 * 2,
+    "super block" : 3 * 2
 }
 currentStock = []
 
