@@ -4,6 +4,7 @@ import time
 from regularMode import regularPlayer
 from enemyIntentions import intentionsList
 from cardDefinitions import cardDef
+from effectDefinitions import effectDefinition
 import enemyHelpers
 import inventory
 
@@ -27,10 +28,51 @@ visibleIntentions = {}
 discard = []
 hand = []
 deck = []
+playerEffects = dict({})
+playerPermanents = []
 enemies = dict({})
 
 # compatability mode
 compatability = True
+
+def checkEnemyHealth():
+    enemyList = list(enemies.keys())
+    for i in range(len(enemyList)):
+        if enemies[enemyList[i]]["health"] <= 0:
+            enemies.pop(enemyList[i])
+            visibleIntentions.pop(enemyList[i])
+
+def addPower():
+    if "power" in playerEffects:
+        return playerEffects["power"]
+    else:
+        return 0
+
+def addEffect(name, times, number):
+    global playerEffects
+    for i in range(times):
+        if name in playerEffects:
+            playerEffects[name] += number
+        else:
+            playerEffects[name] = number
+
+def checkEffectValid():
+    global playerEffects
+    effectList = list(playerEffects.keys())
+    i = 0
+    while i < len(effectList):
+        if playerEffects[effectList[i]] < 1:
+            playerEffects.pop(effectList[i])
+        i += 1
+
+def cardPlayEffects():
+    global playerEffects
+    for i in playerEffects:
+        if i in effectDefinition and effectDefinition[i]["condition"] == "cardPlay":
+            currentEffectDef = effectDefinition[i]
+            exec(currentEffectDef["effect"])
+            playerEffects[i] -= currentEffectDef["stacksLost"]
+    checkEffectValid()
 
 def compSleep(seconds):
     global compatability
@@ -139,15 +181,10 @@ def damageEnemyRand(times,number):
     helperFuncs.clearTerminal()
     enemyList = list(enemies.keys())
     for i in range(times):
-        enemies[enemyList[random.randint(0,len(enemyList)-1)]]["health"] -= number
+        enemies[enemyList[random.randint(0,len(enemyList)-1)]]["health"] -= (number + addPower())
         roll.append(number)
         checkEnemyHealth()
-def checkEnemyHealth():
-    enemyList = list(enemies.keys())
-    for i in range(len(enemyList)):
-        if enemies[enemyList[i]]["health"] <= 0:
-            enemies.pop(enemyList[i])
-            visibleIntentions.pop(enemyList[i])
+
 
 def reloadCard(card,times):
     global deck
@@ -182,7 +219,7 @@ def damageEnemyAll(times,number):
     for i in range(len(enemyList)):
         for e in range(times):
             try:
-                enemies[enemyList[i]]["health"] -= number
+                enemies[enemyList[i]]["health"] -= (number + addPower())
             except:
                 pass
             roll.append(number)
@@ -271,7 +308,7 @@ def damageEnemy(times,number):
         compPrint(list(enemies.keys()))
         target = getEnemy("Choose an enemy: ")
         try:
-            enemies[target]["health"] -= number
+            enemies[target]["health"] -= (number + addPower())
             roll.append(number)
             enemyHelpers.updateEnemyHealth(visibleIntentions,enemies)
             i += 1
@@ -400,13 +437,14 @@ def playerTurn():
                     discardCard(playCard)
                     cost -= currentCardCost
                     exec(effect)
-                    
+                    cardPlayEffects()
                 else:
                     compPrint("Invalid Card")
                     compSleep(1)
             elif playCard == "define":
                 helperFuncs.clearTerminal()
                 exec(effect)
+                cardPlayEffects()
             elif playCard == "end":
                 compSleep(1)
                 helperFuncs.clearTerminal()

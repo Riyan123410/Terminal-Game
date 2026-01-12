@@ -2,6 +2,7 @@ import player
 import inventory
 from regularMode import regularShop
 
+
 def win():
     difficulty = player.difficulty
     print(rf"""
@@ -18,7 +19,8 @@ def win():
 [ENTER] to continue
 """)
     player.difficulty += player.DIFFICULTY_MODIFIER
-    inventory.coins += difficulty * 5
+    inventory.coins += inventory.COINS_MODIFIER
+    player.turnNumber = 0
     regularShop.resetStock()
     input()
     return "playMenu"
