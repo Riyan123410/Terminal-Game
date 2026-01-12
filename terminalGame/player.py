@@ -139,7 +139,7 @@ def damageEnemyRand(times,number):
     helperFuncs.clearTerminal()
     enemyList = list(enemies.keys())
     for i in range(times):
-        enemies[enemyList[random.randint(0,(enemyList)-1)]]["health"] -= number
+        enemies[enemyList[random.randint(0,len(enemyList)-1)]]["health"] -= number
         roll.append(number)
         checkEnemyHealth()
 def checkEnemyHealth():
@@ -164,10 +164,10 @@ def reloadCard(card,times):
     else:
         while (i < len(deck)) and (cardsRemoved <= times):
             card = deck[i]
-            if card[-7] == "-":
-                deck.append(card[:-7])
-                deck.remove(card)
-                cardsRemoved += 1
+            if "reload" in card:
+                    deck.append(card[:-7])
+                    deck.remove(card)
+                    cardsRemoved += 1
             i += 1
         
 

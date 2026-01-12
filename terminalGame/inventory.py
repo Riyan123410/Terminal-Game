@@ -1,9 +1,10 @@
 import player
 
-coins = 0
-cards = ["strike", "strike", "strike", "strike", "strike", "strike", "block", "block", "block", "crossbow"]
-DEFAULT_CARDS = ["strike", "strike", "strike", "strike", "strike", "strike", "block", "block", "block", "crossbow", "clean sweep"]
+DEFAULT_CARDS = ["strike", "strike", "strike", "strike", "strike", "strike", "block", "block", "block", "crossbow",]
 DEFAULT_COINS = 0
+
+cards = DEFAULT_CARDS
+coins = 0
 
 def resetInventory():
     global coins
