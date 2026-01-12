@@ -21,7 +21,6 @@ costMax = 4
 cost = 0
 playerBlock = 0
 difficulty = float(0.5)
-combatDifficulty = 0
 turnNumber = 0
 roll = []
 visibleIntentions = {}
