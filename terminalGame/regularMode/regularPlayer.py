@@ -136,4 +136,4 @@ def printEnemySelection(currentSelected, enemyMax):
     # print the enemys on top, than the selection arrow and finally the controls
     asciiHelpers.displayEnemies()
     print(asciiHelpers.combineCardStrings(indexToArrow, asciiEnemies.ARROW_HEIGHT))
-    print(asciiMenus.getPlayControls("selectEnemy", player.cost, player.playerHealth))
+    print(asciiMenus.getPlayControls("selectEnemy", player.cost, player.playerBlock, player.playerHealth))
