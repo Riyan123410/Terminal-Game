@@ -139,7 +139,7 @@ def damageEnemyRand(times,number):
     helperFuncs.clearTerminal()
     enemyList = list(enemies.keys())
     for i in range(times):
-        enemies[enemyList[random.randint(0,(enemyList)-1)]]["health"] -= number
+        enemies[enemyList[random.randint(0,len(enemyList)-1)]]["health"] -= number
         roll.append(number)
         checkEnemyHealth()
 def checkEnemyHealth():
@@ -164,10 +164,10 @@ def reloadCard(card,times):
     else:
         while (i < len(deck)) and (cardsRemoved <= times):
             card = deck[i]
-            if card[-7] == "-":
-                deck.append(card[:-7])
-                deck.remove(card)
-                cardsRemoved += 1
+            if "-reload" in card:
+                    deck.append(card[:-7])
+                    deck.remove(card)
+                    cardsRemoved += 1
             i += 1
         
 
@@ -180,7 +180,10 @@ def damageEnemyAll(times,number):
     enemyList = list(enemies.keys())
     for i in range(len(enemyList)):
         for e in range(times):
-            enemies[enemyList[i]]["health"] -= number
+            try:
+                enemies[enemyList[i]]["health"] -= number
+            except:
+                pass
             roll.append(number)
             visibleIntentions = enemyHelpers.updateEnemyHealth(visibleIntentions,enemies)
             checkEnemyHealth()
@@ -334,12 +337,14 @@ def startCombat():
     global hand
     global discard
     global playerHealth
+    global cost
     global inventory
     global visibleIntentions
     deck = inventory.cards.copy()
     hand = []
     discard = []
     playerHealth = PLAYER_HEALTH_MAX
+    cost = 0
     setup = enemyHelpers.determineIntentions(enemyHelpers.determineEnemies(enemies,difficulty), turnNumber)
     enemies = setup[0]
     visibleIntentions = setup[1]

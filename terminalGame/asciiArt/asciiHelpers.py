@@ -157,9 +157,9 @@ def printPlayMain(cards, cardSelected, deckSelected, isDiscarding):
     displayCards(createAsciiCardList(cards, cardSelected))
     # depending on if you are discarding print those contorls
     if isDiscarding:
-        print(asciiMenus.getPlayControls("discardCard", player.cost, player.playerHealth))
+        print(asciiMenus.getPlayControls("discardCard", player.cost, player.playerBlock, player.playerHealth))
     else:
-        print(asciiMenus.getPlayControls("playCard", player.cost, player.playerHealth))
+        print(asciiMenus.getPlayControls("playCard", player.cost, player.playerBlock, player.playerHealth))
 
 
 # actually call this in order to print the play menu
