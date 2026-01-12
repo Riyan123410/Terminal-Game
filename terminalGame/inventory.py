@@ -1,6 +1,6 @@
 import player
 
-DEFAULT_CARDS = ["strike", "strike", "strike", "strike", "block", "block", "block", "block", "crossbow",]
+DEFAULT_CARDS = ["strike", "strike", "strike", "strike", "strike", "block", "block", "block", "block", "block", "crossbow",]
 DEFAULT_COINS = 0
 
 cards = DEFAULT_CARDS
