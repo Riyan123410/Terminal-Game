@@ -419,21 +419,18 @@ def getPlayControls(controlName, cost, hp):
   playControls = {
     "playCard" : f"""
 ===============================================================================================================================
-[{hp}] Health                [{cost}] Cost
 Select a card in order to play it, click on the decks in order to view the discard or deck pile, or end your turn
-[A] left    [D] right    [W] up    [S] down    [Space] select
-  """,
+[{hp}] Health          [{cost}] Cost                 [A] left    [D] right    [W] up    [S] down    [Space] select  
+""",
     "discardCard" : f"""
 ===============================================================================================================================
-[{hp}] Health                [{cost}] Cost
 Select a card in order to discard it, click on the decks in order to view the discard or deck pile, or end your turn
-[A] left    [D] right    [W] up    [S] down    [Space] select
+[{hp}] Health          [{cost}] Cost                 [A] left    [D] right    [W] up    [S] down    [Space] select  
   """,
     "selectEnemy" : f"""
 ===============================================================================================================================
-[{hp}] Health                [{cost}] Cost
 Select an enemy in order to attack it
-[A] left    [D] right    [Space] select
-  """
+[{hp}] Health          [{cost}] Cost                 [A] left    [D] right    [W] up    [S] down    [Space] select  
+"""
   }
   return playControls[controlName]
