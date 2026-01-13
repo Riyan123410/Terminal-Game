@@ -19,9 +19,9 @@ assert determinePly(2) == "turn1"
 
 # enemyIntentions(str, int) -> [{str}]
 # purpose: takes in two strings called enemyName and turnNumber, and returns the effects and description of the attacks corresponding
-# to the ply from the intentions list
+#           to the ply from the intentions list. specifically requires a pre-built 'enemies' variable from player.
 # examples:
-#           enemyIntentions("wild bush", "turn1") -> [{'description': 'deal 1d4 damage', 'effect': 'damagePlayer(1,helperFuncs.diceRoll(1,4))'}, {'description': 'heal an ally for 1d4 health', 'effect': 'enemyDamageSelf(1,helperFuncs.diceRoll(1,-4))'}]
+#           enemyIntentions("wild bush", 0) -> [{'description': 'deal 1d4 damage', 'effect': 'damagePlayer(1,helperFuncs.diceRoll(1,4))'}, {'description': 'heal an ally for 1d4 health', 'effect': 'enemyDamageSelf(1,helperFuncs.diceRoll(1,-4))'}]
 def enemyIntentions(enemyName, turnNumber):
     global intentionsList
     attackIntentions = dict({})
@@ -33,12 +33,13 @@ def enemyIntentions(enemyName, turnNumber):
     return attackIntentions
 
 # testing enemyIntentions
-# assert enemyIntentions("wild bush", 1) == [{'description': 'deal 1d6 damage', 'effect': 'damagePlayer(1,helperFuncs.diceRoll(1,6))'}]
-# assert enemyIntentions("wild bush", 0) == [{'description': 'deal 1d4 damage', 'effect': 'damagePlayer(1,helperFuncs.diceRoll(1,4))'}, {'description': 'heal an ally for 1d4 health', 'effect': 'enemyDamageSelf(1,helperFuncs.diceRoll(1,-4))'}]
+assert enemyIntentions("wild bush", 1) == {0: {'description': 'Deal 1d6 damage', 'effect': 'damagePlayer(1,helperFuncs.diceRoll(1,6))'}}
+assert enemyIntentions("wild bush", 0) == {0: {'description': 'Deal 1d4 damage', 'effect': 'damagePlayer(1,helperFuncs.diceRoll(1,4))'}, 1: {'description': 'Heal an ally for 1d4 health', 'effect': 'enemyDamageSelf(1,helperFuncs.diceRoll(1,-4))'}}
 
 #### Used for compatability ####
 # updateEnemyHealth({str}, {str}) -> {str}
-# purpose: takes in two dictionaries called visinleIntentions and Enemies,then updates visualIntentions with the health variable from Enemies.
+# purpose: takes in two dictionaries called visibleIntentions and Enemies, then updates visualIntentions with the health variable from Enemies.
+#           specifically requires a pre-built 'enemies' variable from player.
 # examples:
 #           updateEnemyHealth()
 def updateEnemyHealth(visibleIntentions, enemies):
@@ -48,14 +49,22 @@ def updateEnemyHealth(visibleIntentions, enemies):
         visibleIntentions[enemyList[i]]["health"] = enemies[enemyList[i]]["health"]
     return visibleIntentions
 
+# determineIntentions({str}, int) -> [{str},{str/int}]
+# purpose: Takes in a dictionary and integer called enemies and turnNumber. Changes enemies to reflect the current
+#           turns intentions, before returning a list of the updated enemies and the new visual intentions.
+#           specifically requires a pre-built 'enemies' variable from player.
 def determineIntentions(enemies,turnNumber):
     visibleIntentions = {}
     global intentionsList
     enemyList = list(enemies.keys())
+    # iterates through all enemies in enemies
     for i in range(len(enemyList)):
+        # changes enemies intentions in enemies
         enemies[enemyList[i]]["attacks"] = enemyIntentions(enemyList[i],turnNumber)
+        # determines visibleIntentions for comp mode
         visibleIntentions[enemyList[i]] = {}
         visibleIntentions[enemyList[i]]["attacks"] = {}
+        # adds descriptions to each attack the enemy wants to perform
         for j in range(len(intentionsList[enemyList[i]][determinePly(turnNumber)])):
             visibleIntentions[enemyList[i]]["attacks"][j] = (enemies[enemyList[i]]["attacks"][j]["description"])
             
@@ -63,7 +72,8 @@ def determineIntentions(enemies,turnNumber):
     return [enemies,visibleIntentions]
 
 # determineEnemies({[{str}]}, int) -> {[{str}]}
-# purpose: takes in a dictionary(?) and integer called enemies and difficulty, and updates and returns enemies based on the intentionsList.
+# purpose: takes in a dictionary and integer called enemies and difficulty, and updates and returns enemies based on the intentionsList.
+#           requires a semi-built 'enemies' variable from player
 # examples:
 #            determineEnemies({[{}]}, 1) -> {goose : []}
 def determineEnemies(enemies,difficulty):
@@ -78,10 +88,11 @@ def determineEnemies(enemies,difficulty):
         if intentionsList[addEnemy]["diff"] + combatDifficulty <= difficulty:
             # checks if the enemy is currently in the dictionary to avoid artificial difficulty
             if addEnemy not in enemies:
-                # initiates the enemy in enemies
+                # initiates the enemy's base
                 enemies[addEnemy] = {}
                 enemies[addEnemy]["health"] = (intentionsList[addEnemy]["health"])
                 combatDifficulty += intentionsList[addEnemy]["diff"]
+                # resets attempts
                 attempts = 0
             else:
                 attempts += 1
