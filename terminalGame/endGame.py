@@ -23,8 +23,8 @@ def win():
 [ENTER] to continue
 """)
     # increase ifficulty and coins
-    player.difficulty += player.DIFFICULTY_MODIFIER
-    inventory.coins += player.difficulty * inventory.DIFFICULTY_COINS_CONVERSION
+    player.difficulty += player.DIFFICULTYMODIFIER
+    inventory.coins += player.difficulty * inventory.DIFFICULTYCOINSCONVERSION
     # reset plater and restock shop
     player.resetEffects()
     regularShop.resetStock()

@@ -7,7 +7,7 @@ from asciiArt import asciiEnemies
 from asciiArt import asciiMenus
 
 
-MAX_CARD_LENGTH = 7
+MAXCARDLENGTH = 7
 
 # findWidth(str) -> int
 # purpose: calculates the width of an ASCII string by finding the first \n character after the first line
@@ -56,7 +56,8 @@ def combineStrings(string1, string2, width1, height):
     combinedString = ""
     # loop through the height of the strings
     for i in range(height):
-       # loop through the legnth of each adding to the new string
+       # add each string using slicing from i to width
+       # https://www.w3schools.com/python/gloss_python_string_slice.asp
         combinedString += string1[i * width1 : i * width1 + width1]
         combinedString += string2[i * width2 : i * width2 + width2]
         combinedString += "\n"
@@ -110,6 +111,7 @@ def splitHand(totalHand, maxLen):
         newRow.append(totalHand[-1])
         totalHandCopy.pop()
     # revers the 2nd list since we are adding to it backwards
+    # https://www.w3schools.com/python/ref_list_reverse.asp
     newRow.reverse()
     return (totalHandCopy, newRow)
 
@@ -173,11 +175,11 @@ def menuLoop(currentSelected, menuDir, menuRange, artFunc, nextStates):
 # displayCards([str]) -> None
 # purpose: prints a hand of cards with parameter (cards) in rows with ASCII art
 def displayCards(cards):
-    hand = splitHand(cards, MAX_CARD_LENGTH)
-    print(combineCardStrings(hand[0], asciiCards.CARD_HEIGHT))
+    hand = splitHand(cards, MAXCARDLENGTH)
+    print(combineCardStrings(hand[0], asciiCards.CARDHEIGHT))
     # make sure your hand isn't empty before printing
     if hand[1] != ():
-        print(combineCardStrings(hand[1], asciiCards.CARD_HEIGHT))
+        print(combineCardStrings(hand[1], asciiCards.CARDHEIGHT))
 
 
 # printPlayMain([str], int, int, bool) -> None
@@ -274,7 +276,7 @@ def displayEnemies():
     for enemy in enemies.keys():
         # put each enemy next to each other
         stringList.append(asciiEnemies.getArt(enemy, numToString(enemies[enemy]["health"]), formatDescriptionList(getAttackDescriptions(enemy))))
-    print(asciiHelpers.combineCardStrings(stringList, asciiEnemies.ENEMY_HEIGHT))
+    print(asciiHelpers.combineCardStrings(stringList, asciiEnemies.ENEMYHEIGHT))
 
 
 # indexToArrow(int, int, str, str, str) -> [str]
@@ -318,7 +320,7 @@ def getAttackDescriptions(enemyName):
 
 # formatDescription(str) -> str
 # purpose: formats a string description (description) to fit in enemy
-#          descriptions box defined by asciiEnemies.DESCRIPTION_LEN and asciiEnemies.DESCRIPTION_HEIGHT.
+#          descriptions box defined by asciiEnemies.DESCRIPTIONLEN and asciiEnemies.DESCRIPTIONHEIGHT.
 #          returnes the description with that cap len and that height ending with | on each line
 def formatDescription(description):
     # get turn diescription strin ginto a list, set line and lines
@@ -326,7 +328,7 @@ def formatDescription(description):
     line = ""
     lines = []
 
-    for i in range(asciiEnemies.DESCRIPTION_HEIGHT):
+    for i in range(asciiEnemies.DESCRIPTIONHEIGHT):
         # reset index(wordsAdded) and overfill
         wordsAdded = 0
         overfill = False
@@ -335,7 +337,7 @@ def formatDescription(description):
             # add it to the current line if its les than the max len than overfill, do a try just in case there is arent any words
             try:
                 # add 2 because of extra space and | character
-                if len(line) + len(descriptionList[wordsAdded]) + 2 < asciiEnemies.DESCRIPTION_LEN:
+                if len(line) + len(descriptionList[wordsAdded]) + 2 < asciiEnemies.DESCRIPTIONLEN:
                     line += descriptionList[wordsAdded] + " "
                     wordsAdded += 1
                 else:
@@ -347,7 +349,7 @@ def formatDescription(description):
             descriptionList.pop(0)
         
         # add spaces until reached max len after add | to finish the line, do -2 for the space and |
-        while len(line) < asciiEnemies.DESCRIPTION_LEN - 2:
+        while len(line) < asciiEnemies.DESCRIPTIONLEN - 2:
             line += " "
         line += "|\n"
 

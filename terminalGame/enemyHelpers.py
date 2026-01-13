@@ -67,16 +67,18 @@ def determineIntentions(enemies,turnNumber):
 # examples:
 #            determineEnemies({[{}]}, 1) -> {goose : []}
 def determineEnemies(enemies,difficulty):
+    global intentionsList
     combatDifficulty = 0
     attempts = 0
     maxAttempts = 15
-    global intentionsList
-    # Finds
+    # Finds a suitable enemy to match current difficulty
     while (combatDifficulty < difficulty) and (attempts <= maxAttempts):
         addEnemy = random.choice(list(intentionsList.keys()))
         # Finds a random enemy in the intentions list within the current combat difficulty
         if intentionsList[addEnemy]["diff"] + combatDifficulty <= difficulty:
+            # checks if the enemy is currently in the dictionary to avoid artificial difficulty
             if addEnemy not in enemies:
+                # initiates the enemy in enemies
                 enemies[addEnemy] = {}
                 enemies[addEnemy]["health"] = (intentionsList[addEnemy]["health"])
                 combatDifficulty += intentionsList[addEnemy]["diff"]

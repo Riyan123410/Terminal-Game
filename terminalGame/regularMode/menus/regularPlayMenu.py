@@ -3,10 +3,10 @@ from asciiArt import asciiHelpers
 import inventory
 
 # menu constants
-MENU_DIR = "xDir"
+MENUDIR = "xDir"
 nextGameState = ("regularPlay", "shop", "mainMenu")
-MENU_MAX = len(nextGameState) - 1
-MENU_MIN = 0
+MENUMAX = len(nextGameState) - 1
+MENUMIN = 0
 
 
 # main() -> str
@@ -18,9 +18,10 @@ def main():
 
     # return the next game state based on the menu loop
     return asciiHelpers.menuLoop(
-        MENU_MIN,
-        MENU_DIR,
-        (MENU_MIN, MENU_MAX),
+        MENUMIN,
+        MENUDIR,
+        (MENUMIN, MENUMAX),
+        # https://www.w3schools.com/python/python_lambda.asp 
         lambda: asciiMenus.getPlayMenuArt(coins),
         nextGameState
     )

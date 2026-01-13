@@ -54,6 +54,7 @@ assert changeWithClamp(-15, 10, -20, -1) == -5
 # clearTerminal() -> None
 # purpose: Clears the terminal based on the current operating system
 def clearTerminal():
+    # https://www.w3resource.com/python-exercises/python-basic-exercise-99.php 
     # Check the operating system name
     if os.name == 'nt':
         # Command for Windows

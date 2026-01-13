@@ -74,7 +74,7 @@ intentionsList = {
             [
                 {"description" : "Heal an ally for 1d12 health", "effect" : "enemyDamageSelf(1,helperFuncs.diceRoll(1,-12))"},
             ],
-        "health" : 20,
+        "health" : 25,
         "diff" : 0.75
         },
     "giant goose" : 

@@ -1,4 +1,5 @@
 try:
+    # https://www.w3schools.com/python/ref_module_msvcrt.asp
     import msvcrt
 except:
     print("not compatable")
@@ -12,6 +13,7 @@ def getInput():
     char = msvcrt.getch()
     try:
         # try to convert char from a byte to a string
+        # https://stackoverflow.com/questions/15599565/how-do-you-use-msvcrt-getch-to-extract-and-use-input 
         char = char.decode('ASCII')
     except:
         # if failed to convert just pass and return the byte directly 

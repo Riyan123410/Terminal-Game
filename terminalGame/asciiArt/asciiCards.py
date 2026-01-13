@@ -1,5 +1,5 @@
-CARD_HEIGHT = 11
-CARD_DOWN_HEIGHT = 2
+CARDHEIGHT = 11
+CARDDOWNHEIGHT = 2
 
 # dictionary for all card art
 art = {

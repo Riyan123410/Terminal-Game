@@ -36,14 +36,19 @@ enemies = dict({})
 compatability = True
 
 def checkEnemyHealth():
+    # https://www.w3schools.com/python/python_variables_global.asp
+    global intentionsList
     enemyList = list(enemies.keys())
     for i in range(len(enemyList)):
         if enemies[enemyList[i]]["health"] <= 0:
+            # https://www.w3schools.com/python/ref_list_pop.asp
             enemies.pop(enemyList[i])
             visibleIntentions.pop(enemyList[i])
+        if enemies[enemyList[i]]["health"] > intentionsList[enemyList[i]]["health"]:
+            enemies[enemyList[i]]["health"] = intentionsList[enemyList[i]]["health"]
 
 # gainCost(int) -> None
-# purpose: takes in 
+# purpose: takes in an integer called number, then increases cost by number
 def gainCost(number):
     global cost
     cost += number
@@ -95,6 +100,7 @@ def effectsRun(condition, cardName):
 
     for i in playerEffects:
         if i in effectDefinition and effectDefinition[i]["condition"] == condition:
+            # https://www.w3schools.com/python/ref_func_exec.asp
             currentEffectDef = effectDefinition[i]
             exec(currentEffectDef["effect"])
             playerEffects[i] -= currentEffectDef["stacksLost"]
@@ -159,6 +165,7 @@ def deckDiscard(number):
             deck.remove(card)
             discard.append(card)
         except:
+            # https://www.w3schools.com/python/ref_keyword_pass.asp 
             pass
 
 # discardGain(int) -> None
@@ -204,6 +211,7 @@ def ammoCard(card,times,damage,effect):
         case "all":
             damageEnemyRand(times, helperFuncs.diceRoll(1, damage))
     # replaces card with the reload card
+    # https://www.w3schools.com/python/ref_list_remove.asp 
     discard.remove(card)
     deck.append(card+"-reload")
 
@@ -224,7 +232,6 @@ def damageEnemyRand(times,number):
             pass
         roll.append(number)
         checkEnemyHealth()
-
 # reloadCard(str,int) -> None
 # purpose: takes in a string and integer called card and times, and replaces the currently played card
 #           with it's loaded counterpart. If times is bigger than one, reload multiple cards in the
@@ -492,10 +499,10 @@ def playerTurn():
     compPrint("your turn")
     compSleep(1)
     effectsRun("startTurn", "")
+    turnNumber += 1
     # Main game loop
     while True:
         helperFuncs.clearTerminal()
-        turnNumber += 1
         # sets resources to their max size if they are over it
         while len(hand) > HANDMAX:
             hand.pop()

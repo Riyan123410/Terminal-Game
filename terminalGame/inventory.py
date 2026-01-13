@@ -4,6 +4,7 @@ DEFAULTCARDS = ["strike", "strike", "strike", "strike", "strike", "block", "bloc
 DEFAULTCOINS = 0
 DIFFICULTYCOINSCONVERSION = 2.5
 
+# https://www.w3schools.com/python/ref_list_copy.asp
 cards = DEFAULTCARDS.copy()
 coins = DEFAULTCOINS
 

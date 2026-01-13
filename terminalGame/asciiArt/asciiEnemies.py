@@ -1,8 +1,8 @@
 # constants for art height
-ENEMY_HEIGHT = 11
-ARROW_HEIGHT = 6
-DESCRIPTION_LEN = 26
-DESCRIPTION_HEIGHT = 2
+ENEMYHEIGHT = 11
+ARROWHEIGHT = 6
+DESCRIPTIONLEN = 26
+DESCRIPTIONHEIGHT = 2
 
 # getArt(str, int) -> str
 # purpose: returns ASCII art for a given enemy name from parameter (name)

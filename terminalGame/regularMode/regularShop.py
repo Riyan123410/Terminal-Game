@@ -29,9 +29,9 @@ itemCoins = {
 currentStock = []
 
 # menu constants
-MENU_MAX = 5
-MENU_MIN = 1
-MENU_DIR = "xDir"
+MENUMAX = 5
+MENUMIN = 1
+MENUDIR = "xDir"
 
 
 # listToBookshelf([str]) -> [str]
@@ -58,7 +58,7 @@ def listToBookshelf(currentStock):
 def getArt(currentSelected, coins, cards):
     # get each asii art of the shop from menus and return it
     bookShelf = asciiHelpers.combineCardStrings(listToBookshelf(currentStock), asciiMenus.shop["bookshelfHeight"])
-    indexToArrow = asciiHelpers.indexToArrow(currentSelected, MENU_MAX, asciiMenus.shop["select"]["blank"], asciiMenus.shop["select"]["arrow"], asciiMenus.shop["select"]["lastArrow"])
+    indexToArrow = asciiHelpers.indexToArrow(currentSelected, MENUMAX, asciiMenus.shop["select"]["blank"], asciiMenus.shop["select"]["arrow"], asciiMenus.shop["select"]["lastArrow"])
     arrow = asciiHelpers.combineCardStrings(indexToArrow, asciiMenus.shop["select"]["height"])
     controls = asciiMenus.getCoinMenuControls(coins)
     info = f"Current deck: {cards}"
@@ -69,7 +69,7 @@ def getArt(currentSelected, coins, cards):
 # resetStock() -> None
 # purpose: resets the global shop stock by clearing the currentStock list
 #          and filling it with randomly selected items from the itemCoins list
-#          based on the MENU_MAX constant
+#          based on the MENUMAX constant
 def resetStock():
     # use global current stock and reset it
     global currentStock
@@ -77,7 +77,7 @@ def resetStock():
 
     # create shop items by making it  into a list so a random index can be chosen
     itemsList = list(itemCoins)
-    for i in range(MENU_MAX - 1):
+    for i in range(MENUMAX - 1):
         currentStock.append(random.choice(itemsList))
 
 # main() -> str
@@ -90,7 +90,7 @@ def main():
     coins = inventory.coins
 
     # set current selected and clear terminal to print shop
-    currentSelected = MENU_MIN
+    currentSelected = MENUMIN
     helperFuncs.clearTerminal()
 
     # get cards and print the shop
@@ -101,13 +101,13 @@ def main():
     while True:
         # get input and change with clamp
         inputList = userInput.getInputList()
-        currentSelected = helperFuncs.changeWithClamp(currentSelected, inputList[MENU_DIR], MENU_MIN, MENU_MAX)
+        currentSelected = helperFuncs.changeWithClamp(currentSelected, inputList[MENUDIR], MENUMIN, MENUMAX)
 
         # check if space is pressed so an action can be done
         if inputList["space"] == True:
             
             # if its the last item in the list return main menu to go there, if not purchase an item if you have enough coins
-            if currentSelected == MENU_MAX:
+            if currentSelected == MENUMAX:
                 inventory.coins = coins
                 return "playMenu"
 

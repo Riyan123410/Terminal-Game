@@ -3,7 +3,7 @@ import time
 from asciiArt import asciiMenus
 
 # constants
-TEXT_DELAY = 1
+TEXTDELAY = 1
 
 
 # clearInTime(int/float) -> None
@@ -61,7 +61,7 @@ def afterLaunchSelected(isRegularMode):
     print(f"Compatibility Mode: {not isRegularMode}")
 
     # wait and reset
-    clearInTime(TEXT_DELAY)
+    clearInTime(TEXTDELAY)
 
 # main() -> bool
 # purpose: main function that displays the launch menu,

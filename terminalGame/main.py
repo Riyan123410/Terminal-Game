@@ -3,6 +3,7 @@ import helperFuncs
 import gameCredits
 import endGame
 import player
+# https://docs.python.org/3/tutorial/modules.html
 from regularMode import regularShop
 from regularMode import regularPlayer
 from regularMode.menus import regularMainMenu
@@ -14,7 +15,7 @@ from regularMode.menus import regularPlayMenu
 # purpose: Handles game state transitions in compatibility mode.
 #          Runs game state based on input (gameState)
 #          Always returns quit when the game state returns quit
-def setGameStateCompatibility(gameState):
+def setGameStateCompatibility():
     # true for compatability mode
     player.gameLoop(True)
     print("game over - quitting")
@@ -74,7 +75,7 @@ def main():
         if isRegularMode:
             gameState = setGameStateRegular(gameState)
         else:
-            gameState = setGameStateCompatibility(gameState)
+            gameState = setGameStateCompatibility()
 
 # run main
 main()
