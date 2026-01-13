@@ -501,9 +501,9 @@ art = {
  )   .(   SUPRESSIVE  ( 
 (   /%/\     FIRE      )
  ) (%(%))             ( 
-(   ****   for each    )
+(   **** for each card )
  )    with ammo played( 
-(       gain 3 power   )
+([EXERT] gain 3 power  )
  `-._.-._.--._.-._.-.-' 
 """
     },
