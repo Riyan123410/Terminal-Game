@@ -253,6 +253,7 @@ def damageEnemyRand(times,number):
         # add roll for comp mode
         roll.append(number)
         checkEnemyHealth()
+
 # reloadCard(str,int) -> None
 # purpose: takes in a string and integer called card and times, and replaces the currently played card
 #           with it's loaded counterpart. If times is bigger than one, reload multiple cards in the
