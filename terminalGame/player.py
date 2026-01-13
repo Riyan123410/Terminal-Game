@@ -189,8 +189,8 @@ def damageEnemyRand(times,number):
     global visibleIntentions
     roll = []
     helperFuncs.clearTerminal()
-    enemyList = list(enemies.keys())
     for i in range(times):
+        enemyList = list(enemies.keys())
         enemies[enemyList[random.randint(0,len(enemyList)-1)]]["health"] -= (number + addPower())
         roll.append(number)
         checkEnemyHealth()
