@@ -52,6 +52,10 @@ def addPower():
     else:
         return 0
 
+# addEffect(str,str,int,int,bool) -> None
+# purpose: takes in two strings, two integers, and a boolean called cardName, name, times, number, and exert.
+#           it will then add a dictionary entry to playerEffects called name, with a number equal to number x times.
+#           If exert is True, remove a card with the name cardName from the discard pile.
 def addEffect(cardName, name, times, number, exert):
     global playerEffects
     for i in range(times):
@@ -62,6 +66,9 @@ def addEffect(cardName, name, times, number, exert):
     if exert:
         discard.remove(cardName)
 
+# checkEffectValid() -> None
+# purpose: runs through all effects in playerEffects. If any of them are 0 or below,
+#           remove them from the dictionary.
 def checkEffectValid():
     global playerEffects
     effectList = list(playerEffects.keys())
@@ -71,8 +78,13 @@ def checkEffectValid():
             playerEffects.pop(effectList[i])
         i += 1
 
+# effectsRun(str,str) -> None
+# purpose: takes in two strings called condition and cardName. It will run through all effects in playerEffects,
+#           if it finds an effect with a condition that matches condition, it will run it's effect, and reduce
+#           it's number by stacksLost (defined in effectDefinition)
 def effectsRun(condition, cardName):
     global playerEffects
+    global effectDefinition
 
     for i in playerEffects:
         if i in effectDefinition and effectDefinition[i]["condition"] == condition:
@@ -84,6 +96,9 @@ def effectsRun(condition, cardName):
 
     checkEffectValid()
 
+# compSleep(int/float) -> None
+# purpose: takes in an integer/float called seconds. If compatability is on,
+#           sleeps the program for a number of seconds equal to seconds
 def compSleep(seconds):
     global compatability
     if compatability:
@@ -126,6 +141,8 @@ def resolveIntentions(resolveList):
         compPrint(playerBlock)
     compPrint(playerHealth)
 
+# deckDiscard(int) -> None
+# purpose: Takes in an integer called number, then discards cards from your deck equal to number.
 def deckDiscard(number):
     global deck
     global discard
@@ -183,6 +200,9 @@ def ammoCard(card,times,damage,effect):
     discard.remove(card)
     deck.append(card+"-reload")
 
+# damageEnemyRand(int,int) -> None
+# purpose: takes in two integers call times and number, then reduces a random enemies health by
+#           number + power a number of times equal to times
 def damageEnemyRand(times,number):
     global enemies
     global roll
@@ -198,7 +218,10 @@ def damageEnemyRand(times,number):
         roll.append(number)
         checkEnemyHealth()
 
-
+# reloadCard(str,int) -> None
+# purpose: takes in a string and integer called card and times, and replaces the currently played card
+#           with it's loaded counterpart. If times is bigger than one, reload multiple cards in the
+#           deck with no regard for names.
 def reloadCard(card,times):
     global deck
     global discard
@@ -221,7 +244,9 @@ def reloadCard(card,times):
                     cardsRemoved += 1
             i += 1
         
-
+# damageEnemyAll(int,int) -> None
+# purpose: Takes in two integers called times and numbers, and reduces all enemies
+#           hp by times x number + power
 def damageEnemyAll(times,number):
     global enemies
     global roll
@@ -284,7 +309,9 @@ def damagePlayer(times,number):
         if finalNumber > 0:
             playerHealth -= finalNumber
 
-
+# getEnemy(str) -> str
+# purpose: takes in a string called string. If compatability is active, accept an input,
+#           otherwise run getEnemySelected and return either string.
 def getEnemy(string):
     global compatability
     global hand
@@ -296,6 +323,10 @@ def getEnemy(string):
         target = regularPlayer.getEnemySelected()
     return target
 
+# getCard(str, bool) -> str
+# purpose: takes in a string and boolean called string and isDiscarding. If compatability
+#           mode is active, accept an input, and return it, else run getCardSelected and return
+#           it's return
 def getCard(string, isDiscarding):
     global compatability
     global hand
@@ -307,10 +338,18 @@ def getCard(string, isDiscarding):
         target = regularPlayer.getCardSelected(hand, isDiscarding)
     return target
 
+# compPrint(str) -> None
+# purpose: Takes in a string called string, then prints that string if compatability is active.
 def compPrint(string):
+    global compatability
     if compatability:
         print(string)
 
+# damageEnemy(int,int) -> None
+# purpose: Takes in two integers called times and numbers, then attempts to select an enemy, before
+#           reducing it's health by times x number + current power
+# examples:
+#           damageEnemy(1,4) -> {"goose" : {"health" : currentHealth - 4}}
 def damageEnemy(times,number):
     i = 0
     global enemies
@@ -329,8 +368,13 @@ def damageEnemy(times,number):
                 enemies.pop(target)
                 visibleIntentions.pop(target)
         except:
+            compSleep(0.5)
 
-            compSleep(1)
+# gainBlock(int,int) -> None
+# purpose: takes in two integers called times and number, and increase playerBlock by the number x times
+# examples:
+#           gainBlock(1,4) -> playerBlock + 4
+#           gainBlock(2,1) -> playerBlock + 2
 def gainBlock(times,number):
     global playerBlock
     for i in range(times):
@@ -347,15 +391,23 @@ def drawCards(number):
     global deck
     for i in range(number):
         try:
+            # if the deck is empty, move the discard pile into the deck
             if len(deck) == 0:
                 deck = discard.copy()
                 discard.clear()
+            # draw a random card from the deck
             selectedCard = deck[random.randint(0, len(deck) - 1)]
             hand.append(selectedCard)
             deck.remove(selectedCard)
         except:
             pass
 
+# discardCardRand(int) -> None
+# purpose: Takes in an integer called number, and randomly discards cards from your hand a number
+#           of times equal to number.
+# examples:
+#           discardCardRand(1) -> len(hand) - 1, len(discard) + 1
+#           discardCardRand(4) -> len(hand) - 4, len(discard) + 4
 def discardCardRand(number):
     global discard
     global hand
@@ -379,6 +431,8 @@ def discardCard(name):
     discard.append(name)
     hand.remove(name)
 
+# resetEffects() -> None
+# purpose: clears the players current effects, as well as resets the turn number
 def resetEffects():
     global playerEffects
     global turnNumber
@@ -398,12 +452,14 @@ def startCombat():
     global cost
     global inventory
     global visibleIntentions
+    # resets the players resources
     deck = inventory.cards.copy()
     hand = []
     discard = []
     playerHealth = PLAYER_HEALTH_MAX
     cost = 0
     setup = enemyHelpers.determineIntentions(enemyHelpers.determineEnemies(enemies,difficulty), turnNumber)
+    # sets up the enemies and their intentions
     enemies = setup[0]
     visibleIntentions = setup[1]
     helperFuncs.clearTerminal()
@@ -412,7 +468,7 @@ def startCombat():
 
 # playerTurn() -> None
 # purpose: starts the players turn, and starts taking their actions
-def playerTurn():   
+def playerTurn():
     global cost
     global hand
     global playerBlock
@@ -420,20 +476,25 @@ def playerTurn():
     global costMax
     global cardDefinitions
     global turnNumber
+    # Give the player their starting resources
     drawCards(STARTING_DRAW)
     cost += COST_GAIN
     playerBlock = 0
     helperFuncs.clearTerminal()
+    # Initialization
     compPrint("your turn")
     compSleep(1)
     effectsRun("startTurn", "")
+    # Main game loop
     while True:
         helperFuncs.clearTerminal()
         turnNumber += 1
+        # sets resources to their max size if they are over it
         while len(hand) > HAND_MAX:
             hand.pop()
         while cost > costMax:
             cost -= 1
+        # prints information in compatability mode
         compPrint(f"hand: {hand}")
         compPrint(f"discard: {discard}")
         compPrint(f"deck: {deck}")
@@ -443,48 +504,68 @@ def playerTurn():
         compPrint(visibleIntentions)
         if enemies == {}:
             return
-        # takes string false for is not discarding
+        # Gets the card you want to play
         playCard = getCard("", False).lower()
+        # Attempts to get the designated effect for the selected card
         try:
             effect = cardDefinitions.cardDef[playCard]["effect"]
         except:
-
+                compPrint("Invalid Effect")
                 compSleep(1)
         else:
+            # Checks if the card is in your hand, and you have sufficent cost to play it
             currentCardCost = cardDefinitions.cardDef[playCard]["cost"]
             if (playCard in hand):
                 if cost - currentCardCost > -1:
                     helperFuncs.clearTerminal()
+                    # Removes the card from your hand, subtracts cost, and performs the effect designated
                     discardCard(playCard)
                     cost -= currentCardCost
                     effectsRun("cardPlay", playCard)
                     exec(effect)
+                    # If the card does not exist (Compatability only)
                 else:
                     compPrint("Invalid Card")
                     compSleep(1)
+            # performs the defining function if define is inputted (Compatability only)
             elif playCard == "define":
                 helperFuncs.clearTerminal()
                 exec(effect)
+            # Ends your turn
             elif playCard == "end":
                 compSleep(1)
                 helperFuncs.clearTerminal()
                 discardCardRand(len(hand))
                 return
+            # If the card does not exist (Compatability only)
             else:
                 compPrint("Invalid Card")
                 compSleep(1)
+
+# enemyTurn() -> None
+# purpose: Performs the current intentions listed in the enemies variable, working through all of them and
+#           executing the effects
 def enemyTurn():
     global playerHealth
     global enemies
     global turnNumber
     global visibleIntentions
+    # allows for indexing through the dictionary
     enemyList = list(enemies.keys())
+    # Performs all the enemies intentions
     for i in range(len(list(enemies.keys()))):
 
         resolveIntentions(enemies[enemyList[i]]["attacks"])
     # Determine next enemies attack
     visibleIntentions = enemyHelpers.determineIntentions(enemies, turnNumber)[1]
 
+
+# gameLoop(bool) -> bool
+# purpose: takes in a boolean called isCompatabilityMode, sets compatability to the boolean, and runs the main loop of the game.
+#           If there are no enemies left, returns True, if your health is below 0, return False
+# examples:
+#           gameLoop(False) -> True
+#           gameLoop(True) -> False
 def gameLoop(isCompatabilityMode):
     # set compatability
     global compatability
@@ -502,3 +583,5 @@ def gameLoop(isCompatabilityMode):
         won = False
         
     return won
+
+# Unable to perform testing due to infinite loop, and outside variables
