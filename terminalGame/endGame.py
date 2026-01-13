@@ -18,8 +18,8 @@ def win():
                             Current Score: {difficulty}
 [ENTER] to continue
 """)
-    player.difficulty += player.DIFFICULTY_MODIFIER
-    inventory.coins += player.difficulty * inventory.DIFFICULTY_COINS_CONVERSION
+    player.difficulty += player.DIFFICULTYMODIFIER
+    inventory.coins += player.difficulty * inventory.DIFFICULTYCOINSCONVERSION
     player.resetEffects()
     regularShop.resetStock()
     input()

@@ -1,11 +1,11 @@
 import player
 
-DEFAULT_CARDS = ["strike", "strike", "strike", "strike", "strike", "block", "block", "block", "block", "block", "crossbow"]
-DEFAULT_COINS = 0
-DIFFICULTY_COINS_CONVERSION = 2.5
+DEFAULTCARDS = ["strike", "strike", "strike", "strike", "strike", "block", "block", "block", "block", "block", "crossbow"]
+DEFAULTCOINS = 0
+DIFFICULTYCOINSCONVERSION = 2.5
 
-cards = DEFAULT_CARDS.copy()
-coins = DEFAULT_COINS
+cards = DEFAULTCARDS.copy()
+coins = DEFAULTCOINS
 
 # resetInventory() -> None
 # purpose: resets the players inventory including coins, cards
@@ -13,9 +13,9 @@ coins = DEFAULT_COINS
 def resetInventory():
     global coins
     global cards
-    global DEFAULT_CARDS
-    global DEFAULT_COINS
-    coins = DEFAULT_COINS
-    cards = DEFAULT_CARDS.copy()
-    player.difficulty = player.DIFFICULTY_START
+    global DEFAULTCARDS
+    global DEFAULTCOINS
+    coins = DEFAULTCOINS
+    cards = DEFAULTCARDS.copy()
+    player.difficulty = player.DIFFICULTYSTART
     player.enemies = dict({})

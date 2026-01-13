@@ -9,19 +9,19 @@ import enemyHelpers
 import inventory
 
 # game constants
-COST_GAIN = 3
-STARTING_DRAW = 5
-HAND_MAX = 14
-PLAYER_HEALTH_MAX = 50
-DIFFICULTY_MODIFIER = 0.5
-DIFFICULTY_START = 0.5
+COSTGAIN = 3
+STARTINGDRAW = 5
+HANDMAX = 14
+PLAYERHEALTHMAX = 50
+DIFFICULTYMODIFIER = 0.5
+DIFFICULTYSTART = 0.5
 
 # game
 playerHealth = 50
 costMax = 4
 cost = 0
 playerBlock = 0
-difficulty = DIFFICULTY_START
+difficulty = DIFFICULTYSTART
 turnNumber = 0
 roll = []
 visibleIntentions = {}
@@ -42,10 +42,14 @@ def checkEnemyHealth():
             enemies.pop(enemyList[i])
             visibleIntentions.pop(enemyList[i])
 
+# gainCost(int) -> None
+# purpose: takes in 
 def gainCost(number):
     global cost
     cost += number
 
+# addPower() -> int
+# purpose: if power exists in player effects, return its value. Otherwise return 0
 def addPower():
     if "power" in playerEffects:
         return playerEffects["power"]
@@ -55,14 +59,17 @@ def addPower():
 # addEffect(str,str,int,int,bool) -> None
 # purpose: takes in two strings, two integers, and a boolean called cardName, name, times, number, and exert.
 #           it will then add a dictionary entry to playerEffects called name, with a number equal to number x times.
-#           If exert is True, remove a card with the name cardName from the discard pile.
+#           If exert is True, remove a card with the name cardName from the current game.
 def addEffect(cardName, name, times, number, exert):
     global playerEffects
+    # Loops the amount of times equal to times
     for i in range(times):
+        # If name doesn't exist in effects, add it. Otherwise increase it's number.
         if name in playerEffects:
             playerEffects[name] += number
         else:
             playerEffects[name] = number
+    # removes the card from the game if exert is True
     if exert:
         discard.remove(cardName)
 
@@ -456,7 +463,7 @@ def startCombat():
     deck = inventory.cards.copy()
     hand = []
     discard = []
-    playerHealth = PLAYER_HEALTH_MAX
+    playerHealth = PLAYERHEALTHMAX
     cost = 0
     setup = enemyHelpers.determineIntentions(enemyHelpers.determineEnemies(enemies,difficulty), turnNumber)
     # sets up the enemies and their intentions
@@ -477,8 +484,8 @@ def playerTurn():
     global cardDefinitions
     global turnNumber
     # Give the player their starting resources
-    drawCards(STARTING_DRAW)
-    cost += COST_GAIN
+    drawCards(STARTINGDRAW)
+    cost += COSTGAIN
     playerBlock = 0
     helperFuncs.clearTerminal()
     # Initialization
@@ -490,7 +497,7 @@ def playerTurn():
         helperFuncs.clearTerminal()
         turnNumber += 1
         # sets resources to their max size if they are over it
-        while len(hand) > HAND_MAX:
+        while len(hand) > HANDMAX:
             hand.pop()
         while cost > costMax:
             cost -= 1
