@@ -191,7 +191,10 @@ def damageEnemyRand(times,number):
     helperFuncs.clearTerminal()
     for i in range(times):
         enemyList = list(enemies.keys())
-        enemies[enemyList[random.randint(0,len(enemyList)-1)]]["health"] -= (number + addPower())
+        try:
+            enemies[enemyList[random.randint(0,len(enemyList)-1)]]["health"] -= (number + addPower())
+        except:
+            pass
         roll.append(number)
         checkEnemyHealth()
 
