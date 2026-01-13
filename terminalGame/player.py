@@ -56,6 +56,7 @@ def checkEnemyHealth():
         try:
             if enemies[enemyList[i]]["health"] > intentionsList[enemyList[i]]["health"]:
                 enemies[enemyList[i]]["health"] = intentionsList[enemyList[i]]["health"]
+        # due to it trying to perform this during your turn, where enemy health is changing too frequently
         except:
             pass
 # gainCost(int) -> None
@@ -119,7 +120,8 @@ def effectsRun(condition, cardName):
             playerEffects[i] -= currentEffectDef["stacksLost"]
     # add power of suppress is currently on and an ammo card is played
     if "supress" in playerEffects and (cardName in cardDefinitions.ammoList):
-        addEffect("", "power", 1, 3, False)
+        for i in range(playerEffects["supress"]):
+            addEffect("", "power", 1, 3, False)
     # checks if the effects are still above 1
     checkEffectValid()
 
@@ -164,6 +166,7 @@ def resolveIntentions(resolveList):
     compPrint(healthList)
     compPrint(resolveList[i]["description"])
     compPrint(f"roll: {roll}")
+    # if block exists
     if playerBlock > 0:
         compPrint(playerBlock)
     compPrint(playerHealth)
@@ -626,7 +629,7 @@ def gameLoop(isCompatabilityMode):
     # set victory and start combat
     won = True
     startCombat()
-    # loop until our or all the enemies died
+    # loop until we or all the enemies died
     while enemies != {} and playerHealth > 0:
         playerTurn()
         enemyTurn()
