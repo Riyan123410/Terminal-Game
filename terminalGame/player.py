@@ -457,8 +457,8 @@ def playerTurn():
                     helperFuncs.clearTerminal()
                     discardCard(playCard)
                     cost -= currentCardCost
-                    exec(effect)
                     effectsRun("cardPlay", playCard)
+                    exec(effect)
                 else:
                     compPrint("Invalid Card")
                     compSleep(1)

@@ -96,7 +96,7 @@ cardDef = {
     },
     "sonic speed": {
         "description": "gain 5 haste; 1 cost",
-        "effect": "addEffect('haste', 1, 5)",
+        "effect": "addEffect('sonic speed', 'haste', 1, 5, False)",
         "cost": 1
     },
     "supressive fire": {
