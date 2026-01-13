@@ -543,8 +543,6 @@ art = {
 # getDeckArt() -> (str, str, str)
 # purpose: returns ASCII art strings in a tuple for deck states: 
 #          selected, discard selected, and non-selected
-# examples:
-#          getDeckArt() -> ("deckSelected art", "discardSelected art","endSelected art", "nonSelected art")
 def getDeckArt():
     return(
         str(art["decks"]["deckSelected"]),
