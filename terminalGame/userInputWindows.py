@@ -35,7 +35,7 @@ def getInputList():
         "space" : False
     }
     key = getInput()
-    # match inputs
+    # map inputs to -1 to 1 and space to true/false
     match key:
         case "d": 
             inputList["xDir"] = 1

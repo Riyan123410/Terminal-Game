@@ -16,6 +16,7 @@ def clearInTime(seconds):
 # printLaunch() -> None
 # purpose: clears the terminal and prints the launch mode text
 def printLaunch():
+    # clear terminal so it prints on a clean terminal
     helperFuncs.clearTerminal()
     print(str(asciiMenus.launchMode))
 
@@ -44,6 +45,7 @@ def selectMode():
                     validInput = False
                     print("Not in range")
         except:
+            # no valid input so set it to false to continue loop and print error
             validInput = False
             print("Invalid input")
     return isRegularMode
@@ -67,7 +69,9 @@ def afterLaunchSelected(isRegularMode):
 #          finall returns the mode which can be true for regular
 #          or fase for compatability
 def main():
+    # print ascii art and get input
     printLaunch()
     mode = selectMode()
+    # do after launch based on mode and return it
     afterLaunchSelected(mode)
     return mode

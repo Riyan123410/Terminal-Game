@@ -3,6 +3,10 @@ import inventory
 from regularMode import regularShop
 
 
+# win() -> None
+# purpose: the victory screen for when the player wins a round, it prints the
+#          current difficulty as well. Changes the diff for next round, give coins
+#          resets effects, restocks the stop and waits for input to exit
 def win():
     difficulty = player.difficulty
     print(rf"""
@@ -18,13 +22,22 @@ def win():
                             Current Score: {difficulty}
 [ENTER] to continue
 """)
+    # increase ifficulty and coins
     player.difficulty += player.DIFFICULTY_MODIFIER
     inventory.coins += player.difficulty * inventory.DIFFICULTY_COINS_CONVERSION
+    # reset plater and restock shop
     player.resetEffects()
     regularShop.resetStock()
+
+    # wait for input to go back
     input()
     return "playMenu"
 
+
+# lose() -> None
+# purpose: the lose screen for when the player loses a round, it prints the
+#          current difficulty and high score as well. resets the diff for next round, resets coins
+#          resets effects, restocks the stop and waits for input to exit
 def lose():
     # read the current high score and close the file
     readDifficultyFile = open("difficulty.txt", "r")
@@ -50,6 +63,7 @@ def lose():
                                                               
     [ENTER] to continue                                                        
 """)
+    # wait for input than reset inv and effect than exit
     input()
     inventory.resetInventory()
     player.resetEffects()

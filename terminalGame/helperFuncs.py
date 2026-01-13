@@ -10,10 +10,13 @@ import random
 #          clamp(-5.6, -2.1, 10) -> -2.1
 #          clamp(0, 0, 0) -> 0
 def clamp(num, minNum, maxNum):
+    # if num is less than min num return the min
     if num < minNum:
         return minNum
+    # if its greater return max
     if num > maxNum:
         return maxNum
+    # otherwise return the number
     return num
 
 # tests for clamp
@@ -64,11 +67,15 @@ def clearTerminal():
 # purpose: returns the sum of a random number from 1 to the input (size)
 #          the number of numbers generated are based on the parameter (times)
 def diceRoll(times,size):
+    # reset roll
     roll = 0
+    # only run if size is greater than 0
     if size > 0:
+        # loop through adding each dice roll
         for i in range(times):
             roll += random.randint(1,size)
     else:
+        # negative number for healing
         for i in range(times):
             roll += random.randint(size,-1)
     return roll

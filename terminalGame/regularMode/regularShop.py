@@ -40,9 +40,12 @@ MENU_DIR = "xDir"
 def listToBookshelf(currentStock):
     # create empty bookshelf list
     bookshelfList = []
+
     # loop through the current stock appenging to the list and than retun it
     for item in currentStock:
         bookshelfList.append(asciiMenus.shop["cards"][item])
+    
+    # append the back button and returns the bookshelf
     bookshelfList.append(asciiMenus.shop["backSlot"])
     return bookshelfList
 
@@ -59,6 +62,7 @@ def getArt(currentSelected, coins, cards):
     arrow = asciiHelpers.combineCardStrings(indexToArrow, asciiMenus.shop["select"]["height"])
     controls = asciiMenus.getCoinMenuControls(coins)
     info = f"Current deck: {cards}"
+    # add all ascii and return the full art
     return  bookShelf + arrow + controls + info
 
 
@@ -122,4 +126,5 @@ def main():
         helperFuncs.clearTerminal()
         print(getArt(currentSelected, coins, cards))
 
+# run reset stock when game begins
 resetStock()

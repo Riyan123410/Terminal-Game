@@ -9,5 +9,6 @@ Alex and Riyan
 
 [ENTER] to go back
 """)
+    # wait for input than return mainMenu to go back
     input()
     return "mainMenu"

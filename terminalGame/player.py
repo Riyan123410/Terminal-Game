@@ -338,7 +338,7 @@ def gainBlock(times,number):
 
 # drawCards(int) -> None
 # purpose: takes in an integer called number, and adds cards from the deck to the hand.
-# examples:
+# examples:number
 #           drawCards(1) -> len(hand) + 1, len(deck) - 1
 #           drawCards(2) -> len(hand) + 2, len(deck) - 1
 def drawCards(number):

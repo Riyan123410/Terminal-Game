@@ -25,6 +25,7 @@ def setGameStateCompatibility(gameState):
 #          state based on input (gameState) Always returns quit when
 #          the game state returns or a inccorect game state is recieved
 def setGameStateRegular(gameState):
+    # match each gamestate to their corresponding game state and return it
     match gameState:
         case "mainMenu":
             return regularMainMenu.main()
@@ -44,12 +45,14 @@ def setGameStateRegular(gameState):
             return endGame.lose()
         case _:
             pass
+    # if not game state match print it and return "quit"
     print(gameState)
     return "quit"
 
 # main() -> None
 # purpose: Game starts here here, sets launch mode, and runs the main game loop.
 def main():
+    # set default game state
     gameState = "mainMenu"
 
     # clear before starting

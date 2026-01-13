@@ -37,10 +37,13 @@ def main():
 #          in order to print the correct controls. Returns the card that is 
 #          selected if no card is selected "None" is returned
 def selectCard(cards, isDiscarding):
+    # get global selected y
     global currentSelectedY
 
+    # the current max hand is the len of cards - 1 since lists start at - 0
     currentMaxHand = len(cards) - 1
     currentSelected = MENU_MIN
+
     # first display with first deck selected and make card selected deck + 1 so it isnt selected
     selected = asciiHelpers.displayMainPlay(
         cards, 
@@ -65,8 +68,10 @@ def selectCard(cards, isDiscarding):
 #          (cards) and the parameter (isDiscarding) is used to print the
 #          appropiate instructoins to the user
 def selectDeck(cards, isDiscarding):
+    # get global current selected y
     global currentSelectedY
     currentSelected = MENU_MIN
+
     # first display with first deck selected and make card selected deck + 1 so it isnt selected
     selected = asciiHelpers.displayMainPlay(
         cards, 
@@ -85,6 +90,7 @@ def selectDeck(cards, isDiscarding):
             asciiHelpers.displayDeck(player.discard)
         case 2:
             return "end"
+
     # update y and end is not selected so return none
     currentSelectedY = selected[1]
     return "None"
@@ -98,14 +104,14 @@ def getCardSelected(cards, isDiscarding):
     # global variables
     global currentSelectedY
 
+    # current card is nont and reset current selcted y
     card = "None"
     currentSelectedY = Y_MIN
+
     # loop forever until a card is selected
     while True:
-        if currentSelectedY == Y_MIN:
-            card = selectCard(cards, isDiscarding)
-        else:
-            card = selectDeck(cards, isDiscarding)
+        # select a card
+        card = selectDeck(cards, isDiscarding)
         # when recieving an input check if its a real card to return
         if card != "None":
             return card
@@ -118,8 +124,10 @@ def getEnemySelected():
     enemyMax = len(enemyList)
     currentSelected = ARROW_MIN
 
+    # print enemys
     printEnemySelection(currentSelected, enemyMax)
 
+    # loop until input
     while True:
         inputList = userInput.getInputList()
         # add one to menu min since arrow starts at 1 not 0
@@ -135,6 +143,7 @@ def getEnemySelected():
 #          the arrow starts at the input (currentSelected) and the max the
 #          arrow does depends on the enemy max with the parameter (enemyMax)
 def printEnemySelection(currentSelected, enemyMax):
+    # clear terminal than get arrow string from index
     helperFuncs.clearTerminal()
     indexToArrow = asciiHelpers.indexToArrow(currentSelected, enemyMax, asciiEnemies.arrow["blank"], asciiEnemies.arrow["arrow"],asciiEnemies.arrow["arrow"])
 
