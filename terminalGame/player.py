@@ -402,8 +402,6 @@ def compPrint(string):
 # damageEnemy(int,int) -> None
 # purpose: Takes in two integers called times and numbers, then attempts to select an enemy, before
 #           reducing it's health by times x number + current power
-# examples:
-#           damageEnemy(1,4) -> {"goose" : {"health" : currentHealth - 4}}
 def damageEnemy(times,number):
     i = 0
     global enemies

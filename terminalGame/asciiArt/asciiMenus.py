@@ -1,8 +1,9 @@
 # launc mode string
 launchMode = r"""
-Please full screen your terminal in order for ascii art to display properly,                                                   ‾‾‾‾‾‾|
-make sure you can see the frame properly on the top left, this paragraph should only be 3 lines                                ‾‾‾‾| |
-If art is not displayed correctly compatibilty mode can be used.                                                                   | |
+Please full screen your terminal in order for ascii art to display properly, make sure                                          ‾‾‾‾‾‾|
+you can see the frame properly on the top left, this paragraph should only be 4 lines.                                          ‾‾‾‾| |
+If art is not displayed correctly compatibilty mode can be used. Compatability mode will                                            | |
+be forced on non windows devices
 
 > Continue[0] - ASCII art, input uses WASD and SPACE
 > Compatibility Mode[1] - No ASCII art, input uses characters entered in terminal(for non windows users)
