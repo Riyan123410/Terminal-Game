@@ -88,6 +88,7 @@ def checkEffectValid():
     global playerEffects
     effectList = list(playerEffects.keys())
     i = 0
+    # Checks each effect to see if it is less than zero
     while i < len(effectList):
         if playerEffects[effectList[i]] < 1:
             playerEffects.pop(effectList[i])
@@ -101,15 +102,17 @@ def effectsRun(condition, cardName):
     global playerEffects
     global effectDefinition
 
+    # checks each effect to see if it's condition applies
     for i in playerEffects:
         if i in effectDefinition and effectDefinition[i]["condition"] == condition:
             # https://www.w3schools.com/python/ref_func_exec.asp
             currentEffectDef = effectDefinition[i]
             exec(currentEffectDef["effect"])
             playerEffects[i] -= currentEffectDef["stacksLost"]
+    # add power of suppress is currently on and an ammo card is played
     if "supress" in playerEffects and (cardName in cardDefinitions.ammoList):
         addEffect("", "power", 1, 3, False)
-
+    # checks if the effects are still above 1
     checkEffectValid()
 
 # compSleep(int/float) -> None
@@ -182,14 +185,16 @@ def discardGain(number):
     global cost
     i = 0
     try:
-        while (i < number):
+        while (i < number) and len(hand) > 1:
             # get card is true for is discarding
             discarding = getCard("Card to discard: ", True)
             if discarding in hand:
+                # discards the card selected, then gain 1 cost
                 discardCard(discarding)
                 gainCost(1)
                 i += 1
             else:
+                # still increase it in case of not wanting to discard in comp mode
                 i += 1
                 time.sleep(1)
             helperFuncs.clearTerminal()
@@ -200,7 +205,7 @@ def discardGain(number):
 # purpose: takes in multiple strings and integers called card, times, damage, and effect. It then performs an action based off effect, using
 #           times and damage, before replacing itself with the related reload card.
 def ammoCard(card,times,damage,effect):
-    # determining what happens
+    # determining what happens depending on effect
     match effect:
         case "single":
             damageEnemy(times,damage)
@@ -227,12 +232,14 @@ def damageEnemyRand(times,number):
     global visibleIntentions
     roll = []
     helperFuncs.clearTerminal()
+    # damages a random enemy a number of times equal to times
     for i in range(times):
         enemyList = list(enemies.keys())
         try:
             enemies[enemyList[random.randint(0,len(enemyList)-1)]]["health"] -= (number + addPower())
         except:
             pass
+        # add roll for comp mode
         roll.append(number)
         checkEnemyHealth()
 # reloadCard(str,int) -> None
@@ -244,18 +251,22 @@ def reloadCard(card,times):
     global discard
     cardsRemoved = 0
     i = 0
+    # checking card played for special purposes
     match card:
         case "blunderbuss":
             damageEnemyAll(1,16)
         case "organ gun":
             gainBlock(1,4)
+    # basic effect for normal reloads
     if times == 1:
         deck.append(card)
         discard.remove(card+"-reload")
+    # secondary effect for tactical reload
     else:
         while (i < len(deck)) and (cardsRemoved <= times):
             card = deck[i]
             if "-reload" in card:
+                    # removes the reload from the current card, therefore making it loaded
                     deck.append(card[:-7])
                     deck.remove(card)
                     cardsRemoved += 1
@@ -270,13 +281,17 @@ def damageEnemyAll(times,number):
     global visibleIntentions
     roll = []
     helperFuncs.clearTerminal()
+    # gets enemy list for indexing through it
     enemyList = list(enemies.keys())
     for i in range(len(enemyList)):
+        # decrease enemy health a number of times equal to times
         for e in range(times):
             try:
                 enemies[enemyList[i]]["health"] -= (number + addPower())
+            # in case the enemy dies during this sequence
             except:
                 pass
+            # updates comp mode values
             roll.append(number)
             visibleIntentions = enemyHelpers.updateEnemyHealth(visibleIntentions,enemies)
             checkEnemyHealth()
@@ -286,24 +301,26 @@ def damageEnemyAll(times,number):
 def enemyDamageSelf(times,number):
     global enemies
     global visibleIntentions
+    # modifys enemy health by number a number of times equal to times
     for i in range(times):
         addEnemy = random.choice(list(enemies.keys()))
         enemies[addEnemy]["health"] -= number
+        # update visual enemy health for comp
         enemyHelpers.updateEnemyHealth(visibleIntentions,enemies)
         checkEnemyHealth()
 
 # Not used for non-compatability mode
 # defineCard() -> None
 # purpose: runs a sequence to print the description of cards in compatability mode.
-# def defineCard():
-#     global cardDef
-#     print(hand)
-#     cardInput = input("Which Card: ")
-#     try:
-#         print(cardDef[cardInput]["description"])
-#     except:
-#         print("Invalid Card")
-#     time.sleep(2)
+def defineCard():
+    global cardDef
+    print(hand)
+    cardInput = input("Which Card: ")
+    try:
+        print(cardDef[cardInput]["description"])
+    except:
+        print("Invalid Card")
+    time.sleep(2)
 
 
 # damagePlayer(int,int) -> None
@@ -318,8 +335,10 @@ def damagePlayer(times,number):
     global roll
     finalNumber = number
     roll = []
+    # damage the player loop
     for i in range(times):
         roll.append(number)
+        # decrease damage by block if it exists, then decrease block by damage
         if playerBlock > 0:
             finalNumber = number - playerBlock
             playerBlock -= number
@@ -372,20 +391,24 @@ def damageEnemy(times,number):
     global enemies
     global visibleIntentions
     global roll
+    # damages enemy
     while i < times:
         helperFuncs.clearTerminal()
+        # prints comp mode info
         compPrint(list(enemies.keys()))
+        # picks an enemy to target
         target = getEnemy("Choose an enemy: ")
         try:
             enemies[target]["health"] -= (number + addPower())
+            i += 1
+            # info for comp mode
             roll.append(number)
             enemyHelpers.updateEnemyHealth(visibleIntentions,enemies)
-            i += 1
-            if enemies[target]["health"] <= 0:
-                enemies.pop(target)
-                visibleIntentions.pop(target)
+            checkEnemyHealth()
+        # in case there are no available enemies, increase iteration
         except:
             compSleep(0.5)
+            i += 1
 
 # gainBlock(int,int) -> None
 # purpose: takes in two integers called times and number, and increase playerBlock by the number x times
