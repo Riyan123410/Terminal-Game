@@ -445,7 +445,6 @@ def drawCards(number):
     global hand
     global deck
     for i in range(number):
-        try:
             # if the deck is empty, move the discard pile into the deck
             if len(deck) == 0:
                 deck = discard.copy()
@@ -454,8 +453,6 @@ def drawCards(number):
             selectedCard = deck[random.randint(0, len(deck) - 1)]
             hand.append(selectedCard)
             deck.remove(selectedCard)
-        except:
-            pass
 
 # discardCardRand(int) -> None
 # purpose: Takes in an integer called number, and randomly discards cards from your hand a number
