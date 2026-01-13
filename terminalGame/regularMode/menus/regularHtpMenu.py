@@ -19,6 +19,7 @@ def main():
 BASICS:
     [W,A,S,D] to move your selection
     [space] to select
+    [ENTER to continue]
 
 >> when pressing play you will be prompted with PLAY and SHOP
 SHOP:

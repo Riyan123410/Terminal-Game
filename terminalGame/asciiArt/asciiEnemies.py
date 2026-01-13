@@ -81,6 +81,8 @@ Intention:              |
     except:
         return "INCORRECT NAME"
 
+# no tests because ASCII art
+
 # dictionary for all arrow art
 arrow = {
     "arrow" : r"""

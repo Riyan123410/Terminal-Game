@@ -81,6 +81,8 @@ def diceRoll(times,size):
             roll += random.randint(size,-1)
     return roll
 
+# no tests because random
+
 
 # removeEndlinesInList([str]) -> [str]
 # purpose: removes newline characters from each string in a list and filters out empty strings

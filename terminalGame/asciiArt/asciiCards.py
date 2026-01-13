@@ -550,3 +550,5 @@ def getDeckArt():
         str(art["decks"]["endSelected"]),
         str(art["decks"]["nonSelected"])
     )
+
+# no tests because ASCII art

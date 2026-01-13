@@ -23,6 +23,9 @@ currentSelectedY = 0
 YMIN = 0
 YMAX = 1
 
+# main() -> string
+# purpose: starts the players main gameLoop, gets if you won the game,
+#          if you won, return "won" else return "lost"
 def main():
     won = player.gameLoop(ISCOMPATIBILITYMODE)
     if won:

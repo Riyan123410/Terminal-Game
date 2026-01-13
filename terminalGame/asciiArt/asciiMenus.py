@@ -113,6 +113,8 @@ def getMainMenuArt():
           str(mainMenu["title"]) + str(mainMenu["play"]) + str(mainMenu["controls"]),
   )
 
+# no tests because ASCII art
+
 # dictionary for all the art needed in the play menu
 playMenu = {
   "background" : r"""
@@ -169,6 +171,8 @@ def getCoinMenuControls(coins):
 ===============================================================================================================================
 [A] left    [D] right    [Space] select                                                       [{coins}] coins
 """
+# no tests because ASCII art
+
 
 # getPlayMenuArt(int) -> (str, str, str)
 # purpose: returns ASCII art strings for each play menu option (play, shop, back) including coin display
@@ -183,6 +187,9 @@ def getPlayMenuArt(coins):
     str(playMenu["background"]) + str(playMenu["shopSelected"]) + getCoinMenuControls(coins),
     str(playMenu["background"]) + str(playMenu["backSelected"]) + getCoinMenuControls(coins)
   )
+
+# no tests because ASCII art
+
 
 # shop dictionary with all the shop art
 shop = {
@@ -442,7 +449,10 @@ ______________________________
   }
 }
 
-# all the contrls for the actual game
+# getPlayControls(string, int/float, int/float, int/float) -> string
+# purpose: returns a string with the ascii art based on the paramater
+#          (controlName), it also needs 3 numbers from parameters (cost)
+#          (block) and (hp) in order to display those values
 def getPlayControls(controlName, cost, block, hp):
   playControls = {
     "playCard" : f"""
@@ -462,3 +472,5 @@ Select an enemy in order to attack it
 """
   }
   return playControls[controlName]
+
+# no tests because ASCII art

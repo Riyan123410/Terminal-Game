@@ -49,6 +49,8 @@ def listToBookshelf(currentStock):
     bookshelfList.append(asciiMenus.shop["backSlot"])
     return bookshelfList
 
+# no tests because of ASCII art
+
 
 # getArt(int, int, [str]) -> str
 # purpose: generates the full ASCII shop display including bookshelf, selection arrow,
@@ -64,6 +66,8 @@ def getArt(currentSelected, coins, cards):
     info = f"Current deck: {cards}"
     # add all ascii and return the full art
     return  bookShelf + arrow + controls + info
+
+# no tests because of ASCII art
 
 
 # resetStock() -> None

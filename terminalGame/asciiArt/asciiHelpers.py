@@ -236,7 +236,8 @@ def displayMainPlay(cards, deckSelected, cardSelected, menuRange, yRange, curren
     currentSelected = -1
     return (currentSelected, currentSelectedY)
 
-# displayDeck([str]) -> None
+
+# displayDeck([string]) -> None
 # purpose: prints each card in a deck as selected ASCII art and waits for user input
 #          the cards printed will be a list of strings (deck)
 def displayDeck(deck):
@@ -246,7 +247,7 @@ def displayDeck(deck):
     print("[ENTER] to continue")
     input()
 
-# numToString(int) -> str
+# numToString(int) -> string
 # purpose: converts a number (num) into a string compatible with ASCII enemies
 #          (adds leading zero if < 10)
 # examples:
@@ -278,8 +279,10 @@ def displayEnemies():
         stringList.append(asciiEnemies.getArt(enemy, numToString(enemies[enemy]["health"]), formatDescriptionList(getAttackDescriptions(enemy))))
     print(asciiHelpers.combineCardStrings(stringList, asciiEnemies.ENEMYHEIGHT))
 
+# no tests because ASCII art
 
-# indexToArrow(int, int, str, str, str) -> [str]
+
+# indexToArrow(int, int, string, string, string) -> [string]
 # purpose: creates a list of strings representing arrows for menu selection
 # examples:
 #          indexToArrow(1, 3, "-", ">", "^") -> [">", "-", "-"]
@@ -298,9 +301,10 @@ def indexToArrow(currentSelected, menuMax, blankString, arrowString, lastArrow):
         arrowList.append(arrowString)
     return arrowList
 
+# tests for indexToArrow
 
 
-# getAttackDescriptions(str) -> [str]
+# getAttackDescriptions(string) -> [string]
 # purpose: Takes in a string called enemyName, then finds the attack descriptions for that specific enemy in the enemy list,
 #           and returns them.
 # examples:
@@ -316,9 +320,11 @@ def getAttackDescriptions(enemyName):
         attackDescriptions.append(enemies[enemyName]["attacks"][i]["description"])
     return attackDescriptions
 
+# tests for getAttackDescriptions
 
 
-# formatDescription(str) -> str
+
+# formatDescription(string) -> string
 # purpose: formats a string description (description) to fit in enemy
 #          descriptions box defined by asciiEnemies.DESCRIPTIONLEN and asciiEnemies.DESCRIPTIONHEIGHT.
 #          returnes the description with that cap len and that height ending with | on each line
@@ -359,8 +365,10 @@ def formatDescription(description):
     
     return "".join(lines)
 
+# no tests because ASCII art
 
-# formatDescriptionList([str]) -> str
+
+# formatDescriptionList([string]) -> string
 # purpose: formats a list of description strings from input (descriptionList) 
 #          into a single string for ascii enemies. 
 def formatDescriptionList(descriptionList):
@@ -373,3 +381,5 @@ def formatDescriptionList(descriptionList):
         totalDescriptions.append(formatDescription(" "))
     # join total description list into a string with a next line so its seperated
     return "\n".join(totalDescriptions)
+
+# no tests because ASCII art
