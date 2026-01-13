@@ -95,13 +95,11 @@ def addEffect(cardName, name, times, number, exert):
 #           remove them from the dictionary.
 def checkEffectValid():
     global playerEffects
-    effectList = list(playerEffects.keys())
-    i = 0
-    # Checks each effect to see if it is less than zero
-    while i < len(effectList):
-        if playerEffects[effectList[i]] < 1:
-            playerEffects.pop(effectList[i])
-        i += 1
+    # loop through player effects
+    for effect in playerEffects.keys():
+        if playerEffects[effect] < 1:
+            playerEffects.pop(effect)
+
 
 # effectsRun(str,str) -> None
 # purpose: takes in two strings called condition and cardName. It will run through all effects in playerEffects,
@@ -142,29 +140,35 @@ def compSleep(seconds):
 def resolveIntentions(resolveList):
     global intentionsList
     global roll
+
     healthList = {}
     print(resolveList)
+
     # Main loop for each enemies attack
-    for i in range(len(list(resolveList.keys()))):
+    for attack in resolveList:
         # Health viewing for compatability
-        for j in enemies:
-            healthList[j] = enemies[j]["health"]
+        for enemy in enemies:
+            healthList[enemy] = enemies[enemy]["health"]
+
         # printing information for compatability
         helperFuncs.clearTerminal()
         compPrint(healthList)
-        compPrint(resolveList[i]["description"])
+        compPrint(attack["description"])
         compPrint(f"roll: {roll}")
+
         #  shows block if it is above 0
         if playerBlock > 0:
             compPrint(playerBlock)
+
         compPrint(playerHealth)
         compSleep(0.5)
         # executes the function associated with the effect
-        exec(resolveList[i]["effect"])
+        exec(attack["effect"])
+
     # printing updated information
     helperFuncs.clearTerminal()
     compPrint(healthList)
-    compPrint(resolveList[i]["description"])
+    compPrint(attack["description"])
     compPrint(f"roll: {roll}")
     # if block exists
     if playerBlock > 0:
@@ -603,12 +607,10 @@ def enemyTurn():
     global enemies
     global turnNumber
     global visibleIntentions
-    # allows for indexing through the dictionary
-    enemyList = list(enemies.keys())
-    # Performs all the enemies intentions
-    for i in range(len(list(enemies.keys()))):
 
-        resolveIntentions(enemies[enemyList[i]]["attacks"])
+    # Performs all the enemies intentions
+    for enemy in enemies.keys():
+        resolveIntentions(enemies[enemy]["attacks"])
     # Determine next enemies attack
     visibleIntentions = enemyHelpers.determineIntentions(enemies, turnNumber)[1]
 

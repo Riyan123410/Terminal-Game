@@ -313,12 +313,12 @@ def indexToArrow(currentSelected, menuMax, blankString, arrowString, lastArrow):
 def getAttackDescriptions(enemyName):
     enemies = player.enemies
     attackDescriptions = []
-    # finds the number of attacks the enemy has
-    numOfAttacks = len(list(enemies[enemyName]["attacks"].keys()))
-    # appends the attack description to attack descriptions
-    for i in range(numOfAttacks):
-        attackDescriptions.append(enemies[enemyName]["attacks"][i]["description"])
+    # look through attacks and add them to attack descriptions
+    for attack in enemies[enemyName]["attacks"]:
+        attackDescriptions.append(attack["description"])
+        
     return attackDescriptions
+
 
 # tests for getAttackDescriptions
 

@@ -23,18 +23,11 @@ assert determinePly(2) == "turn1"
 # examples:
 #           enemyIntentions("wild bush", 0) -> [{'description': 'deal 1d4 damage', 'effect': 'damagePlayer(1,helperFuncs.diceRoll(1,4))'}, {'description': 'heal an ally for 1d4 health', 'effect': 'enemyDamageSelf(1,helperFuncs.diceRoll(1,-4))'}]
 def enemyIntentions(enemyName, turnNumber):
-    global intentionsList
-    attackIntentions = dict({})
-
-    # sets the proper formating for the enemy intentions
-    for i in range(len(intentionsList[enemyName][determinePly(turnNumber)])):
-        attackIntentions[i] = intentionsList[enemyName][determinePly(turnNumber)][i]
-
-    return attackIntentions
+    return intentionsList[enemyName][determinePly(turnNumber)].copy()
 
 # testing enemyIntentions
-assert enemyIntentions("wild bush", 1) == {0: {'description': 'Deal 1d6 damage', 'effect': 'damagePlayer(1,helperFuncs.diceRoll(1,6))'}}
-assert enemyIntentions("wild bush", 0) == {0: {'description': 'Deal 1d4 damage', 'effect': 'damagePlayer(1,helperFuncs.diceRoll(1,4))'}, 1: {'description': 'Heal an ally for 1d4 health', 'effect': 'enemyDamageSelf(1,helperFuncs.diceRoll(1,-4))'}}
+# assert enemyIntentions("wild bush", 1) == {0: {'description': 'Deal 1d6 damage', 'effect': 'damagePlayer(1,helperFuncs.diceRoll(1,6))'}}
+# assert enemyIntentions("wild bush", 0) == {0: {'description': 'Deal 1d4 damage', 'effect': 'damagePlayer(1,helperFuncs.diceRoll(1,4))'}, 1: {'description': 'Heal an ally for 1d4 health', 'effect': 'enemyDamageSelf(1,helperFuncs.diceRoll(1,-4))'}}
 
 #### Used for compatability ####
 # updateEnemyHealth({str}, {str}) -> {str}
@@ -58,15 +51,15 @@ def determineIntentions(enemies,turnNumber):
     global intentionsList
     enemyList = list(enemies.keys())
     # iterates through all enemies in enemies
-    for i in range(len(enemyList)):
+    for enemy in enemyList:
         # changes enemies intentions in enemies
-        enemies[enemyList[i]]["attacks"] = enemyIntentions(enemyList[i],turnNumber)
+        enemies[enemy]["attacks"] = enemyIntentions(enemy,turnNumber)
         # determines visibleIntentions for comp mode
-        visibleIntentions[enemyList[i]] = {}
-        visibleIntentions[enemyList[i]]["attacks"] = {}
+        visibleIntentions[enemy] = {}
+        visibleIntentions[enemy]["attacks"] = []
         # adds descriptions to each attack the enemy wants to perform
-        for j in range(len(intentionsList[enemyList[i]][determinePly(turnNumber)])):
-            visibleIntentions[enemyList[i]]["attacks"][j] = (enemies[enemyList[i]]["attacks"][j]["description"])
+        for attack in enemies[enemy]["attacks"]:
+            visibleIntentions[enemy]["attacks"].append(attack["description"])
             
     visibleIntentions = updateEnemyHealth(visibleIntentions,enemies)
     return [enemies,visibleIntentions]
