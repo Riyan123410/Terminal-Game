@@ -62,10 +62,15 @@ def getArt(currentSelected, coins, cards):
     return  bookShelf + arrow + controls + info
 
 
+# resetStock() -> None
+# purpose: resets the global shop stock by clearing the currentStock list
+#          and filling it with randomly selected items from the itemCoins list
+#          based on the MENU_MAX constant
 def resetStock():
+    # use global current stock and reset it
     global currentStock
-
     currentStock = []
+
     # create shop items by making it  into a list so a random index can be chosen
     itemsList = list(itemCoins)
     for i in range(MENU_MAX - 1):
@@ -76,15 +81,15 @@ def resetStock():
 #          updates inventory, and always returns "playMenu" when the
 #          back button is pressed
 def main():
-    # use global current stock and reset it
+    # use global current stock and reset it, set coins based on current inventory
     global currentStock
-
-    # get coins
     coins = inventory.coins
 
     # set current selected and clear terminal to print shop
     currentSelected = MENU_MIN
     helperFuncs.clearTerminal()
+
+    # get cards and print the shop
     cards = inventory.cards
     print(getArt(currentSelected, coins, cards))
     

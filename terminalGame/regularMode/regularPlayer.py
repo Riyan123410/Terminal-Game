@@ -34,7 +34,8 @@ def main():
 # purpose: allows the player to select a card from their hand using input
 #          the card pool that can be selected from is the parameter (cards)
 #          it also prints the controls so the parameter (isDiscarding) is ued
-#          in order to print the correct controls
+#          in order to print the correct controls. Returns the card that is 
+#          selected if no card is selected "None" is returned
 def selectCard(cards, isDiscarding):
     global currentSelectedY
 
@@ -54,10 +55,15 @@ def selectCard(cards, isDiscarding):
         return cards[selected[0]]
     currentSelectedY = selected[1]
 
-    # the while loop didnt catch any card being selected so return none
-    return None
+    # no card was selected so return "None"
+    return "None"
 
-# choose to look at the deck
+
+# selectCard([str], bool) -> str
+# purpose: allows the player to look at a deck using input or to select
+#          end turn. It also displays the currents cards from the parameter
+#          (cards) and the parameter (isDiscarding) is used to print the
+#          appropiate instructoins to the user
 def selectDeck(cards, isDiscarding):
     global currentSelectedY
     currentSelected = MENU_MIN
@@ -101,7 +107,7 @@ def getCardSelected(cards, isDiscarding):
         else:
             card = selectDeck(cards, isDiscarding)
         # when recieving an input check if its a real card to return
-        if card != None:
+        if card != "None":
             return card
 
 # getEnemySelected() -> str

@@ -11,10 +11,11 @@ MAX_CARD_LENGTH = 7
 
 # findWidth(str) -> int
 # purpose: calculates the width of an ASCII string by finding the first \n character after the first line
-#          from the inputed string (string)
+#          from the inputed string (string), so if it doesnt start at \n width will be 1 less
+#          make sure string starts with \n to count properly and has a \n or width will be 0
 # examples:
-#          findWidth("abc\n") -> 3
-#          findWidth("a\bc\df\n") -> 1
+#          findWidth("abc\n") -> 2
+#          findWidth("a\bc\df\n") -> 7
 #          findWidth("\n\n") -> 0
 def findWidth(string):
     # replace endlines so you can find it not starting at the begining since that is an endline
@@ -25,11 +26,23 @@ def findWidth(string):
         width = 0
     return width
 
+# tests for findWidth
+assert findWidth("hello\nworld") == 4
+assert findWidth("\nhello") == 0
+assert findWidth("abc\ndef\nghi") == 2
+assert findWidth("singleline") == 0
+assert findWidth("\n") == 0
+assert findWidth("") == 0
+assert findWidth("a\nb\nc\n") == 0
+
+
 # combineStrings(str, str, int, int) -> str
 # purpose: combines two ASCII strings horizontally given their widths and height
 #          from the parameters (width1) and (height) the strings are also given
 #          with parameter (string1) which would be on the left and (string2)
-#          which would be on the right
+#          which would be on the right. Make sure width1 is entered correctly,
+#          ascii starts with \n, ends with \n, height is entered correctly or
+#          it wont wrap as expected
 # examples:
 #          combineStrings("abc\n", "123\n", 3, 1) -> "abc123\n"
 #          combineStrings("a\nb\n", "x\ny\n", 1, 2) -> "ax\nby\n"
@@ -48,6 +61,13 @@ def combineStrings(string1, string2, width1, height):
         combinedString += string2[i * width2 : i * width2 + width2]
         combinedString += "\n"
     return combinedString
+
+# tests for combineStrings
+assert combineStrings("\nab\ncd", "\n12\n34", 2, 2) == "ab12\ncd34\n"
+assert combineStrings("\nhello\nworld", "idk", 5, 2) == "hello\nworld\n"
+assert combineStrings("", "", 0, 0) == ""
+assert combineStrings("\nabc\n", "\n123\n", 3, 1) == "abc123\n"
+
 
 # combineCardStrings([str], int) -> str
 # purpose: combines a list of ASCII card strings horizontally into one large string
@@ -68,9 +88,16 @@ def combineCardStrings(cards, height):
 
     return combinedString
 
+# tests for combine cardStrings
+assert combineCardStrings(["\nab\ncd", "\n12\n34"], 2) == "ab12\ncd34\n"
+assert combineCardStrings(["\nhello\nworld\n", ""], 2) == "hello\nworld\n"
+assert combineCardStrings(["\nabc\n"], 1) == "abc\n"
+assert combineCardStrings([], 0) == ""
+
+
 # splitHand([str], int) -> ([str], [str])
 # purpose: splits a hand of cards of parameter (totalHand) into two lists 
-#          if is is more than the parameter (maxLen)
+#          if is is more than the parameter (maxLen) which mush by positive
 # examples:
 #          splitHand(["a","b","c"], 2) -> (["a","b"], ["c"])
 #          splitHand(["x","y"], 3) -> (["x","y"], [])
@@ -79,21 +106,23 @@ def splitHand(totalHand, maxLen):
     totalHandCopy = totalHand.copy()
     newRow = []
     # loop through the hand remove and adding until your hand is less than the max
-    while len(totalHand) > maxLen:
+    while len(totalHandCopy) > maxLen:
         newRow.append(totalHand[-1])
         totalHandCopy.pop()
     # revers the 2nd list since we are adding to it backwards
     newRow.reverse()
-    return (totalHand, newRow)
+    return (totalHandCopy, newRow)
+
+# tests for splitHand
+assert splitHand(["a", "b", "c"], 5) == (["a", "b", "c"], [])
+assert splitHand(["a", "b", "c"], 3) == (["a", "b", "c"], [])
+assert splitHand([], 3) == ([], [])
+
 
 # createAsciiCardList([str], int) -> [str]
 # purpose: creates a list of ASCII card art strings from a list of
 #          card names inputed withe the parameter (cards) the paremter
 #          (currentSelected) will use a different artwork
-# examples:
-#          createAsciiCardList(["strike"], 0) -> ["selected strike art"]
-#          createAsciiCardList(["block"], 1) -> ["normal block art"]
-#          createAsciiCardList([], 0) -> []
 def createAsciiCardList(cards, currentSelected):
     asciiDeck = []
     # loop throught the car dlist
@@ -150,6 +179,12 @@ def displayCards(cards):
     if hand[1] != ():
         print(combineCardStrings(hand[1], asciiCards.CARD_HEIGHT))
 
+
+# printPlayMain([str], int, int, bool) -> None
+# purpose: displays the main gameplay screen including enemies, the selected deck,
+#          and the player's hand of cards with (cards). Highlights the currently selected 
+#          card  or deck based on (cardSelected) and (deckSelected), and shows the appropriate 
+#          control menu depending on whether the player is discarding a card (isDiscarding).
 def printPlayMain(cards, cardSelected, deckSelected, isDiscarding):
     # first display with first deck selected and make card selected deck + 1 so it isnt selected
     helperFuncs.clearTerminal()
@@ -163,7 +198,13 @@ def printPlayMain(cards, cardSelected, deckSelected, isDiscarding):
         print(asciiMenus.getPlayControls("playCard", player.cost, player.playerBlock, player.playerHealth))
 
 
-# actually call this in order to print the play menu
+# displayMainPlay([str], int, int, (int, int), (int, int), int, bool) -> (int, int)
+# purpose: handles the main gameplay input loop for selecting cards or decks.
+#          with input (cards). starts selection with (deckSelected) and (cardSelected),  
+#          and (currentSelectedY). Updates the current selection based on user input, and 
+#          clamps selections with parameter (menuRange) and (yRange). Returns a tuple
+#          of the currently selected item, -1 if none, and the current y based on input.
+#          Finally prints the correct instructions with (isDiscarding)
 def displayMainPlay(cards, deckSelected, cardSelected, menuRange, yRange, currentSelectedY, isDiscarding):
 
     printPlayMain(cards, cardSelected, deckSelected, isDiscarding)
@@ -216,6 +257,14 @@ def numToString(num):
         string += "0"
     return string + str(num)
 
+# tests for numToString
+assert numToString(0) == "00"
+assert numToString(5) == "05"
+assert numToString(9) == "09"
+assert numToString(10) == "10"
+assert numToString(23) == "23"
+assert numToString(100) == "100"
+
 # displayEnemies() -> None
 # purpose: prints all enemies using ASCII art and prints them horizontally
 def displayEnemies():
@@ -248,35 +297,6 @@ def indexToArrow(currentSelected, menuMax, blankString, arrowString, lastArrow):
     return arrowList
 
 
-# format enemy descriptions
-def formatDescription(description):
-    descriptionList = description.split().copy()
-    line = ""
-    lines = []
-
-    for i in range(asciiEnemies.DESCRIPTION_HEIGHT):
-
-        wordsAdded = 0
-        # get each word in the descpription 
-        for word in descriptionList:
-            # add it to the current line if its les than the max len
-            if len(line) + len(word) + 1 < asciiEnemies.DESCRIPTION_LEN:
-                line += word + " "
-                wordsAdded += 1
-        # remove all words used
-        for i in range(wordsAdded):
-            descriptionList.pop(0)
-        
-        # add spaces until reached max len after add | to finish the line, do -2 for the space and |
-        while len(line) < asciiEnemies.DESCRIPTION_LEN - 2:
-            line += " "
-        line += "|\n"
-
-        # append each line to the lines list and clear line
-        lines.append(line)
-        line = ""
-    
-    return "".join(lines)
 
 # getAttackDescriptions(str) -> [str]
 # purpose: Takes in a string called enemyName, then finds the attack descriptions for that specific enemy in the enemy list,
@@ -296,18 +316,23 @@ def getAttackDescriptions(enemyName):
 
 
 
+# formatDescription(str) -> str
+# purpose: formats a string description (description) to fit in enemy
+#          descriptions box defined by asciiEnemies.DESCRIPTION_LEN and asciiEnemies.DESCRIPTION_HEIGHT.
+#          returnes the description with that cap len and that height ending with | on each line
 def formatDescription(description):
+    # get turn diescription strin ginto a list, set line and lines
     descriptionList = description.split().copy()
     line = ""
     lines = []
 
     for i in range(asciiEnemies.DESCRIPTION_HEIGHT):
-
+        # reset index(wordsAdded) and overfill
         wordsAdded = 0
         overfill = False
-        # get each word in the descpription 
+        # get each word in the descpription loop until its overfilles
         while not overfill:
-            # add it to the current line if its les than the max len, do a try just in case there is arent any words
+            # add it to the current line if its les than the max len than overfill, do a try just in case there is arent any words
             try:
                 # add 2 because of extra space and | character
                 if len(line) + len(descriptionList[wordsAdded]) + 2 < asciiEnemies.DESCRIPTION_LEN:
@@ -332,6 +357,10 @@ def formatDescription(description):
     
     return "".join(lines)
 
+
+# formatDescriptionList([str]) -> str
+# purpose: formats a list of description strings from input (descriptionList) 
+#          into a single string for ascii enemies. 
 def formatDescriptionList(descriptionList):
     totalDescriptions = []
     # loop through the descrption lists and append

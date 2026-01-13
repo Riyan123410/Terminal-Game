@@ -16,6 +16,16 @@ def clamp(num, minNum, maxNum):
         return maxNum
     return num
 
+# tests for clamp
+assert clamp(5, 10, 20) == 10
+assert clamp(25, 10, 20) == 20
+assert clamp(10, 10, 20) == 10
+assert clamp(20, 10, 20) == 20
+assert clamp(15, 10, 20) == 15
+assert clamp(-5, -10, 0) == -5
+assert clamp(-15, -10, 0) == -10
+assert clamp(5, -10, 0) == 0
+
 # changeWithClamp(int/float, int/float, int/float, int/float) -> int/float
 # purpose: takes in the number (num) adding the parameter (change) it than
 #          clamps this number to be withen (minNum) and (maxNum)
@@ -25,6 +35,18 @@ def clamp(num, minNum, maxNum):
 #          changeWithClamp(5.5, 10, 0, 10.5) -> 10.5
 def changeWithClamp(num, change, minNum, maxNum):
     return clamp(num + change, minNum, maxNum)
+
+# tests for changeWithClamp
+assert changeWithClamp(10, 5, 0, 20) == 15
+assert changeWithClamp(10, -5, 0, 20) == 5
+assert changeWithClamp(18, 5, 0, 20) == 20
+assert changeWithClamp(2, -5, 0, 20) == 0
+assert changeWithClamp(15, 5, 0, 20) == 20
+assert changeWithClamp(5, -5, 0, 20) == 0
+assert changeWithClamp(10, 0, 0, 20) == 10
+assert changeWithClamp(-5, -10, -20, -1) == -15
+assert changeWithClamp(-5, -20, -20, -1) == -20
+assert changeWithClamp(-15, 10, -20, -1) == -5
 
 # clearTerminal() -> None
 # purpose: Clears the terminal based on the current operating system
@@ -67,3 +89,11 @@ def removeEndlinesInList(stringList):
         if replacedEndlines != "":
             newList.append(replacedEndlines)
     return newList
+
+# tests for removeEndLinesInList
+assert removeEndlinesInList(["hello\n", "world\n"]) == ["hello", "world"]
+assert removeEndlinesInList(["\n", "\n\n"]) == []
+assert removeEndlinesInList(["a\nb\nc", "d\ne\nf"]) == ["abc", "def"]
+assert removeEndlinesInList(["no newlines", "still clean"]) == ["no newlines", "still clean"]
+assert removeEndlinesInList(["\nstart", "end\n", "\nmiddle\n"]) == ["start", "end", "middle"]
+assert removeEndlinesInList([]) == []

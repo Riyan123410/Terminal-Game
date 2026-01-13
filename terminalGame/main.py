@@ -14,10 +14,6 @@ from regularMode.menus import regularPlayMenu
 # purpose: Handles game state transitions in compatibility mode.
 #          Runs game state based on input (gameState)
 #          Always returns quit when the game state returns quit
-# examples:
-#          setGameStateCompatibility("mainMenu") -> "quit"
-#          setGameStateCompatibility("game state that doesnt exist") -> "quit"
-#          setGameStateCompatibility("") -> "quit"
 def setGameStateCompatibility(gameState):
     # true for compatability mode
     player.gameLoop(True)
@@ -77,4 +73,5 @@ def main():
         else:
             gameState = setGameStateCompatibility(gameState)
 
+# run main
 main()

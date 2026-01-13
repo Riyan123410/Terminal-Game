@@ -8,9 +8,6 @@ DESCRIPTION_HEIGHT = 2
 # purpose: returns ASCII art for a given enemy name from parameter (name)
 #          with its health from parameter (hp), make sure HP only has 2
 #          digits otherwise ASCII art will get messed up
-# examples:
-#          getArt("bush", 5) -> "bush art" with hp 5
-#          getArt("goose", 10) -> "bush art" with hp 10
 #          getArt("fsdi", 20) -> "INCORRECT NAME"
 def getArt(name, hp, currentAttack):
     art = {

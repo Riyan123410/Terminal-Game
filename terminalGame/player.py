@@ -14,13 +14,14 @@ STARTING_DRAW = 5
 HAND_MAX = 14
 PLAYER_HEALTH_MAX = 50
 DIFFICULTY_MODIFIER = 0.5
+DIFFICULTY_START = 0.5
 
 # game
 playerHealth = 50
 costMax = 4
 cost = 0
 playerBlock = 0
-difficulty = float(0.5)
+difficulty = DIFFICULTY_START
 turnNumber = 0
 roll = []
 visibleIntentions = {}

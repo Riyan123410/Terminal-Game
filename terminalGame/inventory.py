@@ -7,6 +7,9 @@ DIFFICULTY_COINS_CONVERSION = 2
 cards = DEFAULT_CARDS.copy()
 coins = DEFAULT_COINS
 
+# resetInventory() -> None
+# purpose: resets the players inventory including coins, cards
+#          and difficulty to their default values
 def resetInventory():
     global coins
     global cards
@@ -14,5 +17,5 @@ def resetInventory():
     global DEFAULT_COINS
     coins = DEFAULT_COINS
     cards = DEFAULT_CARDS.copy()
-    player.difficulty = 0.5
+    player.difficulty = player.DIFFICULTY_START
     player.enemies = dict({})
