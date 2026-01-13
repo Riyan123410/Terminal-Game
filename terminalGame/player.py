@@ -42,14 +42,22 @@ def checkEnemyHealth():
     global intentionsList
     enemyList = list(enemies.keys())
     for i in range(len(enemyList)):
-        if enemies[enemyList[i]]["health"] <= 0:
-            # https://www.w3schools.com/python/ref_list_pop.asp
-            enemies.pop(enemyList[i])
-            visibleIntentions.pop(enemyList[i])
+        # in case the enemies die during it
+        try:
+            if enemies[enemyList[i]]["health"] <= 0:
+                # https://www.w3schools.com/python/ref_list_pop.asp
+                enemies.pop(enemyList[i])
+                visibleIntentions.pop(enemyList[i])
+                i -= 1
+        except:
+                pass
         # stops overhealing over their max health
-        if enemies[enemyList[i]]["health"] > intentionsList[enemyList[i]]["health"]:
-            enemies[enemyList[i]]["health"] = intentionsList[enemyList[i]]["health"]
-
+        enemyList = list(enemies.keys())
+        try:
+            if enemies[enemyList[i]]["health"] > intentionsList[enemyList[i]]["health"]:
+                enemies[enemyList[i]]["health"] = intentionsList[enemyList[i]]["health"]
+        except:
+            pass
 # gainCost(int) -> None
 # purpose: takes in an integer called number, then increases cost by number
 def gainCost(number):
@@ -185,7 +193,7 @@ def discardGain(number):
     global cost
     i = 0
     try:
-        while (i < number) and len(hand) > 1:
+        while (i < number) and len(hand) > 0:
             # get card is true for is discarding
             discarding = getCard("Card to discard: ", True)
             if discarding in hand:
@@ -219,8 +227,11 @@ def ammoCard(card,times,damage,effect):
         case "all":
             damageEnemyRand(times, helperFuncs.diceRoll(1, damage))
     # replaces card with the reload card
-    # https://www.w3schools.com/python/ref_list_remove.asp 
-    discard.remove(card)
+    # https://www.w3schools.com/python/ref_list_remove.asp
+    try:
+        discard.remove(card)
+    except:
+        deck.remove(card)
     deck.append(card+"-reload")
 
 # damageEnemyRand(int,int) -> None
@@ -260,7 +271,10 @@ def reloadCard(card,times):
     # basic effect for normal reloads
     if times == 1:
         deck.append(card)
-        discard.remove(card+"-reload")
+        try:
+            discard.remove(card+"-reload")
+        except:
+            deck.remove(card+"-reload")
     # secondary effect for tactical reload
     else:
         while (i < len(deck)) and (cardsRemoved <= times):
