@@ -51,7 +51,7 @@ intentionsList = {
                 {"description" : "Discard 1 card from your deck", "effect" : "deckDiscard(1)"}
             ],
         "health" : 25,
-        "diff" : 1.5
+        "diff" : 1.75
         },
     "canadian goose" : 
         {"turn2" : 
@@ -63,7 +63,7 @@ intentionsList = {
                 {"description" : "Heal an ally for 1d2 health", "effect" : "enemyDamageSelf(1,helperFuncs.diceRoll(1,-2))"},
             ],
         "health" : 45,
-        "diff" : 2.5
+        "diff" : 3
         },
     "squirrel" : 
         {"turn2" : 
@@ -88,7 +88,7 @@ intentionsList = {
                 {"description" : "Deal 1d36 damage", "effect" : "damagePlayer(1,helperFuncs.diceRoll(1,36))"},
                 {"description" : "Heal an ally for 2d12 health", "effect" : "enemyDamageSelf(1,helperFuncs.diceRoll(2,-12))"}
             ],
-        "health" : 80,
+        "health" : 99,
         "diff" : 10
         },
 }

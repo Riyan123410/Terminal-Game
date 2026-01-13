@@ -35,6 +35,8 @@ enemies = dict({})
 # compatability mode
 compatability = True
 
+# checkEnemyHealth() -> None
+# 
 def checkEnemyHealth():
     # https://www.w3schools.com/python/python_variables_global.asp
     global intentionsList
@@ -44,6 +46,7 @@ def checkEnemyHealth():
             # https://www.w3schools.com/python/ref_list_pop.asp
             enemies.pop(enemyList[i])
             visibleIntentions.pop(enemyList[i])
+        # stops overhealing over their max health
         if enemies[enemyList[i]]["health"] > intentionsList[enemyList[i]]["health"]:
             enemies[enemyList[i]]["health"] = intentionsList[enemyList[i]]["health"]
 
