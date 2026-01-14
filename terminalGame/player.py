@@ -59,6 +59,7 @@ def checkEnemyHealth():
         # due to it trying to perform this during your turn, where enemy health is changing too frequently
         except:
             pass
+
 # gainCost(int) -> None
 # purpose: takes in an integer called number, then increases cost by number
 def gainCost(number):
@@ -76,7 +77,7 @@ def addPower():
 # addEffect(str,str,int,int,bool) -> None
 # purpose: takes in two strings, two integers, and a boolean called cardName, name, times, number, and exert.
 #           it will then add a dictionary entry to playerEffects called name, with a number equal to number x times.
-#           If exert is True, remove a card with the name cardName from the current game.
+#           If exert is True, remove a card with the name cardName from the current round.
 def addEffect(cardName, name, times, number, exert):
     global playerEffects
     # Loops the amount of times equal to times
@@ -106,7 +107,7 @@ def checkEffectValid():
 # effectsRun(str,str) -> None
 # purpose: takes in two strings called condition and cardName. It will run through all effects in playerEffects,
 #           if it finds an effect with a condition that matches condition, it will run it's effect, and reduce
-#           it's number by stacksLost (defined in effectDefinition)
+#           it's number by stacksLost (defined in effectDefinition).
 def effectsRun(condition, cardName):
     global playerEffects
     global effectDefinition
@@ -135,6 +136,7 @@ def compSleep(seconds):
 
 # resolveIntentions([str]) -> None
 # purpose: takes in a list called resolveList, then executes all strings within the list as functions associated with it's name.
+#           Requires the pre-built 'resolveList' variable to work.
 # examples:
 #           resolveIntentions("damagePlayer(1,2)")                        -> playerHealth - 2
 #           resolveIntentions("discardCardRand(2)")                       -> len(hand) - 2
@@ -245,7 +247,7 @@ def ammoCard(card,times,damage,effect):
 
 # damageEnemyRand(int,int) -> None
 # purpose: takes in two integers call times and number, then reduces a random enemies health by
-#           number + power a number of times equal to times
+#           number + power a number of times equal to times.
 def damageEnemyRand(times,number):
     global enemies
     global roll
@@ -266,7 +268,7 @@ def damageEnemyRand(times,number):
 # reloadCard(str,int) -> None
 # purpose: takes in a string and integer called card and times, and replaces the currently played card
 #           with it's loaded counterpart. If times is bigger than one, reload multiple cards in the
-#           deck with no regard for names.
+#           deck with no regard for names. requires listed card to be in the deck or discard.
 def reloadCard(card,times):
     global deck
     global discard
@@ -298,7 +300,7 @@ def reloadCard(card,times):
         
 # damageEnemyAll(int,int) -> None
 # purpose: Takes in two integers called times and numbers, and reduces all enemies
-#           hp by times x number + power
+#           hp by times x number + power.
 def damageEnemyAll(times,number):
     global enemies
     global roll
@@ -337,11 +339,11 @@ def enemyDamageSelf(times,number):
 # defineCard() -> None
 # purpose: runs a sequence to print the description of cards in compatability mode.
 def defineCard():
-    global cardDef
+    global cardDefinitions
     print(hand)
     cardInput = input("Which Card: ")
     try:
-        print(cardDef[cardInput]["description"])
+        print(cardDefinitions.cardDef[cardInput]["description"])
     except:
         print("Invalid Card")
     time.sleep(2)
@@ -481,6 +483,7 @@ def discardCardRand(number):
 
 # discardCard(str) -> None
 # purpose: takes in a string called name, then removes a card in your hand with the same name, and adds it to the discard.
+#           Requires the same card to be in hand
 # examples:
 #           discardCard("strike")      -> len(hand) - 1, len(discard) + 1
 #           discardCard("clean sweep") -> len(hand) - 1, len(discard) + 1

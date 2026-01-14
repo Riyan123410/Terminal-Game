@@ -23,16 +23,17 @@ assert determinePly(2) == "turn1"
 # examples:
 #           enemyIntentions("wild bush", 0) -> [{'description': 'deal 1d4 damage', 'effect': 'damagePlayer(1,helperFuncs.diceRoll(1,4))'}, {'description': 'heal an ally for 1d4 health', 'effect': 'enemyDamageSelf(1,helperFuncs.diceRoll(1,-4))'}]
 def enemyIntentions(enemyName, turnNumber):
+    global intentionsList
     return intentionsList[enemyName][determinePly(turnNumber)].copy()
 
 # testing enemyIntentions
-# assert enemyIntentions("wild bush", 1) == {0: {'description': 'Deal 1d6 damage', 'effect': 'damagePlayer(1,helperFuncs.diceRoll(1,6))'}}
-# assert enemyIntentions("wild bush", 0) == {0: {'description': 'Deal 1d4 damage', 'effect': 'damagePlayer(1,helperFuncs.diceRoll(1,4))'}, 1: {'description': 'Heal an ally for 1d4 health', 'effect': 'enemyDamageSelf(1,helperFuncs.diceRoll(1,-4))'}}
+assert enemyIntentions("wild bush", 0) == [{'description': 'Deal 1d4 damage', 'effect': 'damagePlayer(1,helperFuncs.diceRoll(1,4))'}, {'description': 'Heal an ally for 1d4 health', 'effect': 'enemyDamageSelf(1,helperFuncs.diceRoll(1,-4))'}]
+assert enemyIntentions("wild bush", 1) == [{'description': 'Deal 1d6 damage', 'effect': 'damagePlayer(1,helperFuncs.diceRoll(1,6))'}]
 
 #### Used for compatability ####
 # updateEnemyHealth({str}, {str}) -> {str}
 # purpose: takes in two dictionaries called visibleIntentions and Enemies, then updates visualIntentions with the health variable from Enemies.
-#           specifically requires a pre-built 'enemies' variable from player.
+#           specifically requires a pre-built 'enemies' variable from player, as well as a pre-built 'visibleIntentions' variable.
 # examples:
 #           updateEnemyHealth()
 def updateEnemyHealth(visibleIntentions, enemies):
@@ -74,7 +75,7 @@ def determineEnemies(enemies,difficulty):
     combatDifficulty = 0
     attempts = 0
     maxAttempts = 15
-    # Finds a suitable enemy to match current difficulty
+    # Finds a suitable enemy to match current difficulty, within the given attempts
     while (combatDifficulty < difficulty) and (attempts <= maxAttempts):
         addEnemy = random.choice(list(intentionsList.keys()))
         # Finds a random enemy in the intentions list within the current combat difficulty
