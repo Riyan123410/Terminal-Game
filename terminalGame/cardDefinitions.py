@@ -95,12 +95,17 @@ cardDef = {
         "cost": 2
     },
     "sonic speed": {
-        "description": "gain 5 haste; 1 cost",
-        "effect": "addEffect('sonic speed', 'haste', 1, 5, False)",
-        "cost": 1
+        "description": "gain 5 haste, gain 3 energetic; 2 cost",
+        "effect": "[addEffect('sonic speed', 'haste', 1, 5, False), addEffect('sonic speed', 'energetic', 1, 3, False)]",
+        "cost": 2
     },
     "supressive fire": {
         "description": "for each card with ammo played, gain 3 power; 2 cost",
+        "effect": "addEffect('supressive fire', 'supress', 1, 1, True)",
+        "cost": 2
+    },
+    "supressive fire2": {
+        "description": "gain 3 energetic; 2 cost",
         "effect": "addEffect('supressive fire', 'supress', 1, 1, True)",
         "cost": 2
     },

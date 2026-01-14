@@ -1,6 +1,6 @@
 import player
 
-DEFAULTCARDS = ["strike", "strike", "strike", "strike", "strike", "block", "block", "block", "block", "block", "crossbow"]
+DEFAULTCARDS = ["strike", "strike", "strike", "strike", "strike", "block", "block", "block", "block", "block", "crossbow", "sonic speed"]
 DEFAULTCOINS = 0
 DIFFICULTYCOINSCONVERSION = 2.5
 

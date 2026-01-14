@@ -74,7 +74,7 @@ def addPower():
     else:
         return 0
 
-# addEffect(str,str,int,int,bool) -> None
+# addEffect(str,[str],[int],int,bool) -> None
 # purpose: takes in two strings, two integers, and a boolean called cardName, name, times, number, and exert.
 #           it will then add a dictionary entry to playerEffects called name, with a number equal to number x times.
 #           If exert is True, remove a card with the name cardName from the current round.
@@ -83,10 +83,10 @@ def addEffect(cardName, name, times, number, exert):
     # Loops the amount of times equal to times
     for i in range(times):
         # If name doesn't exist in effects, add it. Otherwise increase it's number.
-        if name in playerEffects:
-            playerEffects[name] += number
-        else:
-            playerEffects[name] = number
+            if name in playerEffects:
+                playerEffects[name] += number
+            else:
+                playerEffects[name] = number
     # removes the card from the game if exert is True
     if exert:
         discard.remove(cardName)
@@ -114,7 +114,7 @@ def effectsRun(condition, cardName):
 
     # checks each effect to see if it's condition applies
     for effect in playerEffects:
-        if effect in effectDefinition and effectDefinition[i]["condition"] == condition:
+        if effect in effectDefinition and effectDefinition[effect]["condition"] == condition:
             # https://www.w3schools.com/python/ref_func_exec.asp
             currentEffectDef = effectDefinition[effect]
             exec(currentEffectDef["effect"])
@@ -585,7 +585,9 @@ def playerTurn():
                     discardCard(playCard)
                     cost -= currentCardCost
                     effectsRun("cardPlay", playCard)
-                    exec(effect)
+                    effect = [effect]
+                    for run in effect:
+                        exec(run)
                     # If the card does not exist (Compatability only)
                 else:
                     compPrint("Invalid Card")
