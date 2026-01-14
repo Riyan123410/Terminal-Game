@@ -108,3 +108,9 @@ assert removeEndlinesInList(["no newlines", "billy bob"]) == ["no newlines", "bi
 assert removeEndlinesInList(["\nstart", "end\n", "\nmiddle\n"]) == ["start", "end", "middle"]
 assert removeEndlinesInList(["", ""]) == []
 assert removeEndlinesInList([]) == []
+
+# shoppingItems() -> None
+# purpose: prints apple from items, used as an ex
+def shoppingItems():
+    items = {"apple", "burger", "cookie", "fish"}
+    print(items["apple"])

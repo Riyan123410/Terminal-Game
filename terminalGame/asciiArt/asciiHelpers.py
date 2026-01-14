@@ -57,7 +57,6 @@ def combineStrings(string1, string2, width1, height):
     # loop through the height of the strings
     for i in range(height):
        # add each string using slicing from i to width
-       # https://www.w3schools.com/python/gloss_python_string_slice.asp
         combinedString += string1[i * width1 : i * width1 + width1]
         combinedString += string2[i * width2 : i * width2 + width2]
         combinedString += "\n"

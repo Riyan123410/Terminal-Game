@@ -202,6 +202,7 @@ def discardGain(number):
     global cost
     i = 0
     try:
+        # Loops for a number of times equal to number as long as your hand exists
         while (i < number) and len(hand) > 0:
             # get card is true for is discarding
             discarding = getCard("Card to discard: ", True)
@@ -337,9 +338,9 @@ def enemyDamageSelf(times,number):
 # defineCard() -> None
 # purpose: runs a sequence to print the description of cards in compatability mode.
 def defineCard():
-    global cardDefinitions
     print(hand)
     cardInput = input("Which Card: ")
+    # try to get card description, else its an invalid card
     try:
         print(cardDefinitions.cardDef[cardInput]["description"])
     except:
@@ -413,7 +414,7 @@ def damageEnemy(times,number):
     global enemies
     global visibleIntentions
     global roll
-    # damages enemy
+    # damages enemy a number of times equal to times
     while i < times:
         helperFuncs.clearTerminal()
         # prints comp mode info
@@ -427,7 +428,7 @@ def damageEnemy(times,number):
             roll.append(number)
             enemyHelpers.updateEnemyHealth(visibleIntentions,enemies)
             checkEnemyHealth()
-        # in case there are no available enemies, increase iteration
+        # in case there are no available enemies, increase iteration    
         except:
             compSleep(0.5)
             i += 1
@@ -439,6 +440,7 @@ def damageEnemy(times,number):
 #           gainBlock(2,1) -> playerBlock + 2
 def gainBlock(times,number):
     global playerBlock
+    # loop the number of times to add block
     for i in range(times):
         playerBlock += number
 
@@ -451,6 +453,7 @@ def drawCards(number):
     global discard
     global hand
     global deck
+    # loop the times number to draw that many cards
     for i in range(number):
         # if the deck is empty, move the discard pile into the deck
         if len(deck) == 0:
@@ -471,6 +474,7 @@ def discardCardRand(number):
     global discard
     global hand
     cardToDiscard = ""
+    # main loop to discard random cards
     for i in range(number):
         try:
             cardToDiscard = (hand[random.randint(0,len(hand) - 1)])
@@ -518,8 +522,9 @@ def startCombat():
     discard = []
     playerHealth = PLAYERHEALTHMAX
     cost = 0
-    setup = enemyHelpers.determineIntentions(enemyHelpers.determineEnemies(enemies,difficulty), turnNumber)
     # sets up the enemies and their intentions
+    setup = enemyHelpers.determineIntentions(enemyHelpers.determineEnemies(enemies,difficulty), turnNumber)
+    
     enemies = setup[0]
     visibleIntentions = setup[1]
     helperFuncs.clearTerminal()
