@@ -67,7 +67,8 @@ def determineIntentions(enemies,turnNumber):
 
 # determineEnemies({[{str}]}, int) -> {[{str}]}
 # purpose: takes in a dictionary and integer called enemies and difficulty, and updates and returns enemies based on the intentionsList.
-#           requires a semi-built 'enemies' variable from player
+#           it will attempt to find a suitable enemy, then initialize it into enemies with the basic setup.
+#           requires an empty dictionary 'enemies' variable.
 # examples:
 #            determineEnemies({[{}]}, 1) -> {goose : []}
 def determineEnemies(enemies,difficulty):
@@ -94,3 +95,5 @@ def determineEnemies(enemies,difficulty):
             attempts += 1
 
     return enemies
+
+# testing cannot be done due random elements in function

@@ -144,9 +144,7 @@ def compSleep(seconds):
 def resolveIntentions(resolveList):
     global intentionsList
     global roll
-
     healthList = {}
-    print(resolveList)
 
     # Main loop for each enemies attack
     for attack in resolveList:
