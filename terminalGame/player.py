@@ -36,7 +36,7 @@ enemies = dict({})
 compatability = True
 
 # checkEnemyHealth() -> None
-# 
+# purpose: checks 
 def checkEnemyHealth():
     # https://www.w3schools.com/python/python_variables_global.asp
     global intentionsList
