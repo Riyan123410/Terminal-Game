@@ -40,22 +40,20 @@ compatability = True
 def checkEnemyHealth():
     # https://www.w3schools.com/python/python_variables_global.asp
     global intentionsList
-    enemyList = list(enemies.keys())
-    for i in range(len(enemyList)):
+    for enemy in enemies.keys():
         # in case the enemies die during it
         try:
-            if enemies[enemyList[i]]["health"] <= 0:
+            if enemies[enemy]["health"] <= 0:
                 # https://www.w3schools.com/python/ref_list_pop.asp
-                enemies.pop(enemyList[i])
-                visibleIntentions.pop(enemyList[i])
+                enemies.pop(enemy)
+                visibleIntentions.pop(enemy)
                 i -= 1
         except:
                 pass
         # stops overhealing over their max health
-        enemyList = list(enemies.keys())
         try:
-            if enemies[enemyList[i]]["health"] > intentionsList[enemyList[i]]["health"]:
-                enemies[enemyList[i]]["health"] = intentionsList[enemyList[i]]["health"]
+            if enemies[enemy]["health"] > intentionsList[enemy]["health"]:
+                enemies[enemy]["health"] = intentionsList[enemy]["health"]
         # due to it trying to perform this during your turn, where enemy health is changing too frequently
         except:
             pass
@@ -303,13 +301,12 @@ def damageEnemyAll(times,number):
     global visibleIntentions
     roll = []
     helperFuncs.clearTerminal()
-    # gets enemy list for indexing through it
-    enemyList = list(enemies.keys())
-    for i in range(len(enemyList)):
+    # loop through enemys
+    for enemy in enemies.keys():
         # decrease enemy health a number of times equal to times
-        for e in range(times):
+        for j in range(times):
             try:
-                enemies[enemyList[i]]["health"] -= (number + addPower())
+                enemies[enemy]["health"] -= (number + addPower())
             # in case the enemy dies during this sequence
             except:
                 pass
