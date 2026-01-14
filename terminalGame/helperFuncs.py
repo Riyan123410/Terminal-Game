@@ -104,6 +104,7 @@ def removeEndlinesInList(stringList):
 assert removeEndlinesInList(["hello\n", "world\n"]) == ["hello", "world"]
 assert removeEndlinesInList(["\n", "\n\n"]) == []
 assert removeEndlinesInList(["a\nb\nc", "d\ne\nf"]) == ["abc", "def"]
-assert removeEndlinesInList(["no newlines", "still clean"]) == ["no newlines", "still clean"]
+assert removeEndlinesInList(["no newlines", "billy bob"]) == ["no newlines", "billy bob"]
 assert removeEndlinesInList(["\nstart", "end\n", "\nmiddle\n"]) == ["start", "end", "middle"]
+assert removeEndlinesInList(["", ""]) == []
 assert removeEndlinesInList([]) == []

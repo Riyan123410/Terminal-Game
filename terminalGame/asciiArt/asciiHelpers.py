@@ -137,6 +137,9 @@ def createAsciiCardList(cards, currentSelected):
         asciiDeck.append(str(asciiCards.art[cards[i]][cardArt]))
     return asciiDeck
 
+# no tests because of ASCII art
+
+
 # menuLoop(int, dict, str, (), function) -> str
 # purpose: The menu loop that handles input, selection, ASCII art display,
 #          and returns the next game state. To do this it needs the starting
@@ -302,6 +305,12 @@ def indexToArrow(currentSelected, menuMax, blankString, arrowString, lastArrow):
     return arrowList
 
 # tests for indexToArrow
+assert indexToArrow(1, 3, " ", ">", "*") == [">"]
+assert indexToArrow(2, 3, " ", ">", "*") == [" ", ">"]
+assert indexToArrow(3, 3, " ", ">", "*") == [" ", " ", "*"]
+assert indexToArrow(1, 1, "-", "->", ">>") == ["->"]
+assert indexToArrow(2, 2, "_", "=>", ">>") == ["_", ">>"]
+assert indexToArrow(3, 5, ".", "->", "=>") == [".", ".", "->"]
 
 
 # getAttackDescriptions(string) -> [string]

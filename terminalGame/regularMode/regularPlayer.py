@@ -38,7 +38,9 @@ def main():
 #          the card pool that can be selected from is the parameter (cards)
 #          it also prints the controls so the parameter (isDiscarding) is ued
 #          in order to print the correct controls. Returns the card that is 
-#          selected if no card is selected "None" is returned
+#          selected if no card is selected "None" is returned. INFO: make sure
+#          cards is in the dictionary asciiCards.art or a key not found error
+#          will occur
 def selectCard(cards, isDiscarding):
     # get global selected y
     global currentSelectedY
@@ -69,7 +71,9 @@ def selectCard(cards, isDiscarding):
 # purpose: allows the player to look at a deck using input or to select
 #          end turn. It also displays the currents cards from the parameter
 #          (cards) and the parameter (isDiscarding) is used to print the
-#          appropiate instructoins to the user
+#          appropiate instructoins to the user. INFO: make sure
+#          cards is in the dictionary asciiCards.art or a key not found error
+#          will occur
 def selectDeck(cards, isDiscarding):
     # get global current selected y
     global currentSelectedY
@@ -102,7 +106,9 @@ def selectDeck(cards, isDiscarding):
 # getCardSelected([str], bool) -> str
 # purpose: loops until a card is selected by the player and returns it
 #          the card pool is from the list (cards) and also needs to print
-#          the controls so (isDiscarding) is used to print the correct
+#          the controls so (isDiscarding) is used to print the correct. INFO: make sure
+#          cards is in the dictionary asciiCards.art or a key not found error
+#          will occur
 def getCardSelected(cards, isDiscarding):
     # global variables
     global currentSelectedY

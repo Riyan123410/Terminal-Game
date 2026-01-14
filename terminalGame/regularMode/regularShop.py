@@ -36,7 +36,9 @@ MENUDIR = "xDir"
 
 # listToBookshelf([str]) -> [str]
 # purpose: converts a list of stock items from the parameter list [currentStock] 
-#          into their ASCII art cards and appends the back slot at the end
+#          into their ASCII art cards and appends the back slot at the end. INFO:
+#          make sure the list of strings in currentStock are all in the dictionary
+#          asciiMenus.shop["cards"] otherwise a key not found error will occur.
 def listToBookshelf(currentStock):
     # create empty bookshelf list
     bookshelfList = []
@@ -56,7 +58,7 @@ def listToBookshelf(currentStock):
 # purpose: generates the full ASCII shop display including bookshelf, selection arrow,
 #          coin display, and deck info based on current selection parmeter (currentSelected)
 #          and the cards with the parameter (cards) it also prints the coins with the parameter
-#          (coins)
+#          (coins). INFO: current selected must be 0-5 or ascii art will break
 def getArt(currentSelected, coins, cards):
     # get each asii art of the shop from menus and return it
     bookShelf = asciiHelpers.combineCardStrings(listToBookshelf(currentStock), asciiMenus.shop["bookshelfHeight"])
