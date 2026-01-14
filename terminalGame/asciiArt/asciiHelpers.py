@@ -9,10 +9,10 @@ from asciiArt import asciiMenus
 
 MAXCARDLENGTH = 7
 
-# findWidth(str) -> int
+# findWidth(string) -> int
 # purpose: calculates the width of an ASCII string by finding the first \n character after the first line
 #          from the inputed string (string), so if it doesnt start at \n width will be 1 less
-#          make sure string starts with \n to count properly and has a \n or width will be 0
+#          make sure string starts with \n to count properly and has a second \n or width will be 0
 # examples:
 #          findWidth("abc\n") -> 2
 #          findWidth("a\bc\df\n") -> 7
@@ -36,7 +36,7 @@ assert findWidth("") == 0
 assert findWidth("a\nb\nc\n") == 0
 
 
-# combineStrings(str, str, int, int) -> str
+# combineStrings(string, string, int, int) -> string
 # purpose: combines two ASCII strings horizontally given their widths and height
 #          from the parameters (width1) and (height) the strings are also given
 #          with parameter (string1) which would be on the left and (string2)
@@ -70,7 +70,7 @@ assert combineStrings("", "", 0, 0) == ""
 assert combineStrings("\nabc\n", "\n123\n", 3, 1) == "abc123\n"
 
 
-# combineCardStrings([str], int) -> str
+# combineCardStrings([string], int) -> string
 # purpose: combines a list of ASCII card strings horizontally into one large string
 #          with the parameter (cards) being a list of strings and the height is also
 #          required with the parameter (height)
@@ -96,9 +96,10 @@ assert combineCardStrings(["\nabc\n"], 1) == "abc\n"
 assert combineCardStrings([], 0) == ""
 
 
-# splitHand([str], int) -> ([str], [str])
-# purpose: splits a hand of cards of parameter (totalHand) into two lists 
-#          if is is more than the parameter (maxLen) which mush by positive
+# splitHand([string], int) -> ([string], [string])
+# purpose: splits a hand of cards of parameter (totalHand) into a tuple of 2 index  
+#          if is is more than the parameter (maxLen) which must be positive
+#          (the first hand will be len of max len and the other will be the remainder)
 # examples:
 #          splitHand(["a","b","c"], 2) -> (["a","b"], ["c"])
 #          splitHand(["x","y"], 3) -> (["x","y"], [])
@@ -121,10 +122,12 @@ assert splitHand(["a", "b", "c"], 3) == (["a", "b", "c"], [])
 assert splitHand([], 3) == ([], [])
 
 
-# createAsciiCardList([str], int) -> [str]
+# createAsciiCardList([string], int) -> [string]
 # purpose: creates a list of ASCII card art strings from a list of
 #          card names inputed withe the parameter (cards) the paremter
-#          (currentSelected) will use a different artwork
+#          (currentSelected) will use a different artwork. INFO make sure
+#          cards is in dictionary asciiCards.art or it will give a key not
+#          found error
 def createAsciiCardList(cards, currentSelected):
     asciiDeck = []
     # loop throught the car dlist
@@ -140,13 +143,13 @@ def createAsciiCardList(cards, currentSelected):
 # no tests because of ASCII art
 
 
-# menuLoop(int, dict, str, (), function) -> str
+# menuLoop(int, string, (int), function, (string)) -> string
 # purpose: The menu loop that handles input, selection, ASCII art display,
 #          and returns the next game state. To do this it needs the starting
 #          selecting with (currentSelected), the direction the menu is going
 #          in (menuDir) can be "xDir" or "yDir" making it accept WS or AD input, 
 #          the range (menuRange) of the optns and (nextStates) for a list of 
-#          all possible game states the menu can lead to in order
+#          all possible game states the menu can lead to in order.
 def menuLoop(currentSelected, menuDir, menuRange, artFunc, nextStates):
 
     # reset terminal and try to print art function
@@ -175,7 +178,7 @@ def menuLoop(currentSelected, menuDir, menuRange, artFunc, nextStates):
         except:
             print("function for ascii art is out of range")
 
-# displayCards([str]) -> None
+# displayCards([string]) -> None
 # purpose: prints a hand of cards with parameter (cards) in rows with ASCII art
 def displayCards(cards):
     hand = splitHand(cards, MAXCARDLENGTH)
@@ -185,11 +188,13 @@ def displayCards(cards):
         print(combineCardStrings(hand[1], asciiCards.CARDHEIGHT))
 
 
-# printPlayMain([str], int, int, bool) -> None
+# printPlayMain([string], int, int, bool) -> None
 # purpose: displays the main gameplay screen including enemies, the selected deck,
 #          and the player's hand of cards with (cards). Highlights the currently selected 
 #          card  or deck based on (cardSelected) and (deckSelected), and shows the appropriate 
 #          control menu depending on whether the player is discarding a card (isDiscarding).
+#          INFO: make sure cards is in the dictionary asciiCards.art or a key not found error
+#          will be found
 def printPlayMain(cards, cardSelected, deckSelected, isDiscarding):
     # first display with first deck selected and make card selected deck + 1 so it isnt selected
     helperFuncs.clearTerminal()
@@ -203,7 +208,7 @@ def printPlayMain(cards, cardSelected, deckSelected, isDiscarding):
         print(asciiMenus.getPlayControls("playCard", player.cost, player.playerBlock, player.playerHealth))
 
 
-# displayMainPlay([str], int, int, (int, int), (int, int), int, bool) -> (int, int)
+# displayMainPlay([string], int, int, (int, int), (int, int), int, bool) -> (int, int)
 # purpose: handles the main gameplay input loop for selecting cards or decks.
 #          with input (cards). starts selection with (deckSelected) and (cardSelected),  
 #          and (currentSelectedY). Updates the current selection based on user input, and 
@@ -242,7 +247,9 @@ def displayMainPlay(cards, deckSelected, cardSelected, menuRange, yRange, curren
 
 # displayDeck([string]) -> None
 # purpose: prints each card in a deck as selected ASCII art and waits for user input
-#          the cards printed will be a list of strings (deck)
+#          the cards printed will be a list of strings (deck). INFO: make sure each string
+#          in the list is in the dictionary asciiCards.art or a key not found error will
+#          occur
 def displayDeck(deck):
     helperFuncs.clearTerminal()
     for card in deck:
@@ -252,13 +259,15 @@ def displayDeck(deck):
 
 # numToString(int) -> string
 # purpose: converts a number (num) into a string compatible with ASCII enemies
-#          (adds leading zero if < 10)
+#          (adds leading zero if < 10), no more formating needs to be done since
+#          enemy HP is capped in game 1 to less than 100
 # examples:
 #          numToString(5) -> "05"
 #          numToString(12) -> "12"
 #          numToString(0) -> "00"
 def numToString(num):
     string = ""
+    # if less than 10 add 0 than return 
     if num < 10:
         string += "0"
     return string + str(num)
@@ -272,7 +281,7 @@ assert numToString(23) == "23"
 assert numToString(100) == "100"
 
 # displayEnemies() -> None
-# purpose: prints all enemies using ASCII art and prints them horizontally
+# purpose: prints all enemies using ASCII art horizontally
 def displayEnemies():
     enemies = player.enemies
     stringList = []

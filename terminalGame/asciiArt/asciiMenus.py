@@ -160,7 +160,7 @@ playMenu = {
 """
 }
 
-# getCoinMenuControls(int) -> str
+# getCoinMenuControls(int/float) -> str
 # purpose: returns a ASCII string showing controls and the current coin count
 #          with the input (coins)
 # examples:
@@ -175,7 +175,7 @@ def getCoinMenuControls(coins):
 # no tests because ASCII art
 
 
-# getPlayMenuArt(int) -> (str, str, str)
+# getPlayMenuArt(int/loat) -> (str, str, str)
 # purpose: returns ASCII art strings for each play menu option (play, shop, back) including coin display
 #          witht the parameter coins and returns each optons all in a tuple
 # examples:
@@ -453,7 +453,9 @@ ______________________________
 # getPlayControls(string, int/float, int/float, int/float) -> string
 # purpose: returns a string with the ascii art based on the paramater
 #          (controlName), it also needs 3 numbers from parameters (cost)
-#          (block) and (hp) in order to display those values
+#          (block) and (hp) in order to display those values. INFO: make 
+#          controlName is in the following dictionary or a key not found
+#          error will occur
 def getPlayControls(controlName, cost, block, hp):
   playControls = {
     "playCard" : f"""
