@@ -316,7 +316,6 @@ def getAttackDescriptions(enemyName):
     # look through attacks and add them to attack descriptions
     for attack in enemies[enemyName]["attacks"]:
         attackDescriptions.append(attack["description"])
-        
     return attackDescriptions
 
 

@@ -40,20 +40,22 @@ compatability = True
 def checkEnemyHealth():
     # https://www.w3schools.com/python/python_variables_global.asp
     global intentionsList
-    for enemy in enemies.keys():
+    enemyList = list(enemies.keys())
+    for i in range(len(enemyList)):
         # in case the enemies die during it
         try:
-            if enemies[enemy]["health"] <= 0:
+            if enemies[enemyList[i]]["health"] <= 0:
                 # https://www.w3schools.com/python/ref_list_pop.asp
-                enemies.pop(enemy)
-                visibleIntentions.pop(enemy)
+                enemies.pop(enemyList[i])
+                visibleIntentions.pop(enemyList[i])
                 i -= 1
         except:
                 pass
         # stops overhealing over their max health
+        enemyList = list(enemies.keys())
         try:
-            if enemies[enemy]["health"] > intentionsList[enemy]["health"]:
-                enemies[enemy]["health"] = intentionsList[enemy]["health"]
+            if enemies[enemyList[i]]["health"] > intentionsList[enemyList[i]]["health"]:
+                enemies[enemyList[i]]["health"] = intentionsList[enemyList[i]]["health"]
         # due to it trying to perform this during your turn, where enemy health is changing too frequently
         except:
             pass
@@ -93,11 +95,13 @@ def addEffect(cardName, name, times, number, exert):
 #           remove them from the dictionary.
 def checkEffectValid():
     global playerEffects
-    # loop through player effects
-    for effect in playerEffects.keys():
-        if playerEffects[effect] < 1:
-            playerEffects.pop(effect)
-
+    effectList = list(playerEffects.keys())
+    i = 0
+    # Checks each effect to see if it is less than zero
+    while i < len(effectList):
+        if playerEffects[effectList[i]] < 1:
+            playerEffects.pop(effectList[i])
+        i += 1
 
 # effectsRun(str,str) -> None
 # purpose: takes in two strings called condition and cardName. It will run through all effects in playerEffects,
@@ -108,12 +112,12 @@ def effectsRun(condition, cardName):
     global effectDefinition
 
     # checks each effect to see if it's condition applies
-    for i in playerEffects:
-        if i in effectDefinition and effectDefinition[i]["condition"] == condition:
+    for effect in playerEffects:
+        if effect in effectDefinition and effectDefinition[i]["condition"] == condition:
             # https://www.w3schools.com/python/ref_func_exec.asp
-            currentEffectDef = effectDefinition[i]
+            currentEffectDef = effectDefinition[effect]
             exec(currentEffectDef["effect"])
-            playerEffects[i] -= currentEffectDef["stacksLost"]
+            playerEffects[effect] -= currentEffectDef["stacksLost"]
     # add power of suppress is currently on and an ammo card is played
     if "supress" in playerEffects and (cardName in cardDefinitions.ammoList):
         for i in range(playerEffects["supress"]):
@@ -301,12 +305,13 @@ def damageEnemyAll(times,number):
     global visibleIntentions
     roll = []
     helperFuncs.clearTerminal()
-    # loop through enemys
-    for enemy in enemies.keys():
+    # gets enemy list for indexing through it
+    enemyList = list(enemies.keys())
+    for i in range(len(enemyList)):
         # decrease enemy health a number of times equal to times
         for j in range(times):
             try:
-                enemies[enemy]["health"] -= (number + addPower())
+                enemies[enemyList[i]]["health"] -= (number + addPower())
             # in case the enemy dies during this sequence
             except:
                 pass
@@ -447,14 +452,14 @@ def drawCards(number):
     global hand
     global deck
     for i in range(number):
-            # if the deck is empty, move the discard pile into the deck
-            if len(deck) == 0:
-                deck = discard.copy()
-                discard.clear()
-            # draw a random card from the deck
-            selectedCard = deck[random.randint(0, len(deck) - 1)]
-            hand.append(selectedCard)
-            deck.remove(selectedCard)
+        # if the deck is empty, move the discard pile into the deck
+        if len(deck) == 0:
+            deck = discard.copy()
+            discard.clear()
+        # draw a random card from the deck
+        selectedCard = deck[random.randint(0, len(deck) - 1)]
+        hand.append(selectedCard)
+        deck.remove(selectedCard)
 
 # discardCardRand(int) -> None
 # purpose: Takes in an integer called number, and randomly discards cards from your hand a number
@@ -543,11 +548,15 @@ def playerTurn():
     # Main game loop
     while True:
         helperFuncs.clearTerminal()
+        # end if enemies are dead
+        if enemies == {}:
+            return
         # sets resources to their max size if they are over it
         while len(hand) > HANDMAX:
             hand.pop()
-        while cost > costMax:
-            cost -= 1
+        if cost > costMax:
+            cost = costMax
+
         # prints information in compatability mode
         compPrint(f"hand: {hand}")
         compPrint(f"discard: {discard}")
@@ -556,8 +565,7 @@ def playerTurn():
         compPrint(f"health: {playerHealth}")
         compPrint(f"block: {playerBlock}")
         compPrint(visibleIntentions)
-        if enemies == {}:
-            return
+        
         # Gets the card you want to play
         playCard = getCard("", False).lower()
         # Attempts to get the designated effect for the selected card
