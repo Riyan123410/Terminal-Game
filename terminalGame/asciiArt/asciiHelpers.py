@@ -160,7 +160,7 @@ def menuLoop(currentSelected, menuDir, menuRange, artFunc, nextStates):
     
     while True:
         # try to change menu
-        inputList = userInput.getInputList()
+        inputList = userInput.getInputDict()
         try:
             currentSelected = helperFuncs.changeWithClamp(currentSelected, inputList[menuDir], menuRange[0], menuRange[1])
         except:
@@ -222,7 +222,7 @@ def displayMainPlay(cards, deckSelected, cardSelected, menuRange, yRange, curren
 
     while currentSelectedY == menuY:
         # update current selected
-        inputList = userInput.getInputList()
+        inputList = userInput.getInputDict()
         currentSelected = helperFuncs.changeWithClamp(currentSelected, inputList["xDir"], menuRange[0], menuRange[1])
         # check if we are on the deck or card menu than cange that selected
         if menuY == 1:

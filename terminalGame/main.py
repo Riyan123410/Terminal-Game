@@ -1,3 +1,9 @@
+'''
+	Description: Header Comment
+	Author: Mr. Marco
+	Date of last edit: September 11, 2025
+'''
+
 import launchMode
 import helperFuncs
 import gameCredits

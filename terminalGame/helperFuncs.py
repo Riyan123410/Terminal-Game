@@ -1,5 +1,6 @@
 import os
 import random
+import math
 
 
 # clamp(int/float, int/float, int/float) -> int/float
@@ -110,7 +111,14 @@ assert removeEndlinesInList(["", ""]) == []
 assert removeEndlinesInList([]) == []
 
 # shoppingItems() -> None
-# purpose: prints apple from items, used as an ex
+# purpose: prints apple from items, used as an example
 def shoppingItems():
     items = {"apple", "burger", "cookie", "fish"}
-    print(items["apple"])
+    sqrtLenOfApples = math.sqrt(len(items["apple"]))
+    print(sprtLenOfApples)
+
+    shoppingLists = [
+        [],
+        [],
+        []
+    ]

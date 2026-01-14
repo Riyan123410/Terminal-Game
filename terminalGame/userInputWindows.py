@@ -21,7 +21,7 @@ def getInput():
     return char
 
 
-# getInputList() -> {}
+# getInputDict() -> {}
 # purpose: reads a single key press and converts it into a
 #          directional input dictionary for movement and actions
 #          without needing to press enter
@@ -29,9 +29,9 @@ def getInput():
 #          "yDir" with return 1 if w is pressed, -1 if s is pressed
 #          "space" will return true if space is pressed else false
 #          if nothing on xDir or yDir is pressed they will return 0
-def getInputList():
+def getInputDict():
     # set input to 0 and get the key presses
-    inputList = {
+    inputDict = {
         "xDir" : 0,
         "yDir" : 0,
         "space" : False
@@ -40,16 +40,16 @@ def getInputList():
     # map inputs to -1 to 1 and space to true/false
     match key:
         case "d": 
-            inputList["xDir"] = 1
+            inputDict["xDir"] = 1
         case "a":
-            inputList["xDir"] = -1
+            inputDict["xDir"] = -1
         case "w":
-            inputList["yDir"] = 1
+            inputDict["yDir"] = 1
         case "s":  
-            inputList["yDir"] = -1
+            inputDict["yDir"] = -1
         case " ": 
-            inputList["space"] = True
+            inputDict["space"] = True
 
-    return inputList
+    return inputDict
 
 

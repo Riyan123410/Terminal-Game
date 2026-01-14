@@ -141,7 +141,7 @@ def getEnemySelected():
 
     # loop until input
     while True:
-        inputList = userInput.getInputList()
+        inputList = userInput.getInputDict()
         # add one to menu min since arrow starts at 1 not 0
         currentSelected = helperFuncs.changeWithClamp(currentSelected, inputList[MENUDIRX], ARROWMIN, enemyMax)
         printEnemySelection(currentSelected, enemyMax)

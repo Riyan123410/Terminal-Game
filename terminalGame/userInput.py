@@ -39,7 +39,7 @@ def getInput():
         # Return the single character pressed
         return char
 
-def getInputList():
+def getInputDict():
     # set input to 0 and get the key presses
     inputList = {
         "xDir" : 0,

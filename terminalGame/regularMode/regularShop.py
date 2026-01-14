@@ -106,7 +106,7 @@ def main():
     # loop
     while True:
         # get input and change with clamp
-        inputList = userInput.getInputList()
+        inputList = userInput.getInputDict()
         currentSelected = helperFuncs.changeWithClamp(currentSelected, inputList[MENUDIR], MENUMIN, MENUMAX)
 
         # check if space is pressed so an action can be done
