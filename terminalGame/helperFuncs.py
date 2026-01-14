@@ -115,10 +115,18 @@ assert removeEndlinesInList([]) == []
 def shoppingItems():
     items = {"apple", "burger", "cookie", "fish"}
     sqrtLenOfApples = math.sqrt(len(items["apple"]))
-    print(sprtLenOfApples)
+    
+    print(sqrtLenOfApples)
 
+    # create a list of lists
     shoppingLists = [
-        [],
-        [],
-        []
+        ["bread", "mayo", "cheese", "fish", "cheese", "mayo", "bread"],
+        ["bowl", "stock", "fish", "carrot", "corn", "spinach", "water"],
+        ["flour", "water", "yeast", "wait", "knead", "bake", "eat"]
     ]
+
+    # loop through shopping lists with lockstep and print it
+    for i in range(shoppingLists[0]):
+        print(shoppingLists[0][i], shoppingLists[1][i], shoppingLists[2][i])
+
+    
