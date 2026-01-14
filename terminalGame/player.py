@@ -102,6 +102,7 @@ def checkEffectValid():
     while i < len(effectList):
         if playerEffects[effectList[i]] < 1:
             playerEffects.pop(effectList[i])
+            i -= 1
         i += 1
 
 # effectsRun(str,str) -> None
