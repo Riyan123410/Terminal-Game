@@ -317,7 +317,7 @@ def indexToArrow(currentSelected, menuMax, blankString, arrowString, lastArrow):
 assert indexToArrow(1, 3, " ", ">", "*") == [">"]
 assert indexToArrow(2, 3, " ", ">", "*") == [" ", ">"]
 assert indexToArrow(3, 3, " ", ">", "*") == [" ", " ", "*"]
-assert indexToArrow(1, 1, "-", "->", ">>") == ["->"]
+assert indexToArrow(1, 1, "-", "->", ">>") == [">>"]
 assert indexToArrow(2, 2, "_", "=>", ">>") == ["_", ">>"]
 assert indexToArrow(3, 5, ".", "->", "=>") == [".", ".", "->"]
 
