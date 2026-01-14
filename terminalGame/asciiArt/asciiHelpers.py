@@ -56,7 +56,7 @@ def combineStrings(string1, string2, width1, height):
     combinedString = ""
     # loop through the height of the strings
     for i in range(height):
-       # add each string using slicing from i to width
+        # add each string using slicing from i to width
         combinedString += string1[i * width1 : i * width1 + width1]
         combinedString += string2[i * width2 : i * width2 + width2]
         combinedString += "\n"
