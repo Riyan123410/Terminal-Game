@@ -80,7 +80,7 @@ intentionsList = {
     "giant goose" : 
         {"turn1" : 
             [
-                {"description" : "Deal 3d12 damage", "effect" : "damagePlayer(1,helperFuncs.diceRoll(3,12))"}, 
+                {"description" : "Deal 5 damage", "effect" : "damagePlayer(1,5)"}, 
                 {"description" : "Discard 5 cards from your deck", "effect" : "deckDiscard(5)"}
             ], 
         "turn2" : 
@@ -88,7 +88,7 @@ intentionsList = {
                 {"description" : "Deal 1d36 damage", "effect" : "damagePlayer(1,helperFuncs.diceRoll(1,36))"},
                 {"description" : "Heal an ally for 2d12 health", "effect" : "enemyDamageSelf(1,helperFuncs.diceRoll(2,-12))"}
             ],
-        "health" : 99,
-        "diff" : 10
+        "health" : 60,
+        "diff" : 5.5
         },
 }

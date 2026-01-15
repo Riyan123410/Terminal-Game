@@ -69,8 +69,8 @@ Intention:              |
 """,
         "giant goose" : rf"""
 GIANT GOOSE ___        |
-         -=(o  "\       |
-           /|    \      |
+         -=(O  "\_     |
+           /|  \__\     |
             _\____):,   |
 Health: {hp}              |
 Intention:              |

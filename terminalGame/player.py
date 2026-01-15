@@ -124,6 +124,9 @@ def effectsRun(condition, cardName):
     if "supress" in playerEffects and (cardName in cardDefinitions.ammoList):
         for i in range(playerEffects["supress"]):
             addEffect("", "power", 1, 3, False)
+    elif "tactic" in playerEffects:
+        for i in range(playerEffects["tactic"]):
+            gainBlock(1,2)
     # checks if the effects are still above 1
     checkEffectValid()
 
