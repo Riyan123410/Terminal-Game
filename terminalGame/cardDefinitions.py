@@ -104,7 +104,7 @@ cardDef = {
         "effect": "addEffect('supressive fire', 'supress', 1, 1, True)",
         "cost": 2
     },
-    "supressive fire2": {
+    "": {
         "description": "gain 3 energetic; 2 cost",
         "effect": "addEffect('supressive fire', 'supress', 1, 1, True)",
         "cost": 2
