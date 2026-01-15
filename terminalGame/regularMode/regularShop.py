@@ -25,7 +25,8 @@ itemCoins = {
     "super block" : 3 * 2,
     "sonic speed" : 3 * 2,
     "supressive fire" : 4 * 2,
-    "defensive tactic" : 3 * 2
+    "defensive tactic" : 3 * 2,
+    "assault rifle" : 12 * 2
 }
 currentStock = []
 

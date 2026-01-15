@@ -109,6 +109,16 @@ cardDef = {
         "effect": "addEffect('defensive tactic', 'tactic', 1, 1, True)",
         "cost": 2
     },
+    "assault rifle": {
+        "description": "Deals 7x2 damage; 2 cost",
+        "effect": "ammoCard('assault rifle', 7, 2, 'single')",
+        "cost": 2
+    },
+    "assault rifle-reload": {
+        "description": "Reloads assault rifle; 1 cost",
+        "effect": "reloadCard('assault rifle', 1)",
+        "cost": 1
+    },
 }
 
 ammoList = {"revolver", "crossbow", "organ gun", "blunderbuss"}
