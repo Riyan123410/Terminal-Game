@@ -101,9 +101,9 @@ def checkEffectValid():
     # Checks each effect to see if it is less than zero
     while i < len(effectList):
         if playerEffects[effectList[i]] < 1:
+            i -= 1
             playerEffects.pop(effectList[i])
-        else:
-            i += 1
+        i += 1
 
 # effectsRun(str,str) -> None
 # purpose: takes in two strings called condition and cardName. It will run through all effects in playerEffects,
