@@ -1,7 +1,7 @@
 '''
-	Description: Header Comment
-	Author: Mr. Marco
-	Date of last edit: September 11, 2025
+	Description: Sumative, a card game where you fight enemies that get progressivly harder
+	Author: Riyan and Alex
+	Date of last edit: January 14, 2026
 '''
 
 import launchMode

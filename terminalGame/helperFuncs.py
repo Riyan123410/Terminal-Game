@@ -111,12 +111,11 @@ assert removeEndlinesInList(["", ""]) == []
 assert removeEndlinesInList([]) == []
 
 # shoppingItems() -> None
-# purpose: prints apple from items, used as an example
-def shoppingItems():
-    items = {"apple", "burger", "cookie", "fish"}
-    sqrtLenOfApples = math.sqrt(len(items["apple"]))
-    
-    print(sqrtLenOfApples)
+# purpose: prints the sqrt of the length of the word apple, then prints
+#          the current shopping lists, asks the user a question, finally
+#          creates shopping.txt (if it doesnt exist) and re writes it.
+#          This is just an extra function used for examples
+def shoppingItems():    
 
     # create a list of lists
     shoppingLists = [
@@ -126,7 +125,55 @@ def shoppingItems():
     ]
 
     # loop through shopping lists with lockstep and print it
-    for i in range(shoppingLists[0]):
+    for i in range(len(shoppingLists[0])):
         print(shoppingLists[0][i], shoppingLists[1][i], shoppingLists[2][i])
 
-    
+    number = input("how many fish do you know?: ")
+    # try to see if the number is an input and print based on that
+    try:
+        number = int(number)
+    except ValueError as e:
+        print(f"Mr.Marco would be disappointed in you, because: {e}")
+    else:
+        if number > 5:
+            print(f"Wow! thats a lot! that's like, double than {number / 2}!!")
+        else:
+            print(f"Fun Fact! if you square root the number its {math.sqrt(number)}?")
+    finally:
+        print("Thats so cool! :>")
+
+    # append a file called shopping just in case it doesnt exist
+    appendFile = open("shopping.txt", "a")
+    # write user input and close
+    appendFile.write(f"{number}")
+    appendFile.close()
+
+    # read the file and print its contents
+    readFile = open("shopping.txt", "r")
+    print(readFile.read())
+    readFile.close()
+
+    # read the file and write to it
+    readPlus = open("shopping.txt", "r+")
+    print(readPlus.read())
+    # write user input in file and close it
+    readPlus.write(f"{number} saved!")
+    readPlus.close()
+
+    # read and write file, reseting data when opened
+    writePlus = open("shopping.txt", "w+")
+    writePlus.write("this file has been reset")
+    # reset seek to read file, than close it
+    writePlus.seek(0)
+    print(writePlus.read())
+    writePlus.close()
+
+    # open file in append + to also read it
+    appendPlus = open("shopping.txt", "a+")
+    appendPlus.write("\nappending to file")
+    # reset seek to read it and than close file
+    appendPlus.seek(0)
+    print(appendPlus.read())
+    appendPlus.close()
+
+shoppingItems()

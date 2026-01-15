@@ -5,7 +5,7 @@ def getInput():
         # for windows
         import msvcrt
         # get character without pressing enter
-        char = msvcrt.getch()
+        char = msvcrt.getwch()
         # ignore special keys which come as a prefix + code
         if char in (b'\x00', b'\xe0'):
             # call getch again for the second part of the special key, than return blank

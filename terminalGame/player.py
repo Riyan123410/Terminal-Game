@@ -292,10 +292,10 @@ def reloadCard(card,times):
         while (i < len(deck)) and (cardsRemoved <= times):
             card = deck[i]
             if "-reload" in card:
-                    # removes the reload from the current card, therefore making it loaded
-                    deck.append(card[:-7])
-                    deck.remove(card)
-                    cardsRemoved += 1
+                # removes the reload from the current card, therefore making it loaded
+                deck.append(card[:-7])
+                deck.remove(card)
+                cardsRemoved += 1
             i += 1
         
 # damageEnemyAll(int,int) -> None
@@ -647,7 +647,7 @@ def gameLoop(isCompatabilityMode):
     while enemies != {} and playerHealth > 0:
         playerTurn()
         enemyTurn()
-    # if your health is below 0 you lost
+    # if your health is below or equal to 0 you lost
     if playerHealth <= 0:
         won = False
         

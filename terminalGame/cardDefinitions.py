@@ -111,5 +111,5 @@ cardDef = {
     },
 }
 
-ammoList = ["revolver", "crossbow", "organ gun", "blunderbuss"]
+ammoList = {"revolver", "crossbow", "organ gun", "blunderbuss"}
     
