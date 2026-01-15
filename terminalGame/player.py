@@ -249,7 +249,10 @@ def ammoCard(card,times,damage,effect):
     try:
         discard.remove(card)
     except:
-        deck.remove(card)
+        try:
+            deck.remove(card)
+        except:
+            hand.remove(card)
     deck.append(card+"-reload")
 
 # damageEnemyRand(int,int) -> None
