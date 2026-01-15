@@ -175,5 +175,3 @@ def shoppingItems():
     appendPlus.seek(0)
     print(appendPlus.read())
     appendPlus.close()
-
-shoppingItems()
