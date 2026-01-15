@@ -68,8 +68,8 @@ Intention:              |
 {currentAttack}
 """,
         "giant goose" : rf"""
-GIANT GOOSE ___        |
-         -=(O  "\_     |
+GIANT GOOSE ___         |
+         -=(O  "\_      |
            /|  \__\     |
             _\____):,   |
 Health: {hp}              |
