@@ -426,7 +426,7 @@ def damageEnemy(times,number):
     global visibleIntentions
     global roll
     # damages enemy a number of times equal to times
-    while i < times:
+    while i < times and enemies != {}:
         helperFuncs.clearTerminal()
         # prints comp mode info
         compPrint(list(enemies.keys()))
