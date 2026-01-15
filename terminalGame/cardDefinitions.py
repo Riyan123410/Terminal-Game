@@ -75,8 +75,8 @@ cardDef = {
         "cost": 3
     },
     "organ gun": {
-        "description": "deals 8d4 damage to random enemies, requires reload; 2 cost",
-        "effect": "ammoCard('organ gun', 4, 8, 'all')",
+        "description": "deals 4d8 damage to random enemies, requires reload; 2 cost",
+        "effect": "ammoCard('organ gun', 4, helperFuncs.diceRoll(1,8), 'all')",
         "cost": 2
     },
     "organ gun-reload": {
