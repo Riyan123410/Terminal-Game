@@ -9,15 +9,7 @@ except:
 # purpose: returns a single key press from the keyboard without
 #          requiring the enter key to be pressed
 def getInput():
-    # get character without pressing enter
-    # char = msvcrt.getch()
-    # try:
-    #     # try to convert char from a byte to a string
-    #     # https://stackoverflow.com/questions/15599565/how-do-you-use-msvcrt-getch-to-extract-and-use-input 
-    #     char = char.decode('ASCII')
-    # except:
-    #     # if failed to convert just pass and return the byte directly 
-    #     pass
+    # return getwch to recieve input with a key press
     return msvcrt.getwch()
 
 
@@ -51,5 +43,4 @@ def getInputDict():
             inputDict["space"] = True
 
     return inputDict
-
 

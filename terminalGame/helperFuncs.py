@@ -139,7 +139,7 @@ def shoppingItems():
             print(f"Wow! thats a lot! that's like, double than {number / 2}!!")
         else:
             print(f"Fun Fact! if you square root the number its {math.sqrt(number)}?")
-    finally:
+    finally:    
         print("Thats so cool! :>")
 
     # append a file called shopping just in case it doesnt exist
