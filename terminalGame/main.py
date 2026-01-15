@@ -9,6 +9,7 @@ import helperFuncs
 import gameCredits
 import endGame
 import player
+import os
 # https://docs.python.org/3/tutorial/modules.html
 from regularMode import regularShop
 from regularMode import regularPlayer
@@ -65,16 +66,12 @@ def main():
     # clear before starting
     helperFuncs.clearTerminal()
 
-    # TODO: uncomment
-    isRegularMode = launchMode.main()
     # get launch mode and start game after
-    # if os.name == "nt":
-    #     isRegularMode = launchMode.main()i
-    # else:
-    #     isRegularMode = False
+    isRegularMode = launchMode.main()
 
-    # set game state based on compatability mode
-    
+    # if not windows force launch mode to false
+    if os.name != "nt":
+        isRegularMode = False
 
     # run the game until a game sate returns quit
     while gameState != "quit":
